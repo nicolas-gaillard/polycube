@@ -1,7 +1,10 @@
-Présentation de l'équipe :
+Présentation de l'équipe
+========================
 
-Membres :
+Membres
+=======
 
-Objectif du projet :
+Objectif du projet
+==================
 
 testest bis
