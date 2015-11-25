@@ -4,7 +4,7 @@
 def colored54_to_perm48(colored54):
     """Passage du format d'entrée avec les couleurs vers le format à base de permutations de (1..48).
 
-    :param colored54: les 54 facettes étiquetées par leur couleur (O, W, B, G, Y ou R)
+    :param colored54: les 54 facettes étiquetées par leur couleur (O, W, B, G, Y ou R). On considère que ce paramètre est toujours donné au format attendu (pas de gestion d'erreur)
 
     :return: le même cube au format à base de permutations de (1..48)
     """
@@ -12,10 +12,12 @@ def colored54_to_perm48(colored54):
     # D'abord on fait tourner le cube pour que la face rouge soit en face et la blanche en haut
     # On en profite pour retirer les facettes fixes
     couleurs = ["W", "G", "R", "B", "O", "Y"]
-    blanc, vert, rouge, bleu, orange, jaune = [], [], [], [], [], []
+    vert, rouge, bleu, orange, jaune = [], [], [], [], []
+    
+    colored54_ordonne = []
     
     for c in couleurs:
-        tab = blanc
+        tab = colored54_ordonne
         if c == "G":
             tab = vert
         elif c == "R":
@@ -54,23 +56,21 @@ def colored54_to_perm48(colored54):
             tab.extend(colored54[45:49])
             tab.extend(colored54[50:])
 
-    cube = []
-    cube.extend(blanc)
-    cube.extend(vert[:3])
-    cube.extend(rouge[:3])
-    cube.extend(bleu[:3])
-    cube.extend(orange[:3])
-    cube.extend(vert[3:5])
-    cube.extend(rouge[3:5])
-    cube.extend(bleu[3:5])
-    cube.extend(orange[3:5])
-    cube.extend(vert[5:])
-    cube.extend(rouge[5:])
-    cube.extend(bleu[5:])
-    cube.extend(orange[5:])
-    cube.extend(jaune)
+    colored54_ordonne.extend(vert[:3])
+    colored54_ordonne.extend(rouge[:3])
+    colored54_ordonne.extend(bleu[:3])
+    colored54_ordonne.extend(orange[:3])
+    colored54_ordonne.extend(vert[3:5])
+    colored54_ordonne.extend(rouge[3:5])
+    colored54_ordonne.extend(bleu[3:5])
+    colored54_ordonne.extend(orange[3:5])
+    colored54_ordonne.extend(vert[5:])
+    colored54_ordonne.extend(rouge[5:])
+    colored54_ordonne.extend(bleu[5:])
+    colored54_ordonne.extend(orange[5:])
+    colored54_ordonne.extend(jaune)
             
-    return cube
+    return colored54_ordonne
 
 
 if __name__=="__main__":
