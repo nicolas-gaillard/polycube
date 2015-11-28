@@ -1,6 +1,9 @@
 # utils.py
 # -*- coding: utf-8 -*-
 
+from itertools import permutations
+
+
 def rotation_cube(colored54):
     """Tourne le cube de la manière suivante : L -> F ; F -> R ; R -> B ; b -> L
 
@@ -95,24 +98,87 @@ def colored54_to_perm48(colored54):
     colored54_ordonne.pop(25)
     colored54_ordonne.pop(22)
     colored54_ordonne.pop(4)
-    
+
+
+    # On peut maintenant procéder à la numérotation des facettes
+
+    perm48 = [None] * 48  # crée une liste de taille 48 remplie de None
+
+    # On identifie les bords
+    bords_couleur = [["G", "R"], ["R", "B"], ["B", "O"], ["O", "G"], ["W", "R"], ["R", "Y"], ["Y", "O"], ["O", "W"], ["W", "G"], ["G", "Y"], ["Y", "B"], ["B", "W"]]
+    bords_pos = [(21, 22), (23, 24), (25, 26), (27, 20), (6, 12), (32, 41), (46, 38), (18, 1), (3, 9), (29, 43), (44, 35), (15, 4)]
+
+    for (i, j) in bords_pos:
+        couleurs = [colored54_ordonne[i], colored54_ordonne[j]]
+        if couleurs in bords_couleur:
+            pos = bords_couleur.index(couleurs)
+            perm48[i] = bords_pos[pos][0] + 1
+            perm48[j] = bords_pos[pos][1] + 1
+        else:
+            pos = bords_couleur.index([colored54_ordonne[j], colored54_ordonne[i]])
+            perm48[i] = bords_pos[pos][1] + 1
+            perm48[j] = bords_pos[pos][0] + 1
+
+    # On identifie les coins
+    coins_couleur = [["W", "G", "O"], ["W", "B", "O"], ["W", "R", "G"], ["W", "R", "B"], ["Y", "G", "O"], ["Y", "B", "O"], ["Y", "R", "G"], ["Y", "R", "B"]]
+    coins_pos = [(0, 8, 19), (2, 16, 17), (5, 11, 10), (7, 13, 14), (45, 28, 39), (47, 36, 37), (40, 31, 30), (42, 33, 34)]
+
+    for p in coins_pos:
+        couleurs = (colored54_ordonne[p[0]], colored54_ordonne[p[1]], colored54_ordonne[p[2]])
+                        
+        for c in coins_couleur:
+            perms_couleur = list(permutations(c))
+            try:
+                index = perms_couleur.index(couleurs)
+            except:
+                index = -1
+
+            if index != -1:
+                pos = coins_couleur.index(c)
+                perm_pos = list(permutations(coins_pos[pos]))
+                perm48[p[0]] = perm_pos[index][0] + 1
+                perm48[p[1]] = perm_pos[index][1] + 1
+                perm48[p[2]] = perm_pos[index][2] + 1
+                break
             
-    return colored54_ordonne
+            
+    return perm48
 
 
 if __name__ == "__main__":
-    """Les tests des fonctions se font ici"""
-    
+
+    cube = colored54_to_perm48("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+
+    if cube == list(range(1,49)):
+        print("Test rotation 1 OK")
+    else:
+        print("Test rotation 1 KO : " + str(cube))
+
+    cube = colored54_to_perm48("GGGGGGGGGWWWOOOYYYRRRWWWOOOYYYRRRWWWOOOYYYRRRBBBBBBBBB")
+
+    if cube == list(range(1,49)):
+        print("Test rotation 2 OK")
+    else:
+        print("Test rotation 2 KO : " + str(cube))
+
+    cube = colored54_to_perm48("YYYYYYYYYGGGOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRWWWWWWWWW")
+
+    if cube == list(range(1,49)):
+        print("Test rotation 3 OK")
+    else:
+        print("Test rotation 3 KO : " + str(cube))
+
     cube = colored54_to_perm48("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
     
-    if "".join(cube) == "BBOGGBYROYOWOWGRYGYYBBRYRWOOBWYGROWGRWWRRWGBOYGB":
-        print("Test 1 OK")
+    if cube == [37, 36, 40, 30, 22, 17, 47, 12, 38, 44, 18, 3, 39, 6, 11, 23, 46, 29, 45, 48, 26, 25, 24, 42, 33, 2, 19, 27, 35, 5, 41, 31, 13, 20, 1, 21, 14, 8, 4, 34, 32, 7, 9, 16, 28, 43, 10, 15]:
+        print("Test rotation + numérotation 1 OK")
     else:
-        print("Test 1 KO : " + "".join(cube))
+        print("Test rotation + numérotation 1 KO : " + str(cube))
 
     cube = colored54_to_perm48("GRBGRWBBYRYYOOGOBOWWYGGOYYRBBWOWWGYWBORGRBYYWRGWBOGORR")
 
-    if "".join(cube) == "WYYWOYWWGGRGRBOWBRROYYGWBRGBWOYBBYOBGWGROOGYRBOR":
-        print("Test 2 OK")
+    if cube == [1, 42, 43, 4, 19, 41, 7, 3, 9, 10, 32, 31, 13, 17, 18, 2, 35, 34, 33, 20, 45, 44, 30, 5, 16, 23, 22, 36, 8, 39, 48, 37, 26, 46, 40, 25, 11, 6, 21, 14, 38, 27, 29, 47, 24, 15, 28, 12]:
+        print("Test rotation + numérotation 2 OK")
     else:
-        print("Test 2 KO : " + "".join(cube))
+        print("Test rotation + numérotation 2 KO : " + str(cube))
+
