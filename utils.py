@@ -33,10 +33,41 @@ def rotation_cube(colored54):
 def colored54_to_perm48(colored54):
     """Passage du format d'entrée avec les couleurs vers le format à base de permutations de (1..48).
 
-    :param colored54: les 54 facettes étiquetées par leur couleur (O, W, B, G, Y ou R). On considère que ce paramètre est toujours donné au format attendu (pas de gestion d'erreur)
+    :param colored54: les 54 facettes étiquetées par leur couleur (O, W, B, G, Y ou R).
 
-    :return: le même cube au format à base de permutations de (1..48)
+    :return: le même cube au format à base de permutations de (1..48), ou une liste vide en cas d'erreur
     """
+
+    # On commence par tester si l'entrée est bien au format attendu
+    if len(colored54) != 54:
+        return []
+    
+    cptO, cptW, cptB, cptG, cptY, cptR = 0, 0, 0, 0, 0, 0
+    for c in colored54:
+        if c == "O":
+            cptO += 1
+        elif c == "W":
+            cptW += 1
+        elif c == "B":
+            cptB += 1
+        elif c == "G":
+            cptG += 1
+        elif c == "Y":
+            cptY += 1
+        elif c == "R":
+            cptR += 1
+        else:
+            return []
+        
+    if not (cptO == cptW == cptB == cptG == cptY == cptR == 9):
+        return []
+
+    fixes = []
+    for i in [4, 22, 25, 28, 31, 49]:
+        if colored54[i] in fixes:
+            return []
+        else:
+            fixes.append(colored54[i])
 
     # D'abord on fait tourner le cube pour que la face rouge soit en face et la blanche en haut
 
@@ -115,9 +146,13 @@ def colored54_to_perm48(colored54):
             perm48[i] = bords_pos[pos][0] + 1
             perm48[j] = bords_pos[pos][1] + 1
         else:
-            pos = bords_couleur.index([colored54_ordonne[j], colored54_ordonne[i]])
-            perm48[i] = bords_pos[pos][1] + 1
-            perm48[j] = bords_pos[pos][0] + 1
+            couleurs = [colored54_ordonne[j], colored54_ordonne[i]]
+            if couleurs in bords_couleur:
+                pos = bords_couleur.index([colored54_ordonne[j], colored54_ordonne[i]])
+                perm48[i] = bords_pos[pos][1] + 1
+                perm48[j] = bords_pos[pos][0] + 1
+            else:
+                return []
 
     # On identifie les coins
     coins_couleur = [["W", "G", "O"], ["W", "B", "O"], ["W", "R", "G"], ["W", "R", "B"], ["Y", "G", "O"], ["Y", "B", "O"], ["Y", "R", "G"], ["Y", "R", "B"]]
@@ -125,6 +160,7 @@ def colored54_to_perm48(colored54):
 
     for p in coins_pos:
         couleurs = (colored54_ordonne[p[0]], colored54_ordonne[p[1]], colored54_ordonne[p[2]])
+        ajoute = False
                         
         for c in coins_couleur:
             perms_couleur = list(permutations(c))
@@ -139,7 +175,11 @@ def colored54_to_perm48(colored54):
                 perm48[p[0]] = perm_pos[index][0] + 1
                 perm48[p[1]] = perm_pos[index][1] + 1
                 perm48[p[2]] = perm_pos[index][2] + 1
+                ajoute = True
                 break
+            
+        if not ajoute:
+            return []
             
             
     return perm48
@@ -147,6 +187,9 @@ def colored54_to_perm48(colored54):
 
 if __name__ == "__main__":
 
+
+    print(" ===== TESTS colored54_to_perm48 =====")
+    
     cube = colored54_to_perm48("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
 
     if cube == list(range(1,49)):
@@ -181,4 +224,46 @@ if __name__ == "__main__":
         print("Test rotation + numérotation 2 OK")
     else:
         print("Test rotation + numérotation 2 KO : " + str(cube))
+
+    cube = colored54_to_perm48("GRBGRWBBYRYYOOGOBOWWYGG")
+
+    if cube == []:
+        print("Test entrée incorrecte 1 OK")
+    else:
+        print("Test entrée incorrecte 1 KO : " + str(cube))
+
+    cube = colored54_to_perm48("ABCWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+
+    if cube == []:
+        print("Test entrée incorrecte 2 OK")
+    else:
+        print("Test entrée incorrecte 2 KO : " + str(cube))
+
+    cube = colored54_to_perm48("WWWWWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+
+    if cube == []:
+        print("Test entrée incorrecte 3 OK")
+    else:
+        print("Test entrée incorrecte 3 KO : " + str(cube))
+
+    cube = colored54_to_perm48("WWWWWWWWGGGGRRRBBBOOOGWGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+
+    if cube == []:
+        print("Test entrée incorrecte 4 OK")
+    else:
+        print("Test entrée incorrecte 4 KO : " + str(cube))
+
+    cube = colored54_to_perm48("WWWWWWWWWGGGRYRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOORYYYYYYYY")
+
+    if cube == []:
+        print("Test entrée incorrecte 5 OK")
+    else:
+        print("Test entrée incorrecte 5 KO : " + str(cube))
+
+    cube = colored54_to_perm48("WWWWWWWWWGGGRRYBBBOOOGGGRRRBBBOOOGGGRRRBBBOOORYYYYYYYY")
+
+    if cube == []:
+        print("Test entrée incorrecte 6 OK")
+    else:
+        print("Test entrée incorrecte 6 KO : " + str(cube))
 
