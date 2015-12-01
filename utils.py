@@ -94,8 +94,33 @@ def cycle48_to_cycle20(cycle48, cube):
         while 0 in cycle20[k]:
             cycle20[k].remove(0)
 
+# Suppression des cycles redondants :
+# On créer des listes commençant par le même élement que la liste que l'on étudie, puis on organise les élements suivants dans le même sens
+# Si les listes se retrouvent être les mêmes, il y a alors redondances des cycles
+# Enfin, on ajoute le numéro des cycles redondants à une listeSupp, puis on lit cette listeSupp pour enlever les cycles de notre liste cycle20 finale
+    listeSupp = []
+    for a in range(0, len(cycle20)-1):
+        for b in range(a+1, len(cycle20)):
+            if((len(cycle20[a]) == (len(cycle20[b]))) and a != b):
+                liste1 = cycle20[a]
+                element1 = liste1[0]
+                liste2 = []
+                for c in range(0, len(liste1)):
+                    if(str(element1) == str(liste1[c])):
+                        indice = c
+                for d in range(indice, len(liste1)):
+                    liste2.append(liste1[d])
+                for e in range(0, indice):
+                    liste2.append(liste1[e])
+                if(liste1 == liste2):
+                    listeSupp.append(b)
+    cycle20ok = []
+    for f in range(0, len(cycle20)):
+        if(f not in listeSupp):
+            cycle20ok.append(cycle20[f])
+
 # Rajouter une condition pour la supression de cycle similaires
-    return cycle20
+    return cycle20ok
 
 if __name__=="__main__":
     #print(perm48_to_20cube([37,36,40,30,22,17,47,12,38,44,18,3,39,6,11,23,46,29,45,48,26,25,24,42,33,2,19,27,35,5,41,31,13,20,1,21,14,8,4,34,32,7,9,16,28,43,10,15]))
