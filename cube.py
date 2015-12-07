@@ -45,63 +45,64 @@ class cube :
         self.lCube[face][0][1],self.lCube[face][1][0]=self.lCube[face][1][0],self.lCube[face][0][1]
 
     """def rotateEdge(self,face):
-    	if self.lCube[face]
+        if self.lCube[face]
 # Pour chaque face, il faut déterminer quelle face va bouger"""
 
     def turnLine(self,face,ligne):
         # face et ligne sont des int
 
         if self.lCube[face] in self.lCube[1:4]:
-        	if ligne == 1 :
-        	# Faire tourner la ligne du milieu consiste à faire tourner les deux autres
-        		turnLine(self,face,0)
-        		turnLine(self,face,2)
-        	else :
-        		self.F[i],self.R[i]=self.R[i],self.F[i]
-        		self.F[i],self.B[i]=self.B[i],self.F[i]
-        		self.F[i],self.L[i]=self.L[i],self.F[i]
+            if ligne == 1 :
+# Faire tourner la ligne du milieu consiste à faire tourner les deux autres
+                self.turnLine(face,0)
+                self.turnLine(face,2)
+            else :
+                self.F[ligne],self.R[ligne]=self.R[ligne],self.F[ligne]
+                self.F[ligne],self.B[ligne]=self.B[ligne],self.F[ligne]
+                self.F[ligne],self.L[ligne]=self.L[ligne],self.F[ligne]
 
         elif self.lCube[face] == U :
-        	if ligne ==1 :
-        		turnLine(self,face,0)
-        		turnLine(self,face,2)
-        	elif line==0 :
-        		self.U[0][0], self.R[0][2]=self.R[0][2], self.U[0][0]
-        		self.U[0][1], self.R[1][2]=self.R[1][2], self.U[0][1]
-        		self.U[0][2], self.R[2][2]=self.R[2][2], self.U[0][2]
+            if ligne ==1 :
+                self.turnLine(face,0)
+                self.turnLine(face,2)
+            elif line==0 :
+                self.U[0][0], self.R[0][2]=self.R[0][2], self.U[0][0]
+                self.U[0][1], self.R[1][2]=self.R[1][2], self.U[0][1]
+                self.U[0][2], self.R[2][2]=self.R[2][2], self.U[0][2]
 
-        		self.U[0][0], self.D[2][2]=self.D[2][2], self.U[0][0]
-        		self.U[0][1], self.D[2][1]=self.D[2][1], self.U[0][1]
-        		self.U[0][2], self.D[2][0]=self.D[2][0], self.U[0][2]
+                self.U[0][0], self.D[2][2]=self.D[2][2], self.U[0][0]
+                self.U[0][1], self.D[2][1]=self.D[2][1], self.U[0][1]
+                self.U[0][2], self.D[2][0]=self.D[2][0], self.U[0][2]
 
-        		self.U[0][0], self.L[2][0]=self.L[2][0], self.U[0][0]
-        		self.U[0][1], self.L[1][0]=self.L[1][0], self.U[0][1]
-        		self.U[0][2], self.L[0][0]=self.L[0][0], self.U[0][2]
-        	
-        	else : # line == 2
-        		self.U[2][0], self.R[0][0]=self.R[0][0], self.U[2][0]
-        		self.U[2][1], self.R[1][0]=self.R[1][0], self.U[2][1]
-        		self.U[2][2], self.R[2][0]=self.R[2][0], self.U[2][2]
+                self.U[0][0], self.L[2][0]=self.L[2][0], self.U[0][0]
+                self.U[0][1], self.L[1][0]=self.L[1][0], self.U[0][1]
+                self.U[0][2], self.L[0][0]=self.L[0][0], self.U[0][2]
 
-        		self.U[2][0], self.D[0][2]=self.D[0][2], self.U[2][0]
-        		self.U[2][1], self.D[0][1]=self.D[0][1], self.U[2][1]
-        		self.U[2][2], self.D[0][0]=self.D[0][0], self.U[2][2]
+            else : # line == 2
+                self.U[2][0], self.R[0][0]=self.R[0][0], self.U[2][0]
+                self.U[2][1], self.R[1][0]=self.R[1][0], self.U[2][1]
+                self.U[2][2], self.R[2][0]=self.R[2][0], self.U[2][2]
 
-				self.U[2][0], self.L[2][2]=self.L[2][2], self.U[2][0]
-        		self.U[2][1], self.L[1][2]=self.L[1][2], self.U[2][1]
-        		self.U[2][2], self.L[0][2]=self.L[0][2], self.U[2][2]
+                self.U[2][0], self.D[0][2]=self.D[0][2], self.U[2][0]
+                self.U[2][1], self.D[0][1]=self.D[0][1], self.U[2][1]
+                self.U[2][2], self.D[0][0]=self.D[0][0], self.U[2][2]
+                print("connard")
+
+                self.U[2][0], self.L[2][2]=self.L[2][2], self.U[2][0]
+                self.U[2][1], self.L[1][2]=self.L[1][2], self.U[2][1]
+                self.U[2][2], self.L[0][2]=self.L[0][2], self.U[2][2]
 
         else :
-        	if ligne==0 :
-        		turnLine(self,self.U,2)
-        	elif ligne==2: 
-        		turnLine(self,self.U,0)
-        	else :
-        		turnLine(self,self.U,1)
+            if ligne==0 :
+                self.turnLine(self.U,2)
+            elif ligne==2: 
+                self.turnLine(self.U,0)
+            else :
+                self.turnLine(self.U,1)
 
     def cube_to_perm48(self) :
-    	perm48=[]
-    	return perm48
+        perm48=[]
+        return perm48
 
     """def turnColumn(self,face,column):
         if self.lCube[face]==self.F or self.lCube[face]==self.U or self.lCube[face]==self.B or self.lCube[face]==self.D :
@@ -115,7 +116,7 @@ class cube :
         return str(self.lCube[face])
         
     # Rotation de 180° dans le sens des aiguilles d'une face
-    def move2(self,,face):
+    def move2(self,face):
         self.rotateFace(self.rotateFace(face))
         self.rotateEdge(self.rotateEdge(face))
         return "2"+str(self.lCube[face])
@@ -130,6 +131,17 @@ class cube :
 if __name__=="__main__":
     test=cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
     #test.getFace(0)
-    test.rotateFace(2)
-    test.afficheFace(2)
+    #test.rotateFace(2)
+    #test.afficheFace(2)
     #print(cube.listecube[face][0][0])
+    
+    print(test.L)
+    print(test.R)
+    print(test.F)
+    print(test.B)
+    print("FONCTION")
+    test.turnLine(2,0)
+    print(test.L)
+    print(test.R)
+    print(test.F)
+    print(test.B)
