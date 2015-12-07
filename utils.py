@@ -184,86 +184,180 @@ def colored54_to_perm48(colored54):
             
     return perm48
 
+""" Fonction qui permet d'obtenir l'ensemble des cycles de permutation à partir de la configuration initiale du cube,
+jusqu'à la configuration finale """ 
+def perm_48_to_cycle_48(seq_perm_48):
 
-if __name__ == "__main__":
+	seq_1_to_48 = []
+	entree_valide = True
+	""" Boucle permettant de remplir la liste allant de 1 à 48 """
+	for i in range(1,49):
+		seq_1_to_48.append(i)
+	""" Boucle permettant de vérifier si la liste initiale contient bien des nombres de 1 à 48 """
+	for i in range(1,48):
+		if i not in seq_perm_48:
+			entree_valide = False
+			break
+	""" Condition permettant de vérifier si la liste initiale contient bien 48 élements """
+	if len(seq_perm_48) != 48:
+		entree_valide = False
 
+	""" Condition permettant de vérifier si la liste initiale est valide, si c'est le cas l'algorithme se poursuit, sinon on renvoie -1 """
+	if entree_valide == True:
+		permutation_total = []
+		cycle_total = []
+		
+		""" Boucle permettant de vérifier qu'il ne reste pas de cycles à traiter """
+		while len(seq_1_to_48) > 0:
+			courant_seq_1_to_48 = seq_1_to_48[0]
+			courant_seq_perm_48 = seq_perm_48[0]
+			first_seq_perm_48 = seq_perm_48[0]
+			#print("Courant perm48 : "+str(courant_seq_perm_48))
+			#print("Courant 1to48 : "+str(courant_seq_1_to_48))
+			#print("Premier seq_perm_48 :"+str(first_seq_perm_48))
+			permutation = []
+			cycle = []
+			permutation.append([courant_seq_perm_48,courant_seq_1_to_48])
+			#print("Permutation : "+str(permutation))
+			supp_seq_1_to_48 = courant_seq_1_to_48
+			supp_seq_perm_48 = courant_seq_perm_48
+			#print("A supprimer 1to48 : "+str(supp_seq_1_to_48))
+			#print("A supprimer perm48 : "+str(supp_seq_perm_48))
+			courant_seq_1_to_48 = seq_1_to_48[seq_perm_48.index(supp_seq_1_to_48)]
+			courant_seq_perm_48 = seq_perm_48[seq_perm_48.index(supp_seq_1_to_48)]
+			#print("Nouveau courant 1to48: "+str(courant_seq_1_to_48))
+			#print("Nouveau courant perm48 : "+str(courant_seq_perm_48))
+			#print("Ancien seq_1_to_48 : "+str(seq_1_to_48))
+			#print("Ancien seq_perm_48 : "+str(seq_perm_48))
+			seq_1_to_48.remove(supp_seq_1_to_48)
+			seq_perm_48.remove(supp_seq_perm_48)
+			#print("Nouveau seq_1_to_48 : "+str(seq_1_to_48))
+			#print("Nouveau seq_perm_48 : "+str(seq_perm_48))
+			#print("Tant que "+str(courant_seq_1_to_48)+" est different "+str(first_seq_perm_48))
 
-    print(" ===== TESTS colored54_to_perm48 =====")
+			""" Boucle permettant de vérifier qu'un cycle n'est pas terminé """
+			while courant_seq_perm_48 != first_seq_perm_48:
+				permutation.append([courant_seq_perm_48,courant_seq_1_to_48])
+				#print("Permutation : "+str(permutation))
+				supp_seq_1_to_48 = courant_seq_1_to_48
+				supp_seq_perm_48 = courant_seq_perm_48
+				#print("A supprimer 1to48 : "+str(supp_seq_1_to_48))
+				#print("A supprimer perm48 : "+str(supp_seq_perm_48))
+
+				""" Condition permettant d'effectuer la suppression des deux éléments de la derniere permutation """
+				if supp_seq_1_to_48 == first_seq_perm_48:
+					#print("Ancien seq_1_to_48 : "+str(seq_1_to_48))
+					#print("Ancien seq_perm_48 : "+str(seq_perm_48))
+					seq_1_to_48.remove(supp_seq_1_to_48)
+					seq_perm_48.remove(supp_seq_perm_48)
+					#print("Nouveau seq_1_to_48 : "+str(seq_1_to_48))
+					#print("Nouveau seq_perm_48 : "+str(seq_perm_48))
+					break
+				courant_seq_1_to_48 = seq_1_to_48[seq_perm_48.index(supp_seq_1_to_48)]
+				courant_seq_perm_48 = seq_perm_48[seq_perm_48.index(supp_seq_1_to_48)]
+				#print("Nouveau courant 1to48: "+str(courant_seq_1_to_48))
+				#print("Nouveau courant perm48 : "+str(courant_seq_perm_48))
+				#print("Ancien seq_1_to_48 : "+str(seq_1_to_48))
+				#print("Ancien seq_perm_48 : "+str(seq_perm_48))
+				seq_1_to_48.remove(supp_seq_1_to_48)
+				seq_perm_48.remove(supp_seq_perm_48)
+				#print("Nouveau seq_1_to_48 : "+str(seq_1_to_48))
+				#print("Nouveau seq_perm_48 : "+str(seq_perm_48))
+			permutation_total.append(permutation)
+			""" Boucle permettant de constituer les cycles pour chaque ensemble de permutations """
+			for i in range(0,len(permutation)-1):
+				if i == 0:
+					cycle.append(first_seq_perm_48)
+				cycle.append(permutation[i][1])
+			""" Condition qui permet de n'ajouter les éléments dans le cycle que si cela est nécessaire """
+			if cycle != []:
+				cycle_total.append(cycle)
+		return cycle_total
+	else:
+		return -1
+
+if __name__=="__main__":
+
+	print(" ===== TESTS colored54_to_perm48 =====")
+	cube = colored54_to_perm48("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+
+	if cube == list(range(1,49)):
+		print("Test rotation 1 OK")
+	else:
+		print("Test rotation 1 KO : " + str(cube))
+
+	cube = colored54_to_perm48("GGGGGGGGGWWWOOOYYYRRRWWWOOOYYYRRRWWWOOOYYYRRRBBBBBBBBB")
+
+	if cube == list(range(1,49)):
+		print("Test rotation 2 OK")
+	else:
+		print("Test rotation 2 KO : " + str(cube))
+
+	cube = colored54_to_perm48("YYYYYYYYYGGGOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRWWWWWWWWW")
+
+	if cube == list(range(1,49)):
+		print("Test rotation 3 OK")
+	else:
+		print("Test rotation 3 KO : " + str(cube))
+
+	cube = colored54_to_perm48("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
     
-    cube = colored54_to_perm48("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+	if cube == [37, 36, 40, 30, 22, 17, 47, 12, 38, 44, 18, 3, 39, 6, 11, 23, 46, 29, 45, 48, 26, 25, 24, 42, 33, 2, 19, 27, 35, 5, 41, 31, 13, 20, 1, 21, 14, 8, 4, 34, 32, 7, 9, 16, 28, 43, 10, 15]:
+		print("Test rotation + numérotation 1 OK")
+	else:
+		print("Test rotation + numérotation 1 KO : " + str(cube))
 
-    if cube == list(range(1,49)):
-        print("Test rotation 1 OK")
-    else:
-        print("Test rotation 1 KO : " + str(cube))
+	cube = colored54_to_perm48("GRBGRWBBYRYYOOGOBOWWYGGOYYRBBWOWWGYWBORGRBYYWRGWBOGORR")
 
-    cube = colored54_to_perm48("GGGGGGGGGWWWOOOYYYRRRWWWOOOYYYRRRWWWOOOYYYRRRBBBBBBBBB")
+	if cube == [1, 42, 43, 4, 19, 41, 7, 3, 9, 10, 32, 31, 13, 17, 18, 2, 35, 34, 33, 20, 45, 44, 30, 5, 16, 23, 22, 36, 8, 39, 48, 37, 26, 46, 40, 25, 11, 6, 21, 14, 38, 27, 29, 47, 24, 15, 28, 12]:
+		print("Test rotation + numérotation 2 OK")
+	else:
+		print("Test rotation + numérotation 2 KO : " + str(cube))
 
-    if cube == list(range(1,49)):
-        print("Test rotation 2 OK")
-    else:
-        print("Test rotation 2 KO : " + str(cube))
+	cube = colored54_to_perm48("GRBGRWBBYRYYOOGOBOWWYGG")
 
-    cube = colored54_to_perm48("YYYYYYYYYGGGOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRWWWWWWWWW")
+	if cube == []:
+		print("Test entrée incorrecte 1 OK")
+	else:
+		print("Test entrée incorrecte 1 KO : " + str(cube))
 
-    if cube == list(range(1,49)):
-        print("Test rotation 3 OK")
-    else:
-        print("Test rotation 3 KO : " + str(cube))
+	cube = colored54_to_perm48("ABCWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
 
-    cube = colored54_to_perm48("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
-    
-    if cube == [37, 36, 40, 30, 22, 17, 47, 12, 38, 44, 18, 3, 39, 6, 11, 23, 46, 29, 45, 48, 26, 25, 24, 42, 33, 2, 19, 27, 35, 5, 41, 31, 13, 20, 1, 21, 14, 8, 4, 34, 32, 7, 9, 16, 28, 43, 10, 15]:
-        print("Test rotation + numérotation 1 OK")
-    else:
-        print("Test rotation + numérotation 1 KO : " + str(cube))
+	if cube == []:
+		print("Test entrée incorrecte 2 OK")
+	else:
+		print("Test entrée incorrecte 2 KO : " + str(cube))
 
-    cube = colored54_to_perm48("GRBGRWBBYRYYOOGOBOWWYGGOYYRBBWOWWGYWBORGRBYYWRGWBOGORR")
+	cube = colored54_to_perm48("WWWWWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
 
-    if cube == [1, 42, 43, 4, 19, 41, 7, 3, 9, 10, 32, 31, 13, 17, 18, 2, 35, 34, 33, 20, 45, 44, 30, 5, 16, 23, 22, 36, 8, 39, 48, 37, 26, 46, 40, 25, 11, 6, 21, 14, 38, 27, 29, 47, 24, 15, 28, 12]:
-        print("Test rotation + numérotation 2 OK")
-    else:
-        print("Test rotation + numérotation 2 KO : " + str(cube))
+	if cube == []:
+		print("Test entrée incorrecte 3 OK")
+	else:
+		print("Test entrée incorrecte 3 KO : " + str(cube))
 
-    cube = colored54_to_perm48("GRBGRWBBYRYYOOGOBOWWYGG")
+	cube = colored54_to_perm48("WWWWWWWWGGGGRRRBBBOOOGWGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
 
-    if cube == []:
-        print("Test entrée incorrecte 1 OK")
-    else:
-        print("Test entrée incorrecte 1 KO : " + str(cube))
+	if cube == []:
+		print("Test entrée incorrecte 4 OK")
+	else:
+		print("Test entrée incorrecte 4 KO : " + str(cube))
 
-    cube = colored54_to_perm48("ABCWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+	cube = colored54_to_perm48("WWWWWWWWWGGGRYRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOORYYYYYYYY")
 
-    if cube == []:
-        print("Test entrée incorrecte 2 OK")
-    else:
-        print("Test entrée incorrecte 2 KO : " + str(cube))
+	if cube == []:
+		print("Test entrée incorrecte 5 OK")
+	else:
+		print("Test entrée incorrecte 5 KO : " + str(cube))
 
-    cube = colored54_to_perm48("WWWWWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+	cube = colored54_to_perm48("WWWWWWWWWGGGRRYBBBOOOGGGRRRBBBOOOGGGRRRBBBOOORYYYYYYYY")
 
-    if cube == []:
-        print("Test entrée incorrecte 3 OK")
-    else:
-        print("Test entrée incorrecte 3 KO : " + str(cube))
+	if cube == []:
+		print("Test entrée incorrecte 6 OK")
+	else:
+		print("Test entrée incorrecte 6 KO : " + str(cube))
 
-    cube = colored54_to_perm48("WWWWWWWWGGGGRRRBBBOOOGWGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+	print(" ===== TESTS perm48_to_cycle48 =====")
 
-    if cube == []:
-        print("Test entrée incorrecte 4 OK")
-    else:
-        print("Test entrée incorrecte 4 KO : " + str(cube))
+	print(perm_48_to_cycle_48([37,36,40,30,22,17,47,12,38,44,18,3,39,6,11,23,46,29,45,48,26,25,24,42,33,2,19,27,35,5,41,31,13,20,1,21,14,8,4,34,32,7,9,16,28,43,10,15]))
 
-    cube = colored54_to_perm48("WWWWWWWWWGGGRYRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOORYYYYYYYY")
-
-    if cube == []:
-        print("Test entrée incorrecte 5 OK")
-    else:
-        print("Test entrée incorrecte 5 KO : " + str(cube))
-
-    cube = colored54_to_perm48("WWWWWWWWWGGGRRYBBBOOOGGGRRRBBBOOOGGGRRRBBBOOORYYYYYYYY")
-
-    if cube == []:
-        print("Test entrée incorrecte 6 OK")
-    else:
-        print("Test entrée incorrecte 6 KO : " + str(cube))
 
