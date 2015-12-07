@@ -184,6 +184,7 @@ def colored54_to_perm48(colored54):
             
     return perm48
 
+<<<<<<< HEAD
 """ Fonction qui permet d'obtenir l'ensemble des cycles de permutation à partir de la configuration initiale du cube,
 jusqu'à la configuration finale """ 
 def perm_48_to_cycle_48(seq_perm_48):
@@ -359,4 +360,88 @@ if __name__=="__main__":
 	print(" ===== TESTS perm48_to_cycle48 =====")
 
 	print(perm_48_to_cycle_48([37,36,40,30,22,17,47,12,38,44,18,3,39,6,11,23,46,29,45,48,26,25,24,42,33,2,19,27,35,5,41,31,13,20,1,21,14,8,4,34,32,7,9,16,28,43,10,15]))
+=======
+
+if __name__ == "__main__":
+
+
+    print(" ===== TESTS colored54_to_perm48 =====")
+    
+    cube = colored54_to_perm48("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+
+    if cube == list(range(1,49)):
+        print("Test rotation 1 OK")
+    else:
+        print("Test rotation 1 KO : " + str(cube))
+
+    cube = colored54_to_perm48("GGGGGGGGGWWWOOOYYYRRRWWWOOOYYYRRRWWWOOOYYYRRRBBBBBBBBB")
+
+    if cube == list(range(1,49)):
+        print("Test rotation 2 OK")
+    else:
+        print("Test rotation 2 KO : " + str(cube))
+
+    cube = colored54_to_perm48("YYYYYYYYYGGGOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRWWWWWWWWW")
+
+    if cube == list(range(1,49)):
+        print("Test rotation 3 OK")
+    else:
+        print("Test rotation 3 KO : " + str(cube))
+
+    cube = colored54_to_perm48("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+    
+    if cube == [37, 36, 40, 30, 22, 17, 47, 12, 38, 44, 18, 3, 39, 6, 11, 23, 46, 29, 45, 48, 26, 25, 24, 42, 33, 2, 19, 27, 35, 5, 41, 31, 13, 20, 1, 21, 14, 8, 4, 34, 32, 7, 9, 16, 28, 43, 10, 15]:
+        print("Test rotation + numérotation 1 OK")
+    else:
+        print("Test rotation + numérotation 1 KO : " + str(cube))
+
+    cube = colored54_to_perm48("GRBGRWBBYRYYOOGOBOWWYGGOYYRBBWOWWGYWBORGRBYYWRGWBOGORR")
+
+    if cube == [1, 42, 43, 4, 19, 41, 7, 3, 9, 10, 32, 31, 13, 17, 18, 2, 35, 34, 33, 20, 45, 44, 30, 5, 16, 23, 22, 36, 8, 39, 48, 37, 26, 46, 40, 25, 11, 6, 21, 14, 38, 27, 29, 47, 24, 15, 28, 12]:
+        print("Test rotation + numérotation 2 OK")
+    else:
+        print("Test rotation + numérotation 2 KO : " + str(cube))
+
+    cube = colored54_to_perm48("GRBGRWBBYRYYOOGOBOWWYGG")
+
+    if cube == []:
+        print("Test entrée incorrecte 1 OK")
+    else:
+        print("Test entrée incorrecte 1 KO : " + str(cube))
+
+    cube = colored54_to_perm48("ABCWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+
+    if cube == []:
+        print("Test entrée incorrecte 2 OK")
+    else:
+        print("Test entrée incorrecte 2 KO : " + str(cube))
+
+    cube = colored54_to_perm48("WWWWWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+
+    if cube == []:
+        print("Test entrée incorrecte 3 OK")
+    else:
+        print("Test entrée incorrecte 3 KO : " + str(cube))
+
+    cube = colored54_to_perm48("WWWWWWWWGGGGRRRBBBOOOGWGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+
+    if cube == []:
+        print("Test entrée incorrecte 4 OK")
+    else:
+        print("Test entrée incorrecte 4 KO : " + str(cube))
+
+    cube = colored54_to_perm48("WWWWWWWWWGGGRYRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOORYYYYYYYY")
+
+    if cube == []:
+        print("Test entrée incorrecte 5 OK")
+    else:
+        print("Test entrée incorrecte 5 KO : " + str(cube))
+
+    cube = colored54_to_perm48("WWWWWWWWWGGGRRYBBBOOOGGGRRRBBBOOOGGGRRRBBBOOORYYYYYYYY")
+
+    if cube == []:
+        print("Test entrée incorrecte 6 OK")
+    else:
+        print("Test entrée incorrecte 6 KO : " + str(cube))
+>>>>>>> 1fd8916ab16372ce5f4a995090b91d322c0751e2
 
