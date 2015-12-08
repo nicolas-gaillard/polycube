@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from utils import *
 
 class cube :
@@ -33,6 +35,9 @@ class cube :
     def rotateFace(self,face):
         # Face est un int qui fait référence à lCube
         # 0=U, 1=L, 2=F, 3=R, 4=B, 5=D
+
+        #rotation des arêtes
+        self.turnArete(face)
 
         # Placement des coins
         self.lCube[face][0][0],self.lCube[face][0][2]=self.lCube[face][0][2],self.lCube[face][0][0]
@@ -111,7 +116,6 @@ class cube :
     # Rotation de 90° dans le sens des aiguilles d'une face
     def move(self,face):
         self.rotateFace(face)
-        self.turnArete(face)
         return str(self.lCube[face])
         
     # Rotation de 180° dans le sens des aiguilles d'une face
@@ -125,20 +129,30 @@ class cube :
 
     def getFace(self,face):
         return self.lCube[face]
+
+    def afficherCube(self):
+        print(self.lCube[0])
+        print(self.lCube[1])
+        print(self.lCube[2])
+        print(self.lCube[3])
+        print(self.lCube[4])
+        print(self.lCube[5])
+
     
     def turnArete(self, face):
+        print("debut turn arete")
         if(face == 0):
-            echangeArete(4,1,2,3)
+            self.echangeArete(4,1,2,3)
         elif(face == 1):
-            echangeArete(0,4,5,2)
+            self.echangeArete(0,4,5,2)
         elif(face == 2):
-            echangeArete(0,1,5,3)
+            self.echangeArete(0,1,5,3)
         elif(face == 3):
-            echangeArete(0,2,5,4)
+            self.echangeArete(0,2,5,4)
         elif(face == 4):
-            echangeArete(0,3,5,1)
+            self.echangeArete(0,3,5,1)
         else:
-            echangeArete(4,3,2,1)
+            self.echangeArete(4,3,2,1)
     
 
     """
@@ -153,11 +167,8 @@ class cube :
     # U=White=0, F=Red=2, L=Green=1, R=Blue=3, B=Orange=4, D=Yellow=5
 
     def echangeArete(self, couleur1, couleur2, couleur3, couleur4):
+        print("echange arete")
         liste = []
-
-        liste.append(self.lCube[couleur1][2][0])
-        liste.append(self.lCube[couleur1][2][1])
-        liste.append(self.lCube[couleur1][2][2])
 
         liste.append(self.lCube[couleur4][0][0])
         liste.append(self.lCube[couleur4][1][0])
@@ -171,27 +182,33 @@ class cube :
         liste.append(self.lCube[couleur2][1][2])
         liste.append(self.lCube[couleur2][2][2])
 
-        self.lCube[couleur4][0][0]=liste[0]
-        self.lCube[couleur4][1][0]=liste[1]
-        self.lCube[couleur4][2][0]=liste[2]
+        liste.append(self.lCube[couleur1][2][0])
+        liste.append(self.lCube[couleur1][2][1])
+        liste.append(self.lCube[couleur1][2][2])
 
-        self.lCube[couleur3][0][0]=liste[3]
-        self.lCube[couleur3][0][1]=liste[4]
-        self.lCube[couleur3][0][2]=liste[5]
+        self.lCube[couleur3][0][2]=liste[0]
+        self.lCube[couleur3][0][1]=liste[1]
+        self.lCube[couleur3][0][0]=liste[2]
 
-        self.lCube[couleur2][0][2]=liste[6]
-        self.lCube[couleur2][1][2]=liste[7]
-        self.lCube[couleur2][2][2]=liste[8]
+        self.lCube[couleur2][0][2]=liste[3]
+        self.lCube[couleur2][1][2]=liste[4]
+        self.lCube[couleur2][2][2]=liste[5]
 
-        self.lCube[couleur1][2][0]=liste[9]
-        self.lCube[couleur1][2][1]=liste[10]
-        self.lCube[couleur1][2][2]=liste[11]
+        self.lCube[couleur1][2][2]=liste[6]
+        self.lCube[couleur1][2][1]=liste[7]
+        self.lCube[couleur1][2][0]=liste[8]
+
+        self.lCube[couleur4][0][0]=liste[9]
+        self.lCube[couleur4][1][0]=liste[10]
+        self.lCube[couleur4][2][0]=liste[11]
 
 if __name__=="__main__":
     test=cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
     #test.getFace(0)
+    test.afficherCube()
     test.rotateFace(2)
-    
+    print("appel de la fonction")
+    test.afficherCube()
     #test.afficheFace(2)
     #print(cube.listecube[face][0][0])
     #print("FONCTION")
