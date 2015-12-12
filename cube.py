@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from utils import *
+from CubeDisplay import *
 
 class cube :
     def __init__(self,color54):
@@ -29,6 +30,9 @@ class cube :
             self.U=[self.perm48[0:3],[self.perm48[3],'U',self.perm48[4]],self.perm48[5:8]]
 
             self.lCube=[self.U,self.L,self.F,self.R,self.B,self.D]
+
+    def __str__(self):
+    	drawCube(self.cube_to_color54())
 
     def afficheFace(self,face):
         print(self.lCube[face])
@@ -136,15 +140,75 @@ class cube :
         self.lCube[face][0][0] = liste[6]
         self.lCube[face][0][1] = liste[7]
 
+    def cube_to_color54(self):
+    
+        W=['U',1,2,3,4,5,6,7,8]
+        R=['F',12,13,14,23,24,32,33,34]
+        B=['R',15,16,17,25,26,35,36,37]
+        G=['L',9,10,11,21,22,29,30,31]
+        Y=['D',41,42,43,44,45,46,47,48]
+        O=['B',18,19,20,27,28,38,39,40]
+        
+        color54=""
+
+        for k in range(0,3):
+            for l in range(0,3):
+            
+                if self.lCube[0][k][l] in W :
+                    color54+="W"
+                if self.lCube[0][k][l] in R :
+                    color54+="R"
+                if self.lCube[0][k][l] in B :
+                    color54+="B"
+                if self.lCube[0][k][l] in G :
+                    color54+="G"
+                if self.lCube[0][k][l] in Y :
+                    color54+="Y"        
+                if self.lCube[0][k][l] in O :
+                    color54+="O"
+         
+        for j in range(0,3):
+        	for i in range(1,5):
+        		for m in range(0,3):
+        			if self.lCube[i][j][m] in W :
+        				color54+="W"
+        			if self.lCube[i][j][m] in R :
+        				color54+="R"
+        			if self.lCube[i][j][m] in B :       
+        				color54+="B"
+        			if self.lCube[i][j][m] in G :
+        				color54+="G"
+        			if self.lCube[i][j][m] in Y :
+        				color54+="Y"
+        			if self.lCube[i][j][m] in O :
+        				color54+="O"
+
+        for n in range(0,3):
+            for o in range(0,3):
+                if self.lCube[5][n][o] in W :
+                    color54+="W"
+                if self.lCube[5][n][o] in R :
+                    color54+="R"
+                if self.lCube[5][n][o] in B :
+                    color54+="B"
+                if self.lCube[5][n][o] in G :
+                    color54+="G"
+                if self.lCube[5][n][o] in Y :
+                    color54+="Y"
+                if self.lCube[5][n][o] in O :
+                    color54+="O"
+        return color54
+
 if __name__=="__main__":
     test=cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
     #test.getFace(0)
-    test.afficherCube()
-    test.turn(2)
-    print("appel de la fonction")
-    test.afficherCube()
+    #test.afficherCube()
+    #test.turn(2)
+    #print("appel de la fonction")
+    #test.afficherCube()
     #test.afficheFace(2)
     #print(cube.listecube[face][0][0])
     #print("FONCTION")
     #test.turnLine(2,0)
+    print(test)
     
