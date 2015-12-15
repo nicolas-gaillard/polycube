@@ -59,7 +59,6 @@ class cube :
     def turnArete(self, face):
         print("debut turn arete")
         if(face == 0):
-            print("AAAAAAAAAAHHHHHHHH")
             self.echangeAreteBlanche()
         elif(face == 1):
             self.echangeArete(0,4,5,2)
@@ -70,7 +69,7 @@ class cube :
         elif(face == 4):
             self.echangeArete(0,3,5,1)
         else:
-            self.echangeArete(4,3,2,1)
+            self.echangeAreteJaune()
     
 
     """
@@ -150,6 +149,37 @@ class cube :
         self.lCube[1][0][2]=liste[9]
         self.lCube[1][0][1]=liste[10]
         self.lCube[1][0][0]=liste[11]
+
+    def echangeAreteJaune(self):
+        liste = []
+        liste.append(self.lCube[2][2][0])
+        liste.append(self.lCube[2][2][1])
+        liste.append(self.lCube[2][2][2])
+
+        liste.append(self.lCube[1][2][2])
+        liste.append(self.lCube[1][2][1])
+        liste.append(self.lCube[1][2][0])
+
+        liste.append(self.lCube[4][2][2])
+        liste.append(self.lCube[4][2][1])
+        liste.append(self.lCube[4][2][0])
+
+        liste.append(self.lCube[3][2][2])
+        liste.append(self.lCube[3][2][1])
+        liste.append(self.lCube[3][2][0])
+
+        self.lCube[1][2][0]=liste[0]
+        self.lCube[1][2][1]=liste[1]
+        self.lCube[1][2][2]=liste[2]
+        self.lCube[4][2][2]=liste[3]
+        self.lCube[4][2][1]=liste[4]
+        self.lCube[4][2][0]=liste[5]
+        self.lCube[3][2][2]=liste[6]
+        self.lCube[3][2][1]=liste[7]
+        self.lCube[3][2][0]=liste[8]
+        self.lCube[2][2][2]=liste[9]
+        self.lCube[2][2][1]=liste[10]
+        self.lCube[2][2][0]=liste[11]
 
     def echangeFace(self, face):
         print("debut echange face")
@@ -235,7 +265,7 @@ if __name__=="__main__":
     test=cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
     #test.getFace(0)
     test.afficherCube()
-    test.turn(0)
+    test.turn(5)
     print("appel de la fonction")
     test.afficherCube()
     #test.afficheFace(2)
