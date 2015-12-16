@@ -33,6 +33,7 @@ class cube :
 
     def __str__(self):
     	drawCube(self.cube_to_color54())
+        return ""
 
     def afficheFace(self,face):
         print(self.lCube[face])
