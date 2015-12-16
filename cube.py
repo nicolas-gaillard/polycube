@@ -52,6 +52,16 @@ class cube :
         self.turnFace(face)
         self.turnArete(face)
 
+    def turn2(self, face):
+        # Fait tourner une face 2 fois (un demi-tour)
+        self.turn(face)
+        self.turn(face)
+
+    def turnInv(self, face):
+        # Fait tourner une face 3 fois (quart de tour inverse)
+        self.turn2(face)
+        self.turn(face)
+
     def turnFace(self, face):
         print("debut turn face")
         self.echangeFace(face)
