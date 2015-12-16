@@ -100,15 +100,12 @@ class cube :
         liste.append(self.lCube[couleur4][0][0])
         liste.append(self.lCube[couleur4][1][0])
         liste.append(self.lCube[couleur4][2][0])
-
         liste.append(self.lCube[couleur3][0][0])
         liste.append(self.lCube[couleur3][0][1])
         liste.append(self.lCube[couleur3][0][2])
-
         liste.append(self.lCube[couleur2][0][2])
         liste.append(self.lCube[couleur2][1][2])
         liste.append(self.lCube[couleur2][2][2])
-
         liste.append(self.lCube[couleur1][2][0])
         liste.append(self.lCube[couleur1][2][1])
         liste.append(self.lCube[couleur1][2][2])
@@ -116,15 +113,12 @@ class cube :
         self.lCube[couleur3][0][2]=liste[0]
         self.lCube[couleur3][0][1]=liste[1]
         self.lCube[couleur3][0][0]=liste[2]
-
         self.lCube[couleur2][0][2]=liste[3]
         self.lCube[couleur2][1][2]=liste[4]
         self.lCube[couleur2][2][2]=liste[5]
-
         self.lCube[couleur1][2][2]=liste[6]
         self.lCube[couleur1][2][1]=liste[7]
         self.lCube[couleur1][2][0]=liste[8]
-
         self.lCube[couleur4][0][0]=liste[9]
         self.lCube[couleur4][1][0]=liste[10]
         self.lCube[couleur4][2][0]=liste[11]
@@ -134,15 +128,12 @@ class cube :
         liste.append(self.lCube[1][0][2])
         liste.append(self.lCube[1][0][1])
         liste.append(self.lCube[1][0][0])
-
         liste.append(self.lCube[4][0][2])
         liste.append(self.lCube[4][0][1])
         liste.append(self.lCube[4][0][0])
-
         liste.append(self.lCube[3][0][2])
         liste.append(self.lCube[3][0][1])
         liste.append(self.lCube[3][0][0])
-
         liste.append(self.lCube[2][0][2])
         liste.append(self.lCube[2][0][1])
         liste.append(self.lCube[2][0][0])
@@ -162,6 +153,20 @@ class cube :
 
     def echangeAreteJaune(self):
         liste = []
+       
+        self.lCube[3][2][0]=liste[0]
+        self.lCube[3][2][1]=liste[1]
+        self.lCube[3][2][2]=liste[2]
+        self.lCube[4][2][0]=liste[3]
+        self.lCube[4][2][1]=liste[4]
+        self.lCube[4][2][2]=liste[5]
+        self.lCube[3][2][0]=liste[6]
+        self.lCube[3][2][1]=liste[7]
+        self.lCube[3][2][2]=liste[8]
+        self.lCube[2][2][0]=liste[9]
+        self.lCube[2][2][1]=liste[10]
+        self.lCube[2][2][2]=liste[11]
+
         liste.append(self.lCube[2][2][0])
         liste.append(self.lCube[2][2][1])
         liste.append(self.lCube[2][2][2])
@@ -177,19 +182,6 @@ class cube :
         liste.append(self.lCube[3][2][2])
         liste.append(self.lCube[3][2][1])
         liste.append(self.lCube[3][2][0])
-
-        self.lCube[1][2][0]=liste[0]
-        self.lCube[1][2][1]=liste[1]
-        self.lCube[1][2][2]=liste[2]
-        self.lCube[4][2][2]=liste[3]
-        self.lCube[4][2][1]=liste[4]
-        self.lCube[4][2][0]=liste[5]
-        self.lCube[3][2][2]=liste[6]
-        self.lCube[3][2][1]=liste[7]
-        self.lCube[3][2][0]=liste[8]
-        self.lCube[2][2][2]=liste[9]
-        self.lCube[2][2][1]=liste[10]
-        self.lCube[2][2][0]=liste[11]
 
     def echangeFace(self, face):
         print("debut echange face")
