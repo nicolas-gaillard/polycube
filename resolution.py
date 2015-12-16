@@ -42,32 +42,52 @@ def croix(cube):
     :return: une chaîne de caractères décrivant les mouvements à effectuer sur le cube
     """
 
-    # TODO : mettre à jour l'état du cube après chaque mouvement
     mouvements = ""
     jaunes = [42, 44, 45, 47] # facettes jaunes qui doivent former la croix
     fini = croixTerminee(cube)
     
     while not fini:
+        drawCube(cube.cube_to_color54())
         faceD = cube.getFace(5)
         if faceD[0][1] in jaunes and faceD[1][0] in jaunes:
             mouvements += "R'D'B'DBR"
-
+            cube.turnInv(3)
+            cube.turnInv(5)
+            cube.turnInv(4)
+            cube.turn(5)
+            cube.turn(4)
+            cube.turn(3)
             fini = True
         elif faceD[1][0] in jaunes and faceD[2][1] in jaunes:
             mouvements += "F'D'R'DRF"
-
+            cube.turnInv(2)
+            cube.turnInv(5)
+            cube.turnInv(3)
+            cube.turn(5)
+            cube.turn(3)
+            cube.turn(2)
             fini = True
         elif faceD[2][1] in jaunes and faceD[1][2] in jaunes:
             mouvements += "L'D'F'DFL"
-
+            cube.turnInv(1)
+            cube.turnInv(5)
+            cube.turnInv(2)
+            cube.turn(5)
+            cube.turn(2)
+            cube.turn(1)
             fini = True
         else:
             mouvements += "B'D'L'DLB"
+            cube.turnInv(4)  
+            cube.turnInv(5)  
+            cube.turnInv(1)   
+            cube.turn(5)  
+            cube.turn(1)   
+            cube.turn(4)
             
             if faceD[0][1] in jaunes and faceD[1][2] in jaunes:
                 fini = True
             else:
-                # boucle infinie car l'état du cube n'est pas changé pour l'instant (TODO)
                 fini = croixTerminee(cube)
             
     return mouvements
@@ -104,5 +124,5 @@ def orientation_coins(cube):
 if __name__ == "__main__":
     #cube = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOYYBYBGYOBOYRRYOGYYGRY")
     cube = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGBYYOYBRYYORRBYYYYOG")
+    #print(croix(cube))
     drawCube(cube.cube_to_color54())
-    print(croix(cube))
