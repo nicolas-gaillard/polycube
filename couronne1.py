@@ -1,4 +1,5 @@
 from cube import *
+from cubeDisplay import *
 
 # Pour optimiser, anticiper le mouvement suivant et voir si des mouvements peuvent 
 # être raccourcis
@@ -21,6 +22,7 @@ si face 5 :
 def couronne1(cube):
 
 	# Utilisation d'un compteur qui compte les mouvements
+	# Mouvement est une chaine de caractères contenant la liste des mouvements
 	cpt=0
 	mouvement=""
 	coinW=[1,3,6,8]
@@ -36,35 +38,59 @@ def couronne1(cube):
 						if i==0 :
 							if bienPlace(j,k) is False :
 								# Ce n'est pas bien placé, on descend
-								# puis on rappelle l'algo
+								mouvement+=descente0(cube,j,k)
+								cpt+=3
 
-								couronne1(cube)
-
-							if j==0:
-								if k==0:
-								if k==2:
-							if j==2:
-								if k==0:
-								if k==2:
 
 						if i in [1,2,3,4]:
 						# Cas ou la case blanche est sur le haut d'une face
 							if j == 0 and cube.lCube[i][j][k] in coinW :
+								# On la descend
 
-							# Vérification de la configuration du cube pour voir
-							# quel ascenceur utiliser
+
+							if j == 2 and cube.lCube[i][j][k] in coinW :
+								# Vérification de la configuration
+								# Ascenseur_X
 
 						if i==5:
 							# go_to_asc1(cube,i) -> à modifier pour que ça corresponde bien
 		fini = couronne1Done(cube)
+
 	return cpt, mouvement 
 
-	def couronne1Done(cube) : 
-		couronne = liste(range(9,21))
-		couronneDone = False 
+def couronne1Done(cube) : 
+	couronne = liste(range(9,21))
+	couronneDone = False 
 
-		if cube.lCube[1][1] == couronne[0:3] and cube.lCube[2][1] == couronne[3:6] and cube.lCube[3][1] == couronne[6:9] and cube.lCube[4][1] == couronne[9:12] :
-			couronneDone = True  
+	if cube.lCube[1][1] == couronne[0:3] and cube.lCube[2][1] == couronne[3:6] and cube.lCube[3][1] == couronne[6:9] and cube.lCube[4][1] == couronne[9:12] :
+		couronneDone = True  
+
+# Fonction qui descend un cube blanc de la face up s'il n'est pas bien placé
+def descente0(cube,j,k):
+	if j == 0 and k == 0 :
+		cube.turnInv(1)
+		cube.turnInv(5)
+		cube.turn(1)
+		return "L'D'L"
+
+	if j == 0 and k == 2 :
+		cube.turn(3)
+		cube.turnInv(5)
+		cube.turnInv(3)
+		return "RD'R'"
+
+	if j == 2 and k == 0 :
+		cube.turn(1)
+		cube.turnInv(5)
+		cube.turnInv(1)
+		return "LD'R'"
+
+	if j == 2 and k == 2 :
+		cube.turnInv(3)
+		cube.turnInv(5)
+		cube.turn(3)
+		return "R'D'R"
+
 
 
 """def pos_asc1(cube,face):
@@ -147,9 +173,6 @@ def ascenceur2(cube,face):
 		cube.turn(4)
 		cube.turnInv(1)
 
-	# Le compteur prend +4, du à 4 manipulations
-	cpt+=4
-
 	# On se place sur la face où on a la disposition :
 	# F',R,F,R'
 	return "F'RFR'"
@@ -183,14 +206,11 @@ def go_to_asc1(cube,face):
 		cube.turn(1)
 		cube.turn(5)
 
-	# Le compteur prend +5 du à 5 manipulations 
-	cpt+=5
-
 	# R',D',D',R,D	
 	return "R'D'D'RD"
 
-# Fonction pour redescendre
-def descente(cube,j,k):
+# Fonction pour redescendre un cube s'il est sur la face 1,2,3 ou 4 
+def descente1234(cube,j,k):
 	if j == 0 and k == 0 :
 	# S'il est en 00
 		cube.turnInv()
