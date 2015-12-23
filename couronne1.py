@@ -5,7 +5,7 @@ from cube import *
 
 
 """ 
-A chaque modification : recommencer l'algorithme
+A chaque mouvement : rappeler la fonction qui résoud la première couronne
 
 Si face du haut :
 	Vérifier si c'est bien placé, sinon on le descend
@@ -20,66 +20,97 @@ si face 5 :
 
 def couronne1(cube):
 
-	# Utilisation d'un compteur qui compte les manipulations
+	# Utilisation d'un compteur qui compte les mouvements
 	cpt=0
+	mouvement=""
 	coinW=[1,3,6,8]
+	fini = couronne1Done(cube)
 
-	for i in range(0,len(cube.lCube)):
-		for j in [0,2]:
-			for k in [0,2]:
-				if cube.lCube[i][j][k] in coinW :
+	while not fini :
+		for i in range(0,len(cube.lCube)):
+			for j in [0,2]:
+				for k in [0,2]:
+					if cube.lCube[i][j][k] in coinW :
+
 				# 1er cas, déjà sur la face up
-					if i==0 :
-						if j==0:
-							if k==0:
-							if k==2:
-						if j==2:
-							if k==0:
-							if k==2:
+						if i==0 :
+							if bienPlace(j,k) is False :
+								# Ce n'est pas bien placé, on descend
+								# puis on rappelle l'algo
 
-					if i in [1,2,3,4]:
-					if i==5:
-						# go_to_asc1(cube,i) -> à modifier pour que ça corresponde bien
+								couronne1(cube)
 
-				# On regarde s'il est bien placé
-				# Sinon on le descend
+							if j==0:
+								if k==0:
+								if k==2:
+							if j==2:
+								if k==0:
+								if k==2:
 
-	return cpt 
+						if i in [1,2,3,4]:
+						# Cas ou la case blanche est sur le haut d'une face
+							if j == 0 and cube.lCube[i][j][k] in coinW :
+
+							# Vérification de la configuration du cube pour voir
+							# quel ascenceur utiliser
+
+						if i==5:
+							# go_to_asc1(cube,i) -> à modifier pour que ça corresponde bien
+		fini = couronne1Done(cube)
+	return cpt, mouvement 
+
+	def couronne1Done(cube) : 
+		couronne = liste(range(9,21))
+		couronneDone = False 
+
+		if cube.lCube[1][1] == couronne[0:3] and cube.lCube[2][1] == couronne[3:6] and cube.lCube[3][1] == couronne[6:9] and cube.lCube[4][1] == couronne[9:12] :
+			couronneDone = True  
+
 
 """def pos_asc1(cube,face):
 	if cube.lCube[i][2][2]"""
 
-# Fonction pour savoir si un cube blanc sur la face up est bien placé
-"""def bien_placer(i,j):
-	placer=True
-	if([0][i][j]):
+"""def pos_asc2(cube,i,j,k):
+	if cube.lCube[i][j][k] == cube.lCube[i][1][1] :"""
 
-	return placer"""
+
+# Fonction pour savoir si un cube blanc sur la face up est bien placé
+def bienPlace(i,j):
+	if i == 0 and j == 0 and cube.lCube[0][i][j] == 1 :
+		return True
+	elif i == 0 and j == 2 and cube.lCube[0][i][j] == 3 :
+		return True
+	elif i == 2 and j == 0 and cube.lCube[0][i][j] == 6 :
+		return True
+	elif i == 2 and j == 2 and cube.lCube[0][i][j] == 8 :
+		return True
+	else :
+		return False
 
 def ascenceur1(cube,face):
 	if face == 1 :
 		cube.turn(2)
-		cube.turnprim(1)
-		cube.turnprim(2)
+		cube.turnInv(1)
+		cube.turnInv(2)
 		cube.turn(1)
 
 	if face == 2 :
 		# R,F',R',F
 		cube.turn(3)
-		cube.turnprim(2)
-		cube.turnprim(3)
+		cube.turnInv(2)
+		cube.turnInv(3)
 		cube.turn(2)
 
 	if face == 3 :
 		cube.turn(4)
-		cube.turnprim(3)
-		cube.turnprim(4)
+		cube.turnInv(3)
+		cube.turnInv(4)
 		cube.turn(3)
 
 	if face == 4 :
 		cube.turn(1)
-		cube.turnprim(4)
-		cube.turnprim(1)
+		cube.turnInv(4)
+		cube.turnInv(1)
 		cube.turn(4)
 
 	# Le compteur prend +4 du à 4 manipulations
@@ -93,28 +124,28 @@ def ascenceur1(cube,face):
 
 def ascenceur2(cube,face):
 	if face == 1 :
-		cube.turnprim(1)
+		cube.turnInv(1)
 		cube.turn(2)
 		cube.turn(1)
-		cube.turnprim(2)
+		cube.turnInv(2)
 
 	if face == 2 :
-		cube.turnprim(2)
+		cube.turnInv(2)
 		cube.turn(3)
 		cube.turn(2)
-		cube.turnprim(3)
+		cube.turnInv(3)
 
 	if face == 3 :
-		cube.turnprim(3)
+		cube.turnInv(3)
 		cube.turn(4)
 		cube.turn(3)
-		cube.turnprim(4)
+		cube.turnInv(4)
 
 	if face == 4 :
-		cube.turnprim(4)
+		cube.turnInv(4)
 		cube.turn(1)
 		cube.turn(4)
-		cube.turnprim(1)
+		cube.turnInv(1)
 
 	# Le compteur prend +4, du à 4 manipulations
 	cpt+=4
@@ -125,30 +156,30 @@ def ascenceur2(cube,face):
 
 def go_to_asc1(cube,face):
 	if face == 1 :
-		cube.turnprim(2)
-		cube.turnprim(5)
-		cube.turnprim(5)
+		cube.turnInv(2)
+		cube.turnInv(5)
+		cube.turnInv(5)
 		cube.turn(2)
 		cube.turn(5)
 
 	if face == 2 :
-		cube.turnprim(3)
-		cube.turnprim(5)
-		cube.turnprim(5)
+		cube.turnInv(3)
+		cube.turnInv(5)
+		cube.turnInv(5)
 		cube.turn(3)
 		cube.turn(5)
 
 	if face == 3 :
-		cube.turnprim(4)
-		cube.turnprim(5)
-		cube.turnprim(5)
+		cube.turnInv(4)
+		cube.turnInv(5)
+		cube.turnInv(5)
 		cube.turn(4)
 		cube.turn(5)
 
 	if face == 4 : 
-		cube.turnprim(1)
-		cube.turnprim(5)
-		cube.turnprim(5)
+		cube.turnInv(1)
+		cube.turnInv(5)
+		cube.turnInv(5)
 		cube.turn(1)
 		cube.turn(5)
 
@@ -158,26 +189,30 @@ def go_to_asc1(cube,face):
 	# R',D',D',R,D	
 	return "R'D'D'RD"
 
-def descente(cube):
+# Fonction pour redescendre
+def descente(cube,j,k):
+	if j == 0 and k == 0 :
 	# S'il est en 00
-	cube.turnprim()
-	cube.turnprim(5)
-	cube.turn()
+		cube.turnInv()
+		cube.turnInv(5)
+		cube.turn()
 
+	if j == 0 and k == 2 :
 	# S'il est en 02
-	cube.turnprim()
-	cube.turnprim(5)
-	cube.turn()
+		cube.turnInv()
+		cube.turnInv(5)
+		cube.turn()
 
+	"""if j == 2 and k == 0 :
 	# S'il est en 20
-	cube.turnprim()
-	cube.turnprim(5)
-	cube.turn()
+		cube.turnInv()
+		cube.turnInv(5)
+		cube.turn()
 
+	if j == 2 and k == 2 :
 	# S'il est en 22
-	cube.turnprim()
-	cube.turnprim(5)
-	cube.turn()
+		cube.turnInv()
+		cube.turnInv(5)
+		cube.turn()"""
 
 	# Mouvement : R',D',R
-	pass
