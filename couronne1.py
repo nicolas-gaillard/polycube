@@ -13,7 +13,7 @@ Si face du haut :
 
 Si face 1,2,3,4 :
 	si c'est sur la partie haute de la face, on la redescends
-	si c'est sur la partie basse, la placer --> ascenceur suivanta la position
+	si c'est sur la partie basse, la placer --> ascenceur suivant la position
 
 si face 5 :
 	le ramener sur une face 1,2,3,4 et faire l'ascenceur à l'aide de go_to_asc1
@@ -32,28 +32,43 @@ def couronne1(cube):
 		for i in range(0,len(cube.lCube)):
 			for j in [0,2]:
 				for k in [0,2]:
-					if cube.lCube[i][j][k] in coinW :
 
 				# 1er cas, déjà sur la face up
-						if i==0 :
-							if bienPlace(j,k) is False :
-								# Ce n'est pas bien placé, on descend
-								mouvement+=descente0(cube,j,k)
-								cpt+=3
+					if i==0 and cube.lCube[i][j][k] in coinW :
+						if bienPlace(j,k) is False :
+							# Ce n'est pas bien placé, on descend
+							mouvement+=descente0(cube,j,k)
+							cpt+=3
 
 
-						if i in [1,2,3,4]:
+					if i in [1,2,3,4]:
 						# Cas ou la case blanche est sur le haut d'une face
-							if j == 0 and cube.lCube[i][j][k] in coinW :
+						if j == 0 and cube.lCube[i][j][k] in coinW :
 								# On la descend
 
+# Pour optimiser ici, on peut chercher quand il vaut mieux faire un turn' ou turn
+						if j == 2 and cube.lCube[i][j][k] in coinW :
+							n=i
+							while not pos_asc1(cube,n,j,k):
+								cube.turn(5)
+								mouvement+="D"
+								cpt+=1
+								if n == 4 :
+									n = 1 
+								else :
+									n+=1
+							ascenceur1(cube,n)
 
-							if j == 2 and cube.lCube[i][j][k] in coinW :
-								# Vérification de la configuration
-								# Ascenseur_X
+# S'il est sur la partie basse d'une face, et qu'il est blanc, on regarde 
+# si on est en pos asc1, sinon on le place
 
-						if i==5:
-							# go_to_asc1(cube,i) -> à modifier pour que ça corresponde bien
+
+						"""if j == 2 and cube.lCube[i][j][k] :"""
+# Si c'est de la même couleur que cube.lCube i 1 1 alors on regarde si
+# on est en pos asc2 sinon on le place et on le fait
+					if i==5:
+				# go_to_asc1(cube,i) -> à modifier pour que ça corresponde bien
+		
 		fini = couronne1Done(cube)
 
 	return cpt, mouvement 
@@ -97,7 +112,15 @@ def descente0(cube,j,k):
 	if cube.lCube[i][2][2]"""
 
 """def pos_asc2(cube,i,j,k):
-	if cube.lCube[i][j][k] == cube.lCube[i][1][1] :"""
+	if cube.lCube[i][j][k] == cube.lCube[i][1][1] :
+		if i == 4 and cube.lCube[1][2][0] in coinW :
+			return True
+		elif cube.lCube[i+1][2][0] in coinW :
+			return True
+		else : 
+			return False
+	else : 
+		return False"""
 
 
 # Fonction pour savoir si un cube blanc sur la face up est bien placé
@@ -139,8 +162,6 @@ def ascenceur1(cube,face):
 		cube.turnInv(1)
 		cube.turn(4)
 
-	# Le compteur prend +4 du à 4 manipulations
-	cpt+=4
 
 # On doit faire attention à la face où on se trouve et se ramener à un déplacement par
 # rapport à F 
