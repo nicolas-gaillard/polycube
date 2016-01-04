@@ -290,18 +290,18 @@ def descente1234(cube,i,k):
 # Même mouvement que descente0 : R',D',R
 # A OPTIMISER
 	if (i == 1 and k == 0) or (i == 4 and k == 2) :
-		descente0(cube,0,0)
+		t=descente0(cube,0,0)
 
 	if (i == 2 and k == 0) or (i == 1 and k == 2) :
-		descente0(cube,2,0)
+		t=descente0(cube,2,0)
 
 	if (i == 2 and k == 2) or (i == 3 and k == 0) :
-		descente0(cube,2,2)
+		t=descente0(cube,2,2)
 
 	if (i == 3 and k == 2) or (i == 4 and k == 0) :
-		descente0(cube,0,2)
+		t=descente0(cube,0,2)
 
-	return "R'D'R"
+	return t
 
 # --------------------------------------------------------------------------
 
@@ -317,5 +317,8 @@ if __name__ == "__main__" :
 	#print(cube)
 	#print(bienPlace(cube,2,0))
 	couronne1(cube)
-	print(cube)
+	#print(cube)
+	#print(descente1234(cube,2,0))
+	#descente0(cube,2,0)
+	#print(cube)
 
