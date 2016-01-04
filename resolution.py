@@ -2,14 +2,20 @@ from cube import *
 from CubeDisplay import *
 
 def resolution():
-    cube = input("Entrez une chaine de 54 caractères valide : ")
-    premiere_face_couronne(cube)
-    deuxieme_couronne(cube)
-    croix(cube)
-    correspondance(cube)
-    placement_coins(cube)
-    orientation_coins(cube)
-    
+    color54 = input("Entrez une chaîne de 54 caractères valide : ")
+    # Ajouter une fonction de contrôle de la chaîne
+    cube = cube(color54)
+    motion=""
+
+    motion+=premiere_face_couronne(cube)
+    motion+=deuxieme_couronne(cube)
+    motion+=croix(cube)
+    motion+=correspondance(cube)
+    motion+=placement_coins(cube)
+    motion+=orientation_coins(cube)
+
+    return motion
+
 def premiere_face_couronne(cube):
     """ Effectue la première face (la face blanche) ainsi que la première couronne
 
