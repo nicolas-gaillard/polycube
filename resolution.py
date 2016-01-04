@@ -1,6 +1,15 @@
 from cube import *
 from CubeDisplay import *
 
+def resolution():
+    cube = input("Entrez une chaine de 54 caractères valide : ")
+    premiere_face_couronne(cube)
+    deuxieme_couronne(cube)
+    croix(cube)
+    correspondance(cube)
+    placement_coins(cube)
+    orientation_coins(cube)
+    
 def premiere_face_couronne(cube):
     """ Effectue la première face (la face blanche) ainsi que la première couronne
 
