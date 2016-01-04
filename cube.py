@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from utils import *
-#from CubeDisplay import *
+from CubeDisplay import *
 
 class cube :
     def __init__(self,color54):
@@ -278,6 +278,7 @@ if __name__=="__main__":
     test.turn(5)
     print("appel de la fonction")
     test.afficherCube()
+    print(test)
     #test.afficheFace(2)
     #print(cube.listecube[face][0][0])
     #print("FONCTION")

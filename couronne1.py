@@ -1,5 +1,5 @@
 from cube import *
-from cubeDisplay import *
+from CubeDisplay import *
 
 # Pour optimiser, anticiper le mouvement suivant et voir si des mouvements peuvent 
 # être raccourcis
@@ -97,12 +97,13 @@ def couronne1(cube):
 # Args : objet cube
 # Return : Boolean 
 def couronne1Done(cube) : 
-	couronne = liste(range(9,21))
+	couronne = list(range(9,21))
 	couronneDone = False 
 
-	if cube.lCube[1][1] == couronne[0:3] and cube.lCube[2][1] == couronne[3:6] and cube.lCube[3][1] == couronne[6:9] and cube.lCube[4][1] == couronne[9:12] :
-		couronneDone = True  
+	if cube.lCube[1][0] == couronne[0:3] and cube.lCube[2][0] == couronne[3:6] and cube.lCube[3][0] == couronne[6:9] and cube.lCube[4][0] == couronne[9:12] :
+		couronneDone = True
 
+	return couronneDone
 # --------------------------------------------------------------------------
 # Fonction qui descend un cube blanc de la face up s'il n'est pas bien placé
 # Args : objet cube, position (sur la face blanche)
@@ -291,3 +292,16 @@ def descente1234(cube,i,k):
 
 	if (i == 3 and k == 2) or (i == 4 and k == 0) :
 		descente0(cube,0,2)
+
+# --------------------------------------------------------------------------
+
+if __name__ == "__main__" :
+	#l="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY"
+	#print(len(l))
+	cube = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGBYYOYBRYYORRBYYYYOG")
+	#cube2 = cube("GWBWWWGWGOGOYRYRBYOOWYGOYRRBBYBORBOBWGGWBRBRWOYRGYORGY")
+	#print(cube.lCube[1][1][2])
+	#print(cube)
+	print(couronne1Done(cube))
+
+
