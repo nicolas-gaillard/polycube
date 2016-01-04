@@ -63,11 +63,11 @@ class cube :
         self.turn(face)
 
     def turnFace(self, face):
-        print("debut turn face")
+        #print("debut turn face")
         self.echangeFace(face)
     
     def turnArete(self, face):
-        print("debut turn arete")
+        #print("debut turn arete")
         if(face == 0):
             self.echangeAreteBlanche()
         elif(face == 1):
@@ -94,7 +94,7 @@ class cube :
     # U=White=0, F=Red=2, L=Green=1, R=Blue=3, B=Orange=4, D=Yellow=5
 
     def echangeArete(self, couleur1, couleur2, couleur3, couleur4):
-        print("echange arete")
+        #print("echange arete")
         liste = []
 
         liste.append(self.lCube[couleur4][0][0])
@@ -192,7 +192,7 @@ class cube :
         self.lCube[2][2][0]=liste[11]
 
     def echangeFace(self, face):
-        print("debut echange face")
+        #print("debut echange face")
         liste = []
         liste.append(self.lCube[face][0][0])
         liste.append(self.lCube[face][0][1])

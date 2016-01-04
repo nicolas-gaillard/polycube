@@ -29,6 +29,7 @@ def couronne1(cube):
 	fini = couronne1Done(cube)
 
 	while not fini :
+		print("boucle")
 		for i in range(0,len(cube.lCube)):
 			for j in [0,2]:
 				for k in [0,2]:
@@ -38,6 +39,7 @@ def couronne1(cube):
 						if bienPlace(cube,j,k) is False :
 							# Ce n'est pas bien placé, on descend
 							mouvement+=descente0(cube,j,k)
+							print("descente0")
 							cpt+=3
 
 
@@ -47,6 +49,7 @@ def couronne1(cube):
 						if j == 0 and cube.lCube[i][j][k] in coinW :
 								# On la descend
 							mouvement+=descente1234(cube,i,k)
+							print("descente1234")
 							cpt+=3
 
 # Pour optimiser ici, on peut chercher quand il vaut mieux faire un turn' ou turn
@@ -64,6 +67,7 @@ def couronne1(cube):
 								else :
 									n+=1
 							mouvement+=ascenceur1(cube,n)
+							print("ascenceur1")
 							cpt+=4
 
 
@@ -80,15 +84,19 @@ def couronne1(cube):
 								else :
 									n+=1
 							mouvement+=ascenceur2(cube,n)
+							print("ascenceur2")
 							cpt+=4
 
 
 					if i==5 and cube.lCube[i][j][k] in coinW :
 						cpt+=5
 						mouvement+=go_to_asc1(cube,j,k)
+						print("go_to_asc1")
 	# A voir s'il n'est pas possible de simplifier cette suite de mouvements (5)
 		
+		#print(fini)
 		fini = couronne1Done(cube)
+		print(fini)
 
 	return cpt, mouvement 
 
@@ -285,23 +293,29 @@ def descente1234(cube,i,k):
 		descente0(cube,0,0)
 
 	if (i == 2 and k == 0) or (i == 1 and k == 2) :
-		decente0(cube,2,0)
+		descente0(cube,2,0)
 
 	if (i == 2 and k == 2) or (i == 3 and k == 0) :
-		decente0(cube,2,2)
+		descente0(cube,2,2)
 
 	if (i == 3 and k == 2) or (i == 4 and k == 0) :
 		descente0(cube,0,2)
 
+	return "R'D'R"
+
 # --------------------------------------------------------------------------
 
 if __name__ == "__main__" :
-	#l="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY"
-	#print(len(l))
-	cube = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGBYYOYBRYYORRBYYYYOG")
-	#cube2 = cube("GWBWWWGWGOGOYRYRBYOOWYGOYRRBBYBORBOBWGGWBRBRWOYRGYORGY")
+	# Test couronne1Done :
+	#cube = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGBYYOYBRYYORRBYYYYOG")
+	#cube = cube("GWBWWWGWGOGOYRYRBYOOWYGOYRRBBYBORBOBWGGWBRBRWOYRGYORGY")
+
+	# Test bienPlace :
+	#cube = cube("GWBWWWWWGOGGRRYRBYOOWYGGYRRBBYBORBOGYBRBROBOWOOYGYGRYW")
+	cube = cube("GWBWWWWWGOGRBRYRBYOOWYGGORRBBYBORBOGWBRBYYOROROYYYGWGG")
 	#print(cube.lCube[1][1][2])
 	#print(cube)
-	print(couronne1Done(cube))
-
+	#print(bienPlace(cube,2,0))
+	couronne1(cube)
+	print(cube)
 
