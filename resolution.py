@@ -116,7 +116,86 @@ def correspondance(cube):
     :param cube: objet de type cube (voir cube.py)
     :return: une chaîne de caractères décrivant les mouvements à effectuer sur le cube
     """
-    pass
+    
+    # face[1][1] est une constante, elle ne bouge jamais
+    # F=Front, D=Down, L=Left, R=Right, B=Back, U=Up
+    # Convention : U=White=0, F=Red=2, L=Green=1, R=Blue=3, B=Orange=4, D=Yellow=5
+
+
+    # associe un numero de face avec le numero de cube qu'il doit avoir une fois la croix placée
+    dic = {1: 30, 2: 33, 3: 36, 4: 39}
+
+    green = cube.getFace(1)
+    red = cube.getFace(2)
+    blue = cube.getFace(3)
+    orange = cube.getFace(4)
+    fini = False
+
+    aretes = []
+    nbAretesBienPlacees = 0
+    aretes.append(1) if green[2][1] == 30 else aretes.append(0)
+    aretes.append(1) if red[2][1] == 33 else aretes.append(0)
+    aretes.append(1) if blue[2][1] == 36 else aretes.append(0)
+    aretes.append(1) if orange[2][1] == 39 else aretes.append(0)
+    nbAretesBienPlacees = sum(1 for i in aretes if i == 1)
+
+
+
+    # cas ou la croix est bien placée
+    if nbAretesBienPlacees == 4:
+        fini = True
+
+    # cas impossible si les étapes précédentes se sont déroulées correctement
+    elif nbAretesBienPlacees == 3:
+        fini = True
+        print("ERREUR")
+
+    # cas où deux rotations sont nécessaires
+    if nbAretesBienPlacees == 2:
+        pass
+
+    # cas le plus simple, une rotation suffit
+    if nbAretesBienPlacees == 1:
+
+        # on cherche si la rotation est horaire ou antihoraire
+        bonneFace = aretes.index(1) + 1
+        nextFace = (bonneFace % 4) + 1
+        prevFace = ((bonneFace - 2) % 4) + 1
+        nextArete = cube.getFace(nextFace)[2][1]
+
+        if dic[prevFace] == nextArete:
+            rotH(cube,bonneFace)
+        else:
+            rotH(cube,bonneFace)
+        # end if
+    # end if
+
+
+def rotH(cube,face):
+    cube.turnInv(((face+1)%4)+1)
+    cube.turn(5)
+    cube.turn(((face+1)%4)+1)
+    cube.turn(5)
+    cube.turnInv(((face+1)%4)+1)
+    cube.turn2(5)
+    cube.turn(((face+1)%4)+1)
+    cube.turn2(5)
+    print(cube)
+# end function
+
+
+def rotAH(cube,face):
+    cube.turn(((face+1)%4)+1)
+    cube.turnInv(5)
+    cube.turnInv(((face+1)%4)+1)
+    cube.turnInv(5)
+    cube.turn(((face+1)%4)+1)
+    cube.turn2(5)
+    cube.turnInv(((face+1)%4)+1)
+    cube.turn2(5)
+    print(cube)
+# end function
+
 
 
 def placement_coins(cube):
@@ -145,3 +224,5 @@ if __name__ == "__main__":
     print(cube)
     print(croix(cube))
     print(cube)
+    correspondance(cube)
+

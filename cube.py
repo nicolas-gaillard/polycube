@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from utils import *
-#from CubeDisplay import *
+from CubeDisplay import *
 
 class cube :
     def __init__(self,color54):
