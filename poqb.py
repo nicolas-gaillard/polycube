@@ -1,6 +1,9 @@
 # poqb.py
 # -*- coding: utf-8 -*-
 
+from cube import *
+from random import *
+
 def optimisation_manoeuvres(man):
     """Réduit le nombre de manoeuvres à effectuer
     :param man: la chaîne de caractères représentant les manoeuvres à effectuer
@@ -82,6 +85,15 @@ def optimisation_manoeuvres(man):
     return manOpti
 
 
+def generator():
+    test = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+    for i in range(0,25):
+        j = randint(0,5)
+        test.turn(j)
+    return test.cube_to_color54()
+
+
+
 def solve(cube_c54):
     """La fonction principale du projet qui résoud un Rubik's Cube.
 
@@ -109,6 +121,6 @@ def solve(cube_c54):
 
 
 if __name__=="__main__":
-    cube = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
-    print ("Pour la résolution de {}\nExécuter la manoeuvre {}".format(cube, solve(cube)))
-
+    #cube = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
+    #print ("Pour la résolution de {}\nExécuter la manoeuvre {}".format(cube, solve(cube)))
+    #print(generator())
