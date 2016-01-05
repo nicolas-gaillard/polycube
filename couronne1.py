@@ -42,6 +42,10 @@ def couronne1(cube):
 							print("descente0")
 							cpt+=3
 
+							i=0
+							j=0
+							k=0
+
 
 					if i in [1,2,3,4]:
 
@@ -51,6 +55,10 @@ def couronne1(cube):
 							mouvement+=descente1234(cube,i,k)
 							print("descente1234")
 							cpt+=3
+
+							i=0
+							j=0
+							k=0
 
 # Pour optimiser ici, on peut chercher quand il vaut mieux faire un turn' ou turn
 
@@ -70,6 +78,10 @@ def couronne1(cube):
 							print("ascenceur1")
 							cpt+=4
 
+							i=0
+							j=0
+							k=0
+
 
 
 						if j == 2 and k == 0 and cube.lCube[i][j][k] in coinW :
@@ -83,9 +95,17 @@ def couronne1(cube):
 									n = 1
 								else :
 									n+=1
-							mouvement+=ascenceur2(cube,n)
+							
+							if n == 1 :
+								mouvement+=ascenceur2(cube,4)
+							else :
+								mouvement+=ascenceur2(cube,n-1)
 							print("ascenceur2")
 							cpt+=4
+
+							i=0
+							j=0
+							k=0
 
 
 					if i==5 and cube.lCube[i][j][k] in coinW :
@@ -98,6 +118,7 @@ def couronne1(cube):
 		fini = couronne1Done(cube)
 		print(fini)
 
+	print("sortie de boucle")
 	return cpt, mouvement 
 
 # --------------------------------------------------------------------------
@@ -290,18 +311,28 @@ def descente1234(cube,i,k):
 # Même mouvement que descente0 : R',D',R
 # A OPTIMISER
 	if (i == 1 and k == 0) or (i == 4 and k == 2) :
-		t=descente0(cube,0,0)
+		cube.turn(4)
+		cube.turnInv(5)
+		cube.turnInv(4)
+		return "BD'B'"
 
 	if (i == 2 and k == 0) or (i == 1 and k == 2) :
-		t=descente0(cube,2,0)
+		cube.turn(1)
+		cube.turnInv(5)
+		cube.turnInv(1)
+		return "LD'L'"
 
 	if (i == 2 and k == 2) or (i == 3 and k == 0) :
-		t=descente0(cube,2,2)
+		cube.turnInv(3)
+		cube.turnInv(5)
+		cube.turn(3)
+		return "R'D'R"
 
 	if (i == 3 and k == 2) or (i == 4 and k == 0) :
-		t=descente0(cube,0,2)
-
-	return t
+		cube.turn(3)
+		cube.turnInv(5)
+		cube.turnInv(3)
+		return "RD'R'"
 
 # --------------------------------------------------------------------------
 
