@@ -121,6 +121,8 @@ def correspondance(cube):
     # F=Front, D=Down, L=Left, R=Right, B=Back, U=Up
     # Convention : U=White=0, F=Red=2, L=Green=1, R=Blue=3, B=Orange=4, D=Yellow=5
 
+    # sequence de retour
+    sequence = ""
 
     # associe un numero de face avec le numero de cube qu'il doit avoir une fois la croix placée
     dic = {1: 30, 2: 33, 3: 36, 4: 39}
@@ -150,12 +152,29 @@ def correspondance(cube):
         fini = True
         print("ERREUR")
 
-    # cas où deux rotations sont nécessaires
-    if nbAretesBienPlacees == 2:
-        pass
+    # cas où deux séquences de rotations sont nécessaires
+    elif nbAretesBienPlacees == 2:
+        
+        # on cherche si les deux aretes bien placées se suivent
+        succ = False
+        for i in range(4):
+            succ = succ or (arete[i] == arete[(i+1)%4] and arete[i] == 1)
+        # end for
 
-    # cas le plus simple, une rotation suffit
-    if nbAretesBienPlacees == 1:
+        # si elles se suivent une rotation H ou AH de la face jaune donnera une seule arete bien placee et ça on sait faire
+        if succ:
+            cube.turn(5)
+
+        # si elles se suivent pas il faut une séquence entière avec une mauvaise face pour revenir sur une configuration à aucun bon
+        else:
+            mauvaiseFace = 1
+            while 
+            rotH(cube,)
+        # end if
+
+
+    # cas le plus simple, une séquence de rotations suffit
+    elif nbAretesBienPlacees == 1:
 
         # on cherche si la rotation est horaire ou antihoraire
         bonneFace = aretes.index(1) + 1
@@ -168,30 +187,40 @@ def correspondance(cube):
         else:
             rotH(cube,bonneFace)
         # end if
+        fini = True
     # end if
 
+    # cas ou aucune arete n'est bien placée
+    else:
 
-def rotH(cube,face):
-    cube.turnInv(((face+1)%4)+1)
+
+
+# end function
+
+
+def rotAH(cube,face):
+    opp = ((face+1)%4)+1
+    cube.turn(opp)
     cube.turn(5)
-    cube.turn(((face+1)%4)+1)
+    cube.turnInv(opp)
     cube.turn(5)
-    cube.turnInv(((face+1)%4)+1)
+    cube.turn(opp)
     cube.turn2(5)
-    cube.turn(((face+1)%4)+1)
+    cube.turnInv(opp)
     cube.turn2(5)
     print(cube)
 # end function
 
 
-def rotAH(cube,face):
-    cube.turn(((face+1)%4)+1)
+def rotH(cube,face):
+    opp = ((face+1)%4)+1
+    cube.turnInv(opp)
     cube.turnInv(5)
-    cube.turnInv(((face+1)%4)+1)
+    cube.turn(opp)
     cube.turnInv(5)
-    cube.turn(((face+1)%4)+1)
+    cube.turnInv(opp)
     cube.turn2(5)
-    cube.turnInv(((face+1)%4)+1)
+    cube.turn(opp)
     cube.turn2(5)
     print(cube)
 # end function
