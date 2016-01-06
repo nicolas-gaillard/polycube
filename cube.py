@@ -55,30 +55,36 @@ class cube :
 
     def turn2(self, face):
         # Fait tourner une face 2 fois (un demi-tour)
-        self.turn(face)
-        self.turn(face)
+        self.turnFace2(face)
+        self.turnArete(face, 2)
 
     def turnInv(self, face):
         # Fait tourner une face 3 fois (quart de tour inverse)
-        self.turn2(face)
-        self.turn(face)
+        self.turnFaceInv(face)
+        self.turnArete(face, -1)
 
     def turnFace(self, face):
         self.echangeFace(face)
+
+    def turnFace2(self, face):
+        self.echangeFace2(face)
+
+    def turnFaceInv(self, face):
+        self.echangeFaceInv(face)
     
-    def turnArete(self, face):
-        if(face == 0):
-            self.echangeAreteBlanche()
-        elif(face == 1):
-            self.echangeAreteVerte()
-        elif(face == 2):
-            self.echangeAreteRouge()
-        elif(face == 3):
-            self.echangeAreteBleu()
-        elif(face == 4):
-            self.echangeAreteOrange()
+    def turnArete(self, face, nb = 1):
+        if face == 0:
+            self.echangeAreteBlanche(nb)
+        elif face == 1:
+            self.echangeAreteVerte(nb)
+        elif face == 2:
+            self.echangeAreteRouge(nb)
+        elif face == 3:
+            self.echangeAreteBleu(nb)
+        elif face == 4:
+            self.echangeAreteOrange(nb)
         else:
-            self.echangeAreteJaune()
+            self.echangeAreteJaune(nb)
     
 
     """
@@ -92,6 +98,7 @@ class cube :
     """
     # U=White=0, F=Red=2, L=Green=1, R=Blue=3, B=Orange=4, D=Yellow=5
 
+    """
     def echangeArete(self, couleur1, couleur2, couleur3, couleur4):
         liste = [self.lCube[couleur4][0][0], self.lCube[couleur4][1][0], self.lCube[couleur4][2][0],
                  self.lCube[couleur3][0][0], self.lCube[couleur3][0][1], self.lCube[couleur3][0][2],
@@ -110,32 +117,54 @@ class cube :
         self.lCube[couleur4][0][0]=liste[9]
         self.lCube[couleur4][1][0]=liste[10]
         self.lCube[couleur4][2][0]=liste[11]
+    """
 
-    def echangeAreteBlanche(self):
+    # Pour les fonctions ci-dessous, nbTr doit être égal à 1, -1 ou 2
+    
+    def echangeAreteBlanche(self, nbTr = 1):
         liste = [self.lCube[1][0][2], self.lCube[1][0][1], self.lCube[1][0][0],
                  self.lCube[4][0][2], self.lCube[4][0][1], self.lCube[4][0][0],
                  self.lCube[3][0][2], self.lCube[3][0][1], self.lCube[3][0][0],
                  self.lCube[2][0][2], self.lCube[2][0][1],self.lCube[2][0][0]]
 
-        self.lCube[4][0][2]=liste[0]
-        self.lCube[4][0][1]=liste[1]
-        self.lCube[4][0][0]=liste[2]
-        self.lCube[3][0][2]=liste[3]
-        self.lCube[3][0][1]=liste[4]
-        self.lCube[3][0][0]=liste[5]
-        self.lCube[2][0][2]=liste[6]
-        self.lCube[2][0][1]=liste[7]
-        self.lCube[2][0][0]=liste[8]
-        self.lCube[1][0][2]=liste[9]
-        self.lCube[1][0][1]=liste[10]
-        self.lCube[1][0][0]=liste[11]
+        face = nbTr + 3 if nbTr != 2 else 3
+        self.lCube[face][0][2]=liste[0]
+        self.lCube[face][0][1]=liste[1]
+        self.lCube[face][0][0]=liste[2]
+        
+        face = 4 - nbTr if nbTr != -1 else 1
+        self.lCube[face][0][2]=liste[3]
+        self.lCube[face][0][1]=liste[4]
+        self.lCube[face][0][0]=liste[5]
+        
+        face = 3 - nbTr
+        self.lCube[face][0][2]=liste[6]
+        self.lCube[face][0][1]=liste[7]
+        self.lCube[face][0][0]=liste[8]
+        
+        face = 2 - nbTr if nbTr != 2 else 4
+        self.lCube[face][0][2]=liste[9]
+        self.lCube[face][0][1]=liste[10]
+        self.lCube[face][0][0]=liste[11]
+        
 
-    def echangeAreteVerte(self):
-        liste = [self.lCube[5][0][0], self.lCube[5][1][0], self.lCube[5][2][0],
-                 self.lCube[2][0][0], self.lCube[2][1][0], self.lCube[2][2][0],
-                 self.lCube[0][0][0], self.lCube[0][1][0], self.lCube[0][2][0],
-                 self.lCube[4][2][2], self.lCube[4][1][2], self.lCube[4][0][2]]
-
+    def echangeAreteVerte(self, nbTr = 1):
+        if nbTr == 1:
+            liste = [self.lCube[5][0][0], self.lCube[5][1][0], self.lCube[5][2][0],
+                     self.lCube[2][0][0], self.lCube[2][1][0], self.lCube[2][2][0],
+                     self.lCube[0][0][0], self.lCube[0][1][0], self.lCube[0][2][0],
+                     self.lCube[4][2][2], self.lCube[4][1][2], self.lCube[4][0][2]]
+        elif nbTr == 2:
+            liste = [self.lCube[2][0][0], self.lCube[2][1][0], self.lCube[2][2][0],
+                     self.lCube[0][0][0], self.lCube[0][1][0], self.lCube[0][2][0],
+                     self.lCube[4][2][2], self.lCube[4][1][2], self.lCube[4][0][2],
+                     self.lCube[5][0][0], self.lCube[5][1][0], self.lCube[5][2][0]]
+        else:
+            liste = [self.lCube[0][0][0], self.lCube[0][1][0], self.lCube[0][2][0],
+                     self.lCube[4][2][2], self.lCube[4][1][2], self.lCube[4][0][2],
+                     self.lCube[5][0][0], self.lCube[5][1][0], self.lCube[5][2][0],
+                     self.lCube[2][0][0], self.lCube[2][1][0], self.lCube[2][2][0]]
+        
         self.lCube[4][2][2]=liste[0]
         self.lCube[4][1][2]=liste[1]
         self.lCube[4][0][2]=liste[2]
@@ -149,11 +178,22 @@ class cube :
         self.lCube[0][1][0]=liste[10]
         self.lCube[0][2][0]=liste[11]
 
-    def echangeAreteRouge(self):
-        liste = [self.lCube[0][2][0], self.lCube[0][2][1], self.lCube[0][2][2],
-                 self.lCube[1][0][2], self.lCube[1][1][2], self.lCube[1][2][2],
-                 self.lCube[3][0][0], self.lCube[3][1][0], self.lCube[3][2][0],
-                 self.lCube[5][0][0], self.lCube[5][0][1], self.lCube[5][0][2]]
+    def echangeAreteRouge(self, nbTr = 1):
+        if nbTr == 1:
+            liste = [self.lCube[0][2][0], self.lCube[0][2][1], self.lCube[0][2][2],
+                     self.lCube[1][0][2], self.lCube[1][1][2], self.lCube[1][2][2],
+                     self.lCube[3][0][0], self.lCube[3][1][0], self.lCube[3][2][0],
+                     self.lCube[5][0][0], self.lCube[5][0][1], self.lCube[5][0][2]]
+        elif nbTr == 2:
+            liste = [self.lCube[1][2][2], self.lCube[1][1][2], self.lCube[1][0][2],
+                     self.lCube[5][0][0], self.lCube[5][0][1], self.lCube[5][0][2],
+                     self.lCube[0][2][0], self.lCube[0][2][1], self.lCube[0][2][2],
+                     self.lCube[3][2][0], self.lCube[3][1][0], self.lCube[3][0][0]]
+        else:
+            liste = [self.lCube[5][0][2], self.lCube[5][0][1], self.lCube[5][0][0],
+                     self.lCube[3][2][0], self.lCube[3][1][0], self.lCube[3][0][0],
+                     self.lCube[1][2][2], self.lCube[1][1][2], self.lCube[1][0][2],
+                     self.lCube[0][2][2], self.lCube[0][2][1], self.lCube[0][2][0]]
 
         self.lCube[3][0][0]=liste[0]
         self.lCube[3][1][0]=liste[1]
@@ -168,11 +208,22 @@ class cube :
         self.lCube[1][1][2]=liste[10]
         self.lCube[1][2][2]=liste[11]
 
-    def echangeAreteBleu(self):
-        liste = [self.lCube[0][0][2], self.lCube[0][1][2], self.lCube[0][2][2],
-                 self.lCube[2][0][2], self.lCube[2][1][2], self.lCube[2][2][2],
-                 self.lCube[5][0][2], self.lCube[5][1][2], self.lCube[5][2][2],
-                 self.lCube[4][2][0], self.lCube[4][1][0], self.lCube[4][0][0]]
+    def echangeAreteBleu(self, nbTr = 1):
+        if nbTr == 1:
+            liste = [self.lCube[0][0][2], self.lCube[0][1][2], self.lCube[0][2][2],
+                     self.lCube[2][0][2], self.lCube[2][1][2], self.lCube[2][2][2],
+                     self.lCube[5][0][2], self.lCube[5][1][2], self.lCube[5][2][2],
+                     self.lCube[4][2][0], self.lCube[4][1][0], self.lCube[4][0][0]]
+        elif nbTr == 2:
+            liste = [self.lCube[2][0][2], self.lCube[2][1][2], self.lCube[2][2][2],
+                     self.lCube[5][0][2], self.lCube[5][1][2], self.lCube[5][2][2],
+                     self.lCube[4][2][0], self.lCube[4][1][0], self.lCube[4][0][0],
+                     self.lCube[0][0][2], self.lCube[0][1][2], self.lCube[0][2][2]]
+        else:
+            liste = [self.lCube[5][0][2], self.lCube[5][1][2], self.lCube[5][2][2],
+                     self.lCube[4][2][0], self.lCube[4][1][0], self.lCube[4][0][0],
+                     self.lCube[0][0][2], self.lCube[0][1][2], self.lCube[0][2][2],
+                     self.lCube[2][0][2], self.lCube[2][1][2], self.lCube[2][2][2],]
 
         self.lCube[4][2][0]=liste[0]
         self.lCube[4][1][0]=liste[1]
@@ -187,11 +238,22 @@ class cube :
         self.lCube[5][1][2]=liste[10]
         self.lCube[5][2][2]=liste[11]
 
-    def echangeAreteOrange(self):
-        liste = [self.lCube[0][0][0], self.lCube[0][0][1], self.lCube[0][0][2],
-                 self.lCube[3][0][2], self.lCube[3][1][2], self.lCube[3][2][2],
-                 self.lCube[1][0][0], self.lCube[1][1][0], self.lCube[1][2][0],
-                 self.lCube[5][2][0], self.lCube[5][2][1], self.lCube[5][2][2]]
+    def echangeAreteOrange(self, nbTr = 1):
+        if nbTr == 1:
+            liste = [self.lCube[0][0][0], self.lCube[0][0][1], self.lCube[0][0][2],
+                     self.lCube[3][0][2], self.lCube[3][1][2], self.lCube[3][2][2],
+                     self.lCube[1][0][0], self.lCube[1][1][0], self.lCube[1][2][0],
+                     self.lCube[5][2][0], self.lCube[5][2][1], self.lCube[5][2][2]]
+        elif nbTr == 2:
+            liste = [self.lCube[3][0][2], self.lCube[3][1][2], self.lCube[3][2][2],
+                     self.lCube[5][2][2], self.lCube[5][2][1], self.lCube[5][2][0],
+                     self.lCube[0][0][2], self.lCube[0][0][1], self.lCube[0][0][0],
+                     self.lCube[1][0][0], self.lCube[1][1][0], self.lCube[1][2][0]]
+        else:
+            liste = [self.lCube[5][2][2], self.lCube[5][2][1], self.lCube[5][2][0],
+                     self.lCube[1][2][0], self.lCube[1][1][0], self.lCube[1][0][0],
+                     self.lCube[3][2][2], self.lCube[3][1][2], self.lCube[3][0][2],
+                     self.lCube[0][0][2], self.lCube[0][0][1], self.lCube[0][0][0]]
 
         self.lCube[1][2][0]=liste[0]
         self.lCube[1][1][0]=liste[1]
@@ -206,24 +268,31 @@ class cube :
         self.lCube[3][1][2]=liste[10]
         self.lCube[3][0][2]=liste[11]
 
-    def echangeAreteJaune(self):
+    def echangeAreteJaune(self, nbTr = 1):
         liste = [self.lCube[2][2][0], self.lCube[2][2][1], self.lCube[2][2][2],
                  self.lCube[3][2][0], self.lCube[3][2][1], self.lCube[3][2][2],
                  self.lCube[4][2][0], self.lCube[4][2][1], self.lCube[4][2][2],
                  self.lCube[1][2][0], self.lCube[1][2][1], self.lCube[1][2][2]]
 
-        self.lCube[3][2][0]=liste[0]
-        self.lCube[3][2][1]=liste[1]
-        self.lCube[3][2][2]=liste[2]
-        self.lCube[4][2][0]=liste[3]
-        self.lCube[4][2][1]=liste[4]
-        self.lCube[4][2][2]=liste[5]
-        self.lCube[1][2][0]=liste[6]
-        self.lCube[1][2][1]=liste[7]
-        self.lCube[1][2][2]=liste[8]
-        self.lCube[2][2][0]=liste[9]
-        self.lCube[2][2][1]=liste[10]
-        self.lCube[2][2][2]=liste[11]
+        face = nbTr + 2
+        self.lCube[face][2][0]=liste[0]
+        self.lCube[face][2][1]=liste[1]
+        self.lCube[face][2][2]=liste[2]
+
+        face = nbTr + 3 if nbTr != 2 else 1
+        self.lCube[face][2][0]=liste[3]
+        self.lCube[face][2][1]=liste[4]
+        self.lCube[face][2][2]=liste[5]
+
+        face = nbTr if nbTr != -1 else 3
+        self.lCube[face][2][0]=liste[6]
+        self.lCube[face][2][1]=liste[7]
+        self.lCube[face][2][2]=liste[8]
+
+        face += 1
+        self.lCube[face][2][0]=liste[9]
+        self.lCube[face][2][1]=liste[10]
+        self.lCube[face][2][2]=liste[11]
 
     def echangeFace(self, face):
         faceC = self.lCube[face]
@@ -239,6 +308,28 @@ class cube :
         self.lCube[face][1][0] = liste[5]
         self.lCube[face][0][0] = liste[6]
         self.lCube[face][0][1] = liste[7]
+
+    def echangeFace2(self, face):
+        faceC = self.lCube[face]
+        faceC[0][0], faceC[2][2] = faceC[2][2], faceC[0][0]
+        faceC[0][1], faceC[2][1] = faceC[2][1], faceC[0][1]
+        faceC[0][2], faceC[2][0] = faceC[2][0], faceC[0][2]
+        faceC[1][0], faceC[1][2] = faceC[1][2], faceC[1][0]
+
+    def echangeFaceInv(self, face):
+        faceC = self.lCube[face]
+        liste = [faceC[0][0], faceC[0][1], faceC[0][2],
+                 faceC[1][2], faceC[2][2], faceC[2][1],
+                 faceC[2][0], faceC[1][0]]
+
+        self.lCube[face][2][0] = liste[0]
+        self.lCube[face][1][0] = liste[1]
+        self.lCube[face][0][0] = liste[2]
+        self.lCube[face][0][1] = liste[3]
+        self.lCube[face][0][2] = liste[4]
+        self.lCube[face][1][2] = liste[5]
+        self.lCube[face][2][2] = liste[6]
+        self.lCube[face][2][1] = liste[7]
 
     def cube_to_color54(self):
     
@@ -308,8 +399,7 @@ if __name__=="__main__":
     setup = '''from __main__ import (cube, test)'''
     timeit.timeit("test.echangeFace(2)", setup=setup, number=100000)
     """
-    #test=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
-    #print(test)
-    #test.echangeFace(0)
+    #test=cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+    #test.turnInv(4)
     #print(test)
     
