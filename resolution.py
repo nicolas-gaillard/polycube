@@ -52,12 +52,17 @@ def demarrage_deuxieme_couronne(cube):
     :param cube: objet de type cube 
     """
 
+    mouvements = ""
+
     faceL = cube.getFace(1)
 
     vert = [9,10,11]
 
     while faceL[0][0] not in vert and faceL[0][1] not in vert and faceL[0][2] not in vert:
+        mouvements += "U"
         cube.turn(0)
+
+    return mouvements
 
 def deuxieme_couronne(cube):
     """ Effectue la deuxième couronne
@@ -66,8 +71,8 @@ def deuxieme_couronne(cube):
     :return: une chaîne de caractères décrivant les mouvements à effectuer sur le cube
     """
     mouvements = ""
-
-    demarrage_deuxieme_couronne(cube)
+    
+    mouvements += demarrage_deuxieme_couronne(cube)
 
     fin = deuxieme_couronne_terminee(cube)
 
@@ -404,7 +409,7 @@ def orientation_coins(cube):
 
 if __name__ == "__main__":
     #tests pour la deuxieme couronne
-    cube = cube("WWWWWWWWWGGGRRRBBBOOORGYGRGOBRYOBRGYGYYOOBOYYROGRYBBBY")
+    cube = cube("WWWWWWWWWOOOGGGRRRBBBGGYORRYBRGOORBYBYYGBOGBYOGROYYBRY")
     drawCube(cube.cube_to_color54())
     print(deuxieme_couronne(cube))
     drawCube(cube.cube_to_color54())
