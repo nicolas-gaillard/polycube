@@ -43,9 +43,9 @@ def couronne1(cube):
 							print("descente0")
 							cpt+=3
 
-							i=0
+							"""i=0
 							j=0
-							k=0
+							k=0"""
 
 
 					if i in [1,2,3,4]:
@@ -57,9 +57,9 @@ def couronne1(cube):
 							print("descente1234")
 							cpt+=3
 
-							i=0
+							"""i=0
 							j=0
-							k=0
+							k=0"""
 
 # Pour optimiser ici, on peut chercher quand il vaut mieux faire un turn' ou turn
 
@@ -79,9 +79,9 @@ def couronne1(cube):
 							print("ascenceur1")
 							cpt+=4
 
-							i=0
+							"""i=0
 							j=0
-							k=0
+							k=0"""
 
 
 
@@ -104,15 +104,19 @@ def couronne1(cube):
 							print("ascenceur2")
 							cpt+=4
 
-							i=0
+							"""i=0
 							j=0
-							k=0
+							k=0"""
 
 
 					if i==5 and cube.lCube[i][j][k] in coinW :
 						cpt+=5
 						mouvement+=go_to_asc1(cube,j,k)
 						print("go_to_asc1")
+
+						"""i = 0
+						j = 0
+						k = 0"""
 	# A voir s'il n'est pas possible de simplifier cette suite de mouvements (5)
 		
 		#print(fini)
@@ -344,21 +348,21 @@ if __name__ == "__main__" :
 	#cube = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGBYYOYBRYYORRBYYYYOG")
 	#cube = cube("GWBWWWGWGOGOYRYRBYOOWYGOYRRBBYBORBOBWGGWBRBRWOYRGYORGY")
 
-	# Test bienPlace :
-	#cube = cube("GWBWWWWWGOGGRRYRBYOOWYGGYRRBBYBORBOGYBRBROBOWOOYGYGRYW")
-	cube = cube("GWBWWWWWGOGRBRYRBYOOWYGGORRBBYBORBOGWBRBYYOROROYYYGWGG")
+	# Test de fonctions :
 	#print(cube.lCube[1][1][2])
 	#print(cube)
 	#print(bienPlace(cube,2,0))
-	
-	#couronne1(cube)
-	
 	#print(cube)
 	#print(descente1234(cube,2,0))
 	#descente0(cube,2,0)
 	#print(cube)
 
+	# Test de couronne : 
+	#cube = cube("GWBWWWWWGOGGRRYRBYOOWYGGYRRBBYBORBOGYBRBROBOWOOYGYGRYW")
+	#cube = cube("GWBWWWWWGOGRBRYRBYOOWYGGORRBBYBORBOGWBRBYYOROROYYYGWGG")
+	cube = cube("YWBWWWBWYBGOWRGOBWROOYGYRRGYBOGOOYRGORGROWRYBWGYBYBRBG")
+
 	drawCube(cube.cube_to_color54())
-	ascenceur1(cube,2)
+	print(couronne1(cube))
 	drawCube(cube.cube_to_color54())
 
