@@ -35,7 +35,7 @@ def deuxieme_couronne(cube):
 
 
 def croixTerminee(cube):
-    """ Teste l'état du cube pour déterminer si la croix est faite sur la face D (en jaune)
+    """ Teste l"état du cube pour déterminer si la croix est faite sur la face D (en jaune)
 
     :param cube: objet de type cube
     :return: True si la croix est faite, False sinon
@@ -64,7 +64,7 @@ def croix(cube):
     while not fini:
         faceD = cube.getFace(5)
         if faceD[0][1] in jaunes and faceD[1][0] in jaunes:
-            mouvements += "R'D'B'DBR"
+            mouvements += "R"D"B"DBR"
             cube.turnInv(3)
             cube.turnInv(5)
             cube.turnInv(4)
@@ -73,7 +73,7 @@ def croix(cube):
             cube.turn(3)
             fini = True
         elif faceD[1][0] in jaunes and faceD[2][1] in jaunes:
-            mouvements += "F'D'R'DRF"
+            mouvements += "F"D"R"DRF"
             cube.turnInv(2)
             cube.turnInv(5)
             cube.turnInv(3)
@@ -82,7 +82,7 @@ def croix(cube):
             cube.turn(2)
             fini = True
         elif faceD[2][1] in jaunes and faceD[1][2] in jaunes:
-            mouvements += "L'D'F'DFL"
+            mouvements += "L"D"F"DFL"
             cube.turnInv(1)
             cube.turnInv(5)
             cube.turnInv(2)
@@ -95,7 +95,7 @@ def croix(cube):
             if faceD[0][1] in jaunes and faceD[1][2] in jaunes:
                 fini = True
                 
-            mouvements += "B'D'L'DLB"
+            mouvements += "B"D"L"DLB"
             cube.turnInv(4)  
             cube.turnInv(5)  
             cube.turnInv(1)   
@@ -124,7 +124,7 @@ def correspondance(cube):
     # sequence de retour
     sequence = ""
 
-    # associe un numero de face avec le numero de cube qu'il doit avoir une fois la croix placée
+    # associe un numero de face avec le numero de cube qu"il doit avoir une fois la croix placée
     dic = {1: 30, 2: 33, 3: 36, 4: 39}
 
     green = cube.getFace(1)
@@ -143,63 +143,75 @@ def correspondance(cube):
 
 
 
-    # cas ou la croix est bien placée
-    if nbAretesBienPlacees == 4:
-        fini = True
+    while not fini:
 
-    # cas impossible si les étapes précédentes se sont déroulées correctement
-    elif nbAretesBienPlacees == 3:
-        fini = True
-        print("ERREUR")
+        # cas ou la croix est bien placée
+        if nbAretesBienPlacees == 4:
+            fini = True
 
-    # cas où deux séquences de rotations sont nécessaires
-    elif nbAretesBienPlacees == 2:
-        
-        # on cherche si les deux aretes bien placées se suivent
-        succ = False
-        for i in range(4):
-            succ = succ or (arete[i] == arete[(i+1)%4] and arete[i] == 1)
-        # end for
+        # cas impossible si les étapes précédentes se sont déroulées correctement
+        elif nbAretesBienPlacees == 3:
+            fini = True
+            print("ERREUR")
 
-        # si elles se suivent une rotation H ou AH de la face jaune donnera une seule arete bien placee et ça on sait faire
-        if succ:
-            cube.turn(5)
+        # cas où deux séquences de rotations sont nécessaires
+        elif nbAretesBienPlacees == 2:
+            
+            # on cherche si les deux aretes bien placées se suivent
+            succ = False
+            for i in range(4):
+                succ = succ or (arete[i] == arete[(i+1)%4] and arete[i] == 1)
+            # end for
 
-        # si elles se suivent pas il faut une séquence entière avec une mauvaise face pour revenir sur une configuration à aucun bon
-        else:
-            mauvaiseFace = 1
-            while 
-            rotH(cube,)
+            # si elles se suivent une rotation H ou AH de la face jaune donnera une seule arete bien placee et ça on sait faire
+            if succ:
+                cube.turn(5)
+                sequence += "D"
+
+            # si elles se suivent pas il faut une séquence entière avec une mauvaise face pour revenir sur une configuration à 0 bien placées
+            else:
+                idFace = 1
+                while dic[idFace] == cube.getFace(idFace)[2][1] and idFace < 4:
+                    idFace += 1
+                # end while
+                sequence += rotH(cube,idFace)
+            # end if
+
+
+
+        # cas le plus simple, une séquence de rotations suffit
+        elif nbAretesBienPlacees == 1:
+
+            # on cherche si la rotation est horaire ou antihoraire
+            bonneFace = aretes.index(1) + 1
+            nextFace = (bonneFace % 4) + 1
+            prevFace = ((bonneFace - 2) % 4) + 1
+            nextArete = cube.getFace(nextFace)[2][1]
+
+            if dic[prevFace] == nextArete:
+                sequence += rotH(cube,bonneFace)
+            else:
+                sequence += rotH(cube,bonneFace)
+            # end if
+            fini = True
         # end if
 
-
-    # cas le plus simple, une séquence de rotations suffit
-    elif nbAretesBienPlacees == 1:
-
-        # on cherche si la rotation est horaire ou antihoraire
-        bonneFace = aretes.index(1) + 1
-        nextFace = (bonneFace % 4) + 1
-        prevFace = ((bonneFace - 2) % 4) + 1
-        nextArete = cube.getFace(nextFace)[2][1]
-
-        if dic[prevFace] == nextArete:
-            rotH(cube,bonneFace)
+        # cas ou aucune arete n"est bien placée
         else:
-            rotH(cube,bonneFace)
-        # end if
-        fini = True
-    # end if
+            sequence += rotH(cube,5)
+    # end while
 
-    # cas ou aucune arete n'est bien placée
-    else:
-
-
+    return sequence
 
 # end function
 
 
 def rotAH(cube,face):
+
+    dic = {1: "L", 2: "F", 3: "R", 4: "B"}
+    dicInv = {1: "L'", 2: "F'", 3: "R'", 4: "B'"}
     opp = ((face+1)%4)+1
+
     cube.turn(opp)
     cube.turn(5)
     cube.turnInv(opp)
@@ -209,11 +221,18 @@ def rotAH(cube,face):
     cube.turnInv(opp)
     cube.turn2(5)
     print(cube)
+
+    return dic[opp] + "D" + dicInv[opp] + "D" + dic[opp] + "D2" + dicInv[opp] + "D2"
+
 # end function
 
 
 def rotH(cube,face):
+
+    dic = {1: "L", 2: "F", 3: "R", 4: "B"}
+    dicInv = {1: "L'", 2: "F'", 3: "R'", 4: "B'"}
     opp = ((face+1)%4)+1
+
     cube.turnInv(opp)
     cube.turnInv(5)
     cube.turn(opp)
@@ -223,6 +242,8 @@ def rotH(cube,face):
     cube.turn(opp)
     cube.turn2(5)
     print(cube)
+
+    return dicInv[opp] + "D'" + dic[opp] + "D'" + dicInv[opp] + "D2" + dic[opp] + "D2"
 # end function
 
 
@@ -237,7 +258,7 @@ def placement_coins(cube):
 
 
 def orientation_coins(cube):
-    """ Effectue l'orientation des coins autour de la croix
+    """ Effectue l"orientation des coins autour de la croix
 
     :param cube: objet de type cube (voir cube.py)
     :return: une chaîne de caractères décrivant les mouvements à effectuer sur le cube
