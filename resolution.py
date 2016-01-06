@@ -56,7 +56,7 @@ def demarrage_deuxieme_couronne(cube):
 
     vert = [9,10,11]
 
-    while faceL[0][0] not in vert and faceL[0][1] not in vert or faceL[0][2] not in vert:
+    while faceL[0][0] not in vert and faceL[0][1] not in vert and faceL[0][2] not in vert:
         cube.turn(0)
 
 def deuxieme_couronne(cube):
@@ -105,8 +105,14 @@ def deuxieme_couronne(cube):
                 cube.turn(1)
             else:
                 if faceF[2][1] not in arete_rouge and faceR[2][1] not in arete_bleu and faceB[2][1] not in arete_orange:
+                    mouvements += "D"
                     cube.turn(5)
                 pass
+        faceL = cube.getFace(1)
+        faceF = cube.getFace(2)
+        faceR = cube.getFace(3)
+        faceB = cube.getFace(4)
+        faceD = cube.getFace(5)
         if faceF[2][1] in arete_rouge:
             if faceD[0][1] in arete_bleu:
                 mouvements += "D'R'DRDFD'F'"
@@ -130,8 +136,14 @@ def deuxieme_couronne(cube):
                 cube.turn(2)
             else:
                 if faceL[2][1] not in arete_vert and faceR[2][1] not in arete_bleu and faceB[2][1] not in arete_orange:
+                    mouvements += "D"
                     cube.turn(5)
                 pass
+        faceL = cube.getFace(1)
+        faceF = cube.getFace(2)
+        faceR = cube.getFace(3)
+        faceB = cube.getFace(4)
+        faceD = cube.getFace(5)
         if faceR[2][1] in arete_bleu:
             if faceD[1][2] in arete_orange:
                 mouvements += "D'B'DBDRD'R'"
@@ -155,8 +167,14 @@ def deuxieme_couronne(cube):
                 cube.turn(3)
             else:
                 if faceL[2][1] not in arete_vert and faceF[2][1] not in arete_rouge and faceB[2][1] not in arete_orange:
+                    mouvements += "D"
                     cube.turn(5)
                 pass
+        faceL = cube.getFace(1)
+        faceF = cube.getFace(2)
+        faceR = cube.getFace(3)
+        faceB = cube.getFace(4)
+        faceD = cube.getFace(5)
         if faceB[2][1] in arete_orange:
             if faceD[2][1] in arete_vert:
                 mouvements += "D'L'DLDBD'B'"
@@ -180,10 +198,103 @@ def deuxieme_couronne(cube):
                 cube.turn(4)
             else:
                 if faceL[2][1] not in arete_vert and faceF[2][1] not in arete_rouge and faceR[2][1] not in arete_bleu:
+                    mouvements += "D"
                     cube.turn(5)
                 pass
+        faceL = cube.getFace(1)
+        faceF = cube.getFace(2)
+        faceR = cube.getFace(3)
+        faceB = cube.getFace(4)
+        faceD = cube.getFace(5)
         if faceL[2][1] not in arete_vert and faceF[2][1] not in arete_rouge and faceR[2][1] not in arete_bleu and faceB[2][1] not in arete_orange:
+            mouvements += "D"
             cube.turn(5)
+        faceL = cube.getFace(1)
+        faceF = cube.getFace(2)
+        faceR = cube.getFace(3)
+        faceB = cube.getFace(4)
+        faceD = cube.getFace(5)
+        if croixTerminee(cube) and fin == False:
+            if faceL[2][1] in arete_vert and faceL[1][0] not in arete_vert:
+                mouvements += "DBD'B'D'L'DL"
+                cube.turn(5)
+                cube.turn(4)
+                cube.turnInv(5)
+                cube.turnInv(4)
+                cube.turnInv(5)
+                cube.turnInv(1)
+                cube.turn(5)
+                cube.turn(1)
+            elif faceL[2][1] in arete_vert and faceL[1][2] not in arete_vert:
+                mouvements += "D'F'DFDLD'L'"
+                cube.turnInv(5)
+                cube.turnInv(2)
+                cube.turn(5)
+                cube.turn(2)
+                cube.turn(5)
+                cube.turn(1)
+                cube.turnInv(5)
+                cube.turnInv(1)
+            elif faceF[2][1] in arete_rouge and faceF[1][0] not in arete_rouge:
+                mouvements += "DLD'L'D'F'DF"
+                cube.turn(5)
+                cube.turn(1)
+                cube.turnInv(5)
+                cube.turnInv(1)
+                cube.turnInv(5)
+                cube.turnInv(2)
+                cube.turn(5)
+                cube.turn(2)
+            elif faceF[2][1] in arete_rouge and faceF[1][2] not in arete_rouge:
+                mouvements += "D'R'DRDFD'F'"
+                cube.turnInv(5)
+                cube.turnInv(3)
+                cube.turn(5)
+                cube.turn(3)
+                cube.turn(5)
+                cube.turn(2)
+                cube.turnInv(5)
+                cube.turnInv(2)
+            elif faceR[2][1] in arete_bleu and faceR[1][0] not in arete_bleu:
+                mouvements += "DFD'F'D'R'DR"
+                cube.turn(5)
+                cube.turn(2)
+                cube.turnInv(5)
+                cube.turnInv(2)
+                cube.turnInv(5)
+                cube.turnInv(3)
+                cube.turn(5)
+                cube.turn(3)
+            elif faceR[2][1] in arete_bleu and faceR[1][2] not in arete_bleu:
+                mouvements += "D'B'DBDRD'R'"
+                cube.turnInv(5)
+                cube.turnInv(4)
+                cube.turn(5)
+                cube.turn(4)
+                cube.turn(5)
+                cube.turn(3)
+                cube.turnInv(5)
+                cube.turnInv(3)
+            elif faceB[2][1] in arete_orange and faceB[1][0] not in arete_orange:
+                mouvements += "DRD'R'D'B'DB"
+                cube.turn(5)
+                cube.turn(3)
+                cube.turnInv(5)
+                cube.turnInv(3)
+                cube.turnInv(5)
+                cube.turnInv(4)
+                cube.turn(5)
+                cube.turn(4)
+            elif faceB[2][1] in arete_orange and faceB[1][2] not in arete_orange:
+                mouvements += "D'L'DLDBD'B'"
+                cube.turnInv(5)
+                cube.turnInv(1)
+                cube.turn(5)
+                cube.turn(1)
+                cube.turn(5)
+                cube.turn(4)
+                cube.turnInv(5)
+                cube.turnInv(4)
         if fin == False:
             fin = deuxieme_couronne_terminee(cube)
     return mouvements
@@ -293,15 +404,15 @@ def orientation_coins(cube):
 
 if __name__ == "__main__":
     #tests pour la deuxieme couronne
-    #cube = cube("WWWWWWWWWOOOGGGRRRBBBGGYORRYBRGOORBYBYYGBOGBYOGROYYBRY")
-    #drawCube(cube.cube_to_color54())
-    #print(deuxieme_couronne(cube))
-    #drawCube(cube.cube_to_color54())
+    cube = cube("WWWWWWWWWGGGRRRBBBOOORGYGRGOBRYOBRGYGYYOOBOYYROGRYBBBY")
+    drawCube(cube.cube_to_color54())
+    print(deuxieme_couronne(cube))
+    drawCube(cube.cube_to_color54())
 
     # tests pour la croix jaune
     #cube = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOYYBYBGYOBOYRRYOGYYGRY")
     #cube = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGBYYOYBRYYORRBYYYYOG")
-    #print(croix(cube))
-    #print(deuxieme_couronne_terminee(cube))
+    print(croix(cube))
+    drawCube(cube.cube_to_color54())
     #print(croix(cube))
     
