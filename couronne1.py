@@ -30,6 +30,7 @@ def couronne1(cube):
 
 	while not fini :
 		print("boucle")
+		# Parcours du cube
 		for i in range(0,len(cube.lCube)):
 			for j in [0,2]:
 				for k in [0,2]:
@@ -219,7 +220,8 @@ def coin_couleur(cube,face,k):
 		return False
 
 # --------------------------------------------------------------------------
-def ascenceur1(cube,face):			
+def ascenceur1(cube,face):	
+# face de 1 à 4		
 # R,F',R',F en étant devant la face où l'on doit effectuer le mouvement
 	if face == 1 :
 		cube.turn(2)
@@ -250,7 +252,8 @@ def ascenceur1(cube,face):
 		return "LB'L'B"
 
 # --------------------------------------------------------------------------
-def ascenceur2(cube,face):			
+def ascenceur2(cube,face):	
+# face de 1 à 4		
 # F',R,F,R' en étant devant la face où l'on doit effectuer le mouvement
 	if face == 1 :
 		cube.turnInv(1)
@@ -347,9 +350,15 @@ if __name__ == "__main__" :
 	#print(cube.lCube[1][1][2])
 	#print(cube)
 	#print(bienPlace(cube,2,0))
-	couronne1(cube)
+	
+	#couronne1(cube)
+	
 	#print(cube)
 	#print(descente1234(cube,2,0))
 	#descente0(cube,2,0)
 	#print(cube)
+
+	drawCube(cube.cube_to_color54())
+	ascenceur1(cube,2)
+	drawCube(cube.cube_to_color54())
 
