@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from utils import *
-#from CubeDisplay import *
+from CubeDisplay import *
 
 class cube :
     def __init__(self,color54):
@@ -93,20 +93,10 @@ class cube :
     # U=White=0, F=Red=2, L=Green=1, R=Blue=3, B=Orange=4, D=Yellow=5
 
     def echangeArete(self, couleur1, couleur2, couleur3, couleur4):
-        liste = []
-
-        liste.append(self.lCube[couleur4][0][0])
-        liste.append(self.lCube[couleur4][1][0])
-        liste.append(self.lCube[couleur4][2][0])
-        liste.append(self.lCube[couleur3][0][0])
-        liste.append(self.lCube[couleur3][0][1])
-        liste.append(self.lCube[couleur3][0][2])
-        liste.append(self.lCube[couleur2][0][2])
-        liste.append(self.lCube[couleur2][1][2])
-        liste.append(self.lCube[couleur2][2][2])
-        liste.append(self.lCube[couleur1][2][0])
-        liste.append(self.lCube[couleur1][2][1])
-        liste.append(self.lCube[couleur1][2][2])
+        liste = [self.lCube[couleur4][0][0], self.lCube[couleur4][1][0], self.lCube[couleur4][2][0],
+                 self.lCube[couleur3][0][0], self.lCube[couleur3][0][1], self.lCube[couleur3][0][2],
+                 self.lCube[couleur2][0][2], self.lCube[couleur2][1][2], self.lCube[couleur2][2][2],
+                 self.lCube[couleur1][2][0], self.lCube[couleur1][2][1], self.lCube[couleur1][2][2]]
 
         self.lCube[couleur3][0][2]=liste[0]
         self.lCube[couleur3][0][1]=liste[1]
@@ -122,19 +112,10 @@ class cube :
         self.lCube[couleur4][2][0]=liste[11]
 
     def echangeAreteBlanche(self):
-        liste = []
-        liste.append(self.lCube[1][0][2])
-        liste.append(self.lCube[1][0][1])
-        liste.append(self.lCube[1][0][0])
-        liste.append(self.lCube[4][0][2])
-        liste.append(self.lCube[4][0][1])
-        liste.append(self.lCube[4][0][0])
-        liste.append(self.lCube[3][0][2])
-        liste.append(self.lCube[3][0][1])
-        liste.append(self.lCube[3][0][0])
-        liste.append(self.lCube[2][0][2])
-        liste.append(self.lCube[2][0][1])
-        liste.append(self.lCube[2][0][0])
+        liste = [self.lCube[1][0][2], self.lCube[1][0][1], self.lCube[1][0][0],
+                 self.lCube[4][0][2], self.lCube[4][0][1], self.lCube[4][0][0],
+                 self.lCube[3][0][2], self.lCube[3][0][1], self.lCube[3][0][0],
+                 self.lCube[2][0][2], self.lCube[2][0][1],self.lCube[2][0][0]]
 
         self.lCube[4][0][2]=liste[0]
         self.lCube[4][0][1]=liste[1]
@@ -150,19 +131,10 @@ class cube :
         self.lCube[1][0][0]=liste[11]
 
     def echangeAreteVerte(self):
-        liste = []
-        liste.append(self.lCube[5][0][0])
-        liste.append(self.lCube[5][1][0])
-        liste.append(self.lCube[5][2][0])
-        liste.append(self.lCube[2][0][0])
-        liste.append(self.lCube[2][1][0])
-        liste.append(self.lCube[2][2][0])
-        liste.append(self.lCube[0][0][0])
-        liste.append(self.lCube[0][1][0])
-        liste.append(self.lCube[0][2][0])
-        liste.append(self.lCube[4][2][2])
-        liste.append(self.lCube[4][1][2])
-        liste.append(self.lCube[4][0][2])
+        liste = [self.lCube[5][0][0], self.lCube[5][1][0], self.lCube[5][2][0],
+                 self.lCube[2][0][0], self.lCube[2][1][0], self.lCube[2][2][0],
+                 self.lCube[0][0][0], self.lCube[0][1][0], self.lCube[0][2][0],
+                 self.lCube[4][2][2], self.lCube[4][1][2], self.lCube[4][0][2]]
 
         self.lCube[4][2][2]=liste[0]
         self.lCube[4][1][2]=liste[1]
@@ -178,19 +150,10 @@ class cube :
         self.lCube[0][2][0]=liste[11]
 
     def echangeAreteRouge(self):
-        liste = []
-        liste.append(self.lCube[0][2][0])
-        liste.append(self.lCube[0][2][1])
-        liste.append(self.lCube[0][2][2])
-        liste.append(self.lCube[1][0][2])
-        liste.append(self.lCube[1][1][2])
-        liste.append(self.lCube[1][2][2])
-        liste.append(self.lCube[3][0][0])
-        liste.append(self.lCube[3][1][0])
-        liste.append(self.lCube[3][2][0])
-        liste.append(self.lCube[5][0][0])
-        liste.append(self.lCube[5][0][1])
-        liste.append(self.lCube[5][0][2])
+        liste = [self.lCube[0][2][0], self.lCube[0][2][1], self.lCube[0][2][2],
+                 self.lCube[1][0][2], self.lCube[1][1][2], self.lCube[1][2][2],
+                 self.lCube[3][0][0], self.lCube[3][1][0], self.lCube[3][2][0],
+                 self.lCube[5][0][0], self.lCube[5][0][1], self.lCube[5][0][2]]
 
         self.lCube[3][0][0]=liste[0]
         self.lCube[3][1][0]=liste[1]
@@ -206,19 +169,10 @@ class cube :
         self.lCube[1][2][2]=liste[11]
 
     def echangeAreteBleu(self):
-        liste = []
-        liste.append(self.lCube[0][0][2])
-        liste.append(self.lCube[0][1][2])
-        liste.append(self.lCube[0][2][2])
-        liste.append(self.lCube[2][0][2])
-        liste.append(self.lCube[2][1][2])
-        liste.append(self.lCube[2][2][2])
-        liste.append(self.lCube[5][0][2])
-        liste.append(self.lCube[5][1][2])
-        liste.append(self.lCube[5][2][2])
-        liste.append(self.lCube[4][2][0])
-        liste.append(self.lCube[4][1][0])
-        liste.append(self.lCube[4][0][0])
+        liste = [self.lCube[0][0][2], self.lCube[0][1][2], self.lCube[0][2][2],
+                 self.lCube[2][0][2], self.lCube[2][1][2], self.lCube[2][2][2],
+                 self.lCube[5][0][2], self.lCube[5][1][2], self.lCube[5][2][2],
+                 self.lCube[4][2][0], self.lCube[4][1][0], self.lCube[4][0][0]]
 
         self.lCube[4][2][0]=liste[0]
         self.lCube[4][1][0]=liste[1]
@@ -234,19 +188,10 @@ class cube :
         self.lCube[5][2][2]=liste[11]
 
     def echangeAreteOrange(self):
-        liste = []
-        liste.append(self.lCube[0][0][0])
-        liste.append(self.lCube[0][0][1])
-        liste.append(self.lCube[0][0][2])
-        liste.append(self.lCube[3][0][2])
-        liste.append(self.lCube[3][1][2])
-        liste.append(self.lCube[3][2][2])
-        liste.append(self.lCube[1][0][0])
-        liste.append(self.lCube[1][1][0])
-        liste.append(self.lCube[1][2][0])
-        liste.append(self.lCube[5][2][0])
-        liste.append(self.lCube[5][2][1])
-        liste.append(self.lCube[5][2][2])
+        liste = [self.lCube[0][0][0], self.lCube[0][0][1], self.lCube[0][0][2],
+                 self.lCube[3][0][2], self.lCube[3][1][2], self.lCube[3][2][2],
+                 self.lCube[1][0][0], self.lCube[1][1][0], self.lCube[1][2][0],
+                 self.lCube[5][2][0], self.lCube[5][2][1], self.lCube[5][2][2]]
 
         self.lCube[1][2][0]=liste[0]
         self.lCube[1][1][0]=liste[1]
@@ -262,20 +207,10 @@ class cube :
         self.lCube[3][0][2]=liste[11]
 
     def echangeAreteJaune(self):
-        liste = []
-       
-        liste.append(self.lCube[2][2][0])
-        liste.append(self.lCube[2][2][1])
-        liste.append(self.lCube[2][2][2])
-        liste.append(self.lCube[3][2][0])
-        liste.append(self.lCube[3][2][1])
-        liste.append(self.lCube[3][2][2])
-        liste.append(self.lCube[4][2][0])
-        liste.append(self.lCube[4][2][1])
-        liste.append(self.lCube[4][2][2])
-        liste.append(self.lCube[1][2][0])
-        liste.append(self.lCube[1][2][1])
-        liste.append(self.lCube[1][2][2])
+        liste = [self.lCube[2][2][0], self.lCube[2][2][1], self.lCube[2][2][2],
+                 self.lCube[3][2][0], self.lCube[3][2][1], self.lCube[3][2][2],
+                 self.lCube[4][2][0], self.lCube[4][2][1], self.lCube[4][2][2],
+                 self.lCube[1][2][0], self.lCube[1][2][1], self.lCube[1][2][2]]
 
         self.lCube[3][2][0]=liste[0]
         self.lCube[3][2][1]=liste[1]
@@ -291,15 +226,10 @@ class cube :
         self.lCube[2][2][2]=liste[11]
 
     def echangeFace(self, face):
-        liste = []
-        liste.append(self.lCube[face][0][0])
-        liste.append(self.lCube[face][0][1])
-        liste.append(self.lCube[face][0][2])
-        liste.append(self.lCube[face][1][2])
-        liste.append(self.lCube[face][2][2])
-        liste.append(self.lCube[face][2][1])
-        liste.append(self.lCube[face][2][0])
-        liste.append(self.lCube[face][1][0])
+        faceC = self.lCube[face]
+        liste = [faceC[0][0], faceC[0][1], faceC[0][2],
+                 faceC[1][2], faceC[2][2], faceC[2][1],
+                 faceC[2][0], faceC[1][0]]
 
         self.lCube[face][0][2] = liste[0]
         self.lCube[face][1][2] = liste[1]
@@ -370,15 +300,16 @@ class cube :
         return color54
 
 if __name__=="__main__":
+    """
+    pour mesurer les performances :
+    import timeit
+    exec(open("cube.py").read())
     test=cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
-    #test.getFace(0)
-    test.afficherCube()
-    test.turn(5)
-    print("appel de la fonction")
-    test.afficherCube()
-    #test.afficheFace(2)
-    #print(cube.listecube[face][0][0])
-    #print("FONCTION")
-    #test.turnLine(2,0)
+    setup = '''from __main__ import (cube, test)'''
+    timeit.timeit("test.echangeFace(2)", setup=setup, number=100000)
+    """
+    #test=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+    #print(test)
+    #test.echangeFace(0)
     #print(test)
     
