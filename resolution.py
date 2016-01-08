@@ -256,7 +256,6 @@ def rotH(cube,face):
 # end function
 
 
-
 def placementOK(cube):
     """ On verifie si les coins sont bien placés
 
@@ -298,7 +297,7 @@ def placementOK(cube):
 
 
 def placement_coins(cube):
-""" Effectue le placement des coins sur la face jaune, l'orientation sera faite après
+    """ Effectue le placement des coins sur la face jaune, l'orientation sera faite après
 
     :param cube: objet de type cube (voir cube.py)
     :return: une chaîne de caractères décrivant les mouvements à effectuer sur le cube
