@@ -1,10 +1,9 @@
 from cube import *
 from CubeDisplay import *
 
-# Pour optimiser, anticiper le mouvement suivant et voir si des mouvements peuvent 
-# être raccourcis
-
 """ 
+Stratégie :
+
 Boucle tant que la première couronne n'est pas réalisée
 
 Si face du haut (blanche) :
@@ -23,13 +22,13 @@ Si face 5 :
 def couronne1(cube):
 # Utilisation d'un compteur qui compte les mouvements
 # Mouvement est une chaine de caractères contenant la liste des mouvements
-	cpt=0
+	#cpt=0
 	mouvement=""
 	coinW=[1,3,6,8]
 	fini = couronne1Done(cube)
 
 	while not fini :
-		print("boucle")
+		#print("boucle")
 		# Parcours du cube
 		for i in range(0,len(cube.lCube)):
 			for j in [0,2]:
@@ -40,12 +39,8 @@ def couronne1(cube):
 						if bienPlace(cube,j,k) is False :
 							# Ce n'est pas bien placé, on descend
 							mouvement+=descente0(cube,j,k)
-							print("descente0")
-							cpt+=3
-
-							"""i=0
-							j=0
-							k=0"""
+							#print("descente0")
+							#cpt+=3
 
 
 					if i in [1,2,3,4]:
@@ -54,12 +49,8 @@ def couronne1(cube):
 						if j == 0 and cube.lCube[i][j][k] in coinW :
 								# On la descend
 							mouvement+=descente1234(cube,i,k)
-							print("descente1234")
-							cpt+=3
-
-							"""i=0
-							j=0
-							k=0"""
+							#print("descente1234")
+							#cpt+=3
 
 # Pour optimiser ici, on peut chercher quand il vaut mieux faire un turn' ou turn
 
@@ -70,19 +61,14 @@ def couronne1(cube):
 							while not pos_asc1(cube,n):
 								cube.turn(5)
 								mouvement+="D"
-								cpt+=1
+								#cpt+=1
 								if n == 4 :
 									n = 1 
 								else :
 									n+=1
 							mouvement+=ascenceur1(cube,n)
-							print("ascenceur1")
-							cpt+=4
-
-							"""i=0
-							j=0
-							k=0"""
-
+							#print("ascenceur1")
+							#cpt+=4
 
 
 						if j == 2 and k == 0 and cube.lCube[i][j][k] in coinW :
@@ -91,7 +77,7 @@ def couronne1(cube):
 							while not pos_asc2(cube,n):
 								cube.turn(5)
 								mouvement+="D"
-								cpt+=1
+								#cpt+=1
 								if n == 4 :
 									n = 1
 								else :
@@ -101,30 +87,24 @@ def couronne1(cube):
 								mouvement+=ascenceur2(cube,4)
 							else :
 								mouvement+=ascenceur2(cube,n-1)
-							print("ascenceur2")
-							cpt+=4
-
-							"""i=0
-							j=0
-							k=0"""
+							#print("ascenceur2")
+							#cpt+=4
 
 
 					if i==5 and cube.lCube[i][j][k] in coinW :
-						cpt+=5
+						#cpt+=5
 						mouvement+=go_to_asc1(cube,j,k)
-						print("go_to_asc1")
+						#print("go_to_asc1")
 
-						"""i = 0
-						j = 0
-						k = 0"""
 	# A voir s'il n'est pas possible de simplifier cette suite de mouvements (5)
 		
 		#print(fini)
 		fini = couronne1Done(cube)
-		print(fini)
+		#print(fini)
 
-	print("sortie de boucle")
-	return cpt, mouvement 
+	#print("sortie de boucle")
+	# return cpt
+	return mouvement 
 
 # --------------------------------------------------------------------------
 # Fonction qui détermine si la première couronne est réalisée ou non
@@ -343,6 +323,8 @@ def descente1234(cube,i,k):
 
 # --------------------------------------------------------------------------
 
+"""  --- TEST DE LA FONCTION --
+
 if __name__ == "__main__" :
 	# Test couronne1Done :
 	#cube = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGBYYOYBRYYORRBYYYYOG")
@@ -364,5 +346,5 @@ if __name__ == "__main__" :
 
 	drawCube(cube.cube_to_color54())
 	print(couronne1(cube))
-	drawCube(cube.cube_to_color54())
+	drawCube(cube.cube_to_color54())"""
 
