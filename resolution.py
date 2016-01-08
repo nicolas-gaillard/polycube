@@ -725,7 +725,7 @@ def orientation_coins(cube):
     jaunes=[41,43,46,48]
 
     while not (bas[0][0] in jaunes and bas[0][2] in jaunes and bas[2][0] in jaunes and bas[2][2] in jaunes):
-        for face in range(1,4):
+        for face in range(1,5):
             faceOpp = ((face+1)%4)+1
             faceSuiv = (face%4)+1
 

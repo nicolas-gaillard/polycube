@@ -120,16 +120,20 @@ def solve(cube_c54):
     
     c = cube(cube_c54)
 
-    motion=premiere_face_couronne(c)
+    motion = ""
+    #motion=premiere_face_couronne(c)
     motion+=deuxieme_couronne(c)
     motion+=croix(c)
     motion+=correspondance(c)
     motion+=placement_coins(c)
     motion+=orientation_coins(c)
+
+    motion = optimisation_manoeuvres(motion)
     
     return motion
 
 
+"""
 if __name__=="__main__":
     #cube = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
     #print ("Pour la résolution de {}\nExécuter la manoeuvre {}".format(cube, solve(cube)))
@@ -140,3 +144,4 @@ if __name__=="__main__":
 
     sol = solve(color54)
     print(sol)
+"""
