@@ -19,6 +19,8 @@ def croixBlancheDone(cube):
 
 if __name__ == "__main__" :
 
-	cube = cube("BRBRWBROWWWYBWGROYOYOGGWGROYBBROOGBWGBWBGRYGOOWRYYYYRG")
+	stringCube = generator()
+	print(stringCube)
+	cube = cube(stringCube)
 	print(croixBlancheDone(cube))
 	drawCube(cube.cube_to_color54())
