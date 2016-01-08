@@ -6,8 +6,17 @@ def croixBlanche(cube):
 
 	mouvement=""
 
+	"""
 	while(croixBlancheDone(cube) == False):
 		print("croix blanche non terminée")
+	"""
+	listeFacetteBlanche = [2, 4, 5, 7]
+	for facette in listeFacetteBlanche:
+		for i in range(0,6):
+			for j in range(0,3):
+				for k in range(0,3):
+					if cube.lCube[i][j][k] == facette:
+						print("Facette numéro : "+str(facette)+" position "+str(i), str(j), str(k))
 
 def croixBlancheDone(cube):
 	""" Cette fonction nous permet de savoir si la croix blanche est terminé ou non
@@ -23,4 +32,6 @@ if __name__ == "__main__" :
 	print(stringCube)
 	cube = cube(stringCube)
 	print(croixBlancheDone(cube))
+	croixBlanche(cube)
 	drawCube(cube.cube_to_color54())
+	
