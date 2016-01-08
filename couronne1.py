@@ -28,7 +28,8 @@ def couronne1(cube):
 	fini = couronne1Done(cube)
 
 	while not fini :
-		#print("boucle")
+		print("boucle")
+
 		# Parcours du cube
 		for i in range(0,len(cube.lCube)):
 			for j in [0,2]:
@@ -39,7 +40,7 @@ def couronne1(cube):
 						if bienPlace(cube,j,k) is False :
 							# Ce n'est pas bien placé, on descend
 							mouvement+=descente0(cube,j,k)
-							#print("descente0")
+							print("descente0")
 							#cpt+=3
 
 
@@ -49,7 +50,7 @@ def couronne1(cube):
 						if j == 0 and cube.lCube[i][j][k] in coinW :
 								# On la descend
 							mouvement+=descente1234(cube,i,k)
-							#print("descente1234")
+							print("descente1234")
 							#cpt+=3
 
 # Pour optimiser ici, on peut chercher quand il vaut mieux faire un turn' ou turn
@@ -74,6 +75,7 @@ def couronne1(cube):
 								else :
 									n+=1
 							mouvement+=ascenceur1(cube,n)
+							print("ascenceur1")
 							#cpt+=4
 
 
@@ -100,14 +102,16 @@ def couronne1(cube):
 								mouvement+=ascenceur2(cube,4)
 							else :
 								mouvement+=ascenceur2(cube,n-1)
-							#print("ascenceur2")
+							print("ascenceur2")
 							#cpt+=4
 
 
 					if i==5 and cube.lCube[i][j][k] in coinW :
 						#cpt+=5
 						mouvement+=go_to_asc1(cube,j,k)
-						#print("go_to_asc1")
+					
+
+						print("go_to_asc1")
 
 	# A voir s'il n'est pas possible de simplifier cette suite de mouvements (5)
 		
@@ -115,7 +119,7 @@ def couronne1(cube):
 		fini = couronne1Done(cube)
 		#print(fini)
 
-	#print("sortie de boucle")
+	print("sortie de boucle")
 	# return cpt
 	return mouvement 
 
@@ -286,21 +290,33 @@ def ascenceur2(cube,face):
 # Return : String
 def go_to_asc1(cube,j,k):
 # R',D',D',R,D par rapport à Front
-	if (j == 0 and k == 0) or (j == 2 and k == 0):
+	if (j == 0 and k == 0) :
+		cube.turn(1)
+		cube.turnInv(5)
+		cube.turnInv(5)
+		cube.turnInv(1)
+		return "LD'D'L'"#+asc1_complet(cube)
+
+	if (j == 2 and k == 0) :
 		cube.turnInv(1)
 		cube.turnInv(5)
 		cube.turnInv(5)
 		cube.turn(1)
-		cube.turn(5)
-		return "L'D'D'LD"
+		return "L'D'D'L"#+asc2_complet(cube)
 
-	if (j == 0 and k == 2) or (j == 2 and k == 2) :
+	if (j == 2 and k == 2) :
+		cube.turn(3)
+		cube.turnInv(5)
+		cube.turnInv(5)
+		cube.turnInv(3)
+		return "RD'D'R'"#+asc1_complet(cube)
+
+	if (j == 0 and k == 2) :
 		cube.turnInv(3)
 		cube.turnInv(5)
 		cube.turnInv(5)
 		cube.turn(3)
-		cube.turn(5)
-		return "R'D'D'RD"
+		return "R'D'D'R"#+asc2_complet(cube)
 	
 
 # --------------------------------------------------------------------------
@@ -356,8 +372,9 @@ if __name__ == "__main__" :
 	#cube = cube("GWBWWWWWGOGGRRYRBYOOWYGGYRRBBYBORBOGYBRBROBOWOOYGYGRYW")
 	#cube = cube("GWBWWWWWGOGRBRYRBYOOWYGGORRBBYBORBOGWBRBYYOROROYYYGWGG")
 	#cube = cube("YWBWWWBWYBGOWRGOBWROOYGYRRGYBOGOOYRGORGROWRYBWGYBYBRBG")
-	#cube = cube("OWBWWWGWGBOOYGWORYOBWRGGYRBOBYOOYROGRBRWBGWRYYYBGYRBGR") NE MARCHE PAS AVEC CE CUBE
-	cube=cube("RWRWWWGWBBGWORYOBBWOYYGYRRBOBOGOOGGWORGRBWRROBGYYYYYBG")
+	#cube=cube("RWRWWWGWBBGWORYOBBWOYYGYRRBOBOGOOGGWORGRBWRROBGYYYYYBG")
+	#cube = cube("WWWWWWYWOOGOBRGWBGROBYGOGRYGBOYOBBGYGRBYBYOBWRYRRYRROG")
+	cube = cube("WWBWWWYWYOGOBRRGBRYOBYGOGRYOBRBOBWBOGGBRYGORGYRWOYGRYW")
 	drawCube(cube.cube_to_color54())
 	print(couronne1(cube))
 	drawCube(cube.cube_to_color54())
