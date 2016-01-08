@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from cube import *
+from resolution import *
 from random import *
 
 def optimisation_manoeuvres(man):
@@ -116,11 +117,26 @@ def solve(cube_c54):
 
     """
 
-    pass
-    return "ch'sais pas faire..."
+    
+    c = cube(cube_c54)
+
+    motion=premiere_face_couronne(c)
+    motion+=deuxieme_couronne(c)
+    motion+=croix(c)
+    motion+=correspondance(c)
+    motion+=placement_coins(c)
+    motion+=orientation_coins(c)
+    
+    return motion
 
 
 if __name__=="__main__":
     #cube = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
     #print ("Pour la résolution de {}\nExécuter la manoeuvre {}".format(cube, solve(cube)))
     #print(generator())
+    
+    color54 = input("Entrez une chaîne de 54 caractères valide : ")
+    # Ajouter une fonction de contrôle de la chaîne
+
+    sol = solve(color54)
+    print(sol)
