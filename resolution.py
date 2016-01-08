@@ -161,7 +161,7 @@ def placementOK(cube):
 
 #end function
 
-def placementCoins(cube):
+def placement_coins(cube):
     """ Effectue le placement des coins sur la face jaune, l'orientation sera faite après
 
     :param cube: objet de type cube (voir cube.py)
