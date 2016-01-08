@@ -359,20 +359,20 @@ class cube :
                     color54+="O"
          
         for j in range(0,3):
-        	for i in range(1,5):
-        		for m in range(0,3):
-        			if self.lCube[i][j][m] in W :
-        				color54+="W"
-        			if self.lCube[i][j][m] in R :
-        				color54+="R"
-        			if self.lCube[i][j][m] in B :       
-        				color54+="B"
-        			if self.lCube[i][j][m] in G :
-        				color54+="G"
-        			if self.lCube[i][j][m] in Y :
-        				color54+="Y"
-        			if self.lCube[i][j][m] in O :
-        				color54+="O"
+            for i in range(1,5):
+                for m in range(0,3):
+                    if self.lCube[i][j][m] in W :
+                        color54+="W"
+                    if self.lCube[i][j][m] in R :
+                        color54+="R"
+                    if self.lCube[i][j][m] in B :       
+                        color54+="B"
+                    if self.lCube[i][j][m] in G :
+                        color54+="G"
+                    if self.lCube[i][j][m] in Y :
+                        color54+="Y"
+                    if self.lCube[i][j][m] in O :
+                        color54+="O"
 
         for n in range(0,3):
             for o in range(0,3):
