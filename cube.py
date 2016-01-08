@@ -402,3 +402,4 @@ if __name__=="__main__":
     #test=cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
     #test.turnInv(4)
     #print(test)
+    
