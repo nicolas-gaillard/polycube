@@ -1,5 +1,6 @@
 from cube import *
 from CubeDisplay import *
+from couronne1 import *
 
 def resolution():
     color54 = input("Entrez une chaîne de 54 caractères valide : ")
@@ -16,13 +17,16 @@ def resolution():
 
     return motion
 
+def croix_blanche(cube):
+    pass
+
 def premiere_face_couronne(cube):
+    return couronne1(cube)
     """ Effectue la première face (la face blanche) ainsi que la première couronne
 
     :param cube: objet de type cube (voir cube.py)
     :return: une chaîne de caractères décrivant les mouvements à effectuer sur le cube
     """
-    pass
 
 
 def deuxieme_couronne(cube):
