@@ -58,6 +58,13 @@ def couronne1(cube):
 						if j == 2 and k ==2 and cube.lCube[i][j][k] in coinW :
 							# Configuration de l'ascenceur1 :
 							n=i
+							if (n == 1 and pos_asc1(cube,4)) or (n in [2,3,4] and pos_asc1(cube,n-1)):
+								cube.turnInv(5)
+								mouvement+="D'"
+								if n == 1 :
+									n = 4
+								else :
+									n=n-1
 							while not pos_asc1(cube,n):
 								cube.turn(5)
 								mouvement+="D"
@@ -67,13 +74,19 @@ def couronne1(cube):
 								else :
 									n+=1
 							mouvement+=ascenceur1(cube,n)
-							#print("ascenceur1")
 							#cpt+=4
 
 
 						if j == 2 and k == 0 and cube.lCube[i][j][k] in coinW :
 							# Configuration de l'ascenceur 2 : 
 							n=i
+							if (n == 1 and pos_asc2(cube,4)) or (n in [2,3,4] and pos_asc2(cube,n-1)):
+								cube.turnInv(5)
+								mouvement+="D'"
+								if n == 1 :
+									n = 4
+								else :
+									n=n-1
 							while not pos_asc2(cube,n):
 								cube.turn(5)
 								mouvement+="D"
@@ -139,7 +152,7 @@ def descente0(cube,j,k):
 		cube.turn(1)
 		cube.turnInv(5)
 		cube.turnInv(1)
-		return "LD'R'"
+		return "LD'L'"
 
 	if j == 2 and k == 2 :
 		cube.turnInv(3)
@@ -323,7 +336,7 @@ def descente1234(cube,i,k):
 
 # --------------------------------------------------------------------------
 
-"""  --- TEST DE LA FONCTION --
+#--- TEST DE LA FONCTION --
 
 if __name__ == "__main__" :
 	# Test couronne1Done :
@@ -342,9 +355,10 @@ if __name__ == "__main__" :
 	# Test de couronne : 
 	#cube = cube("GWBWWWWWGOGGRRYRBYOOWYGGYRRBBYBORBOGYBRBROBOWOOYGYGRYW")
 	#cube = cube("GWBWWWWWGOGRBRYRBYOOWYGGORRBBYBORBOGWBRBYYOROROYYYGWGG")
-	cube = cube("YWBWWWBWYBGOWRGOBWROOYGYRRGYBOGOOYRGORGROWRYBWGYBYBRBG")
-
+	#cube = cube("YWBWWWBWYBGOWRGOBWROOYGYRRGYBOGOOYRGORGROWRYBWGYBYBRBG")
+	#cube = cube("OWBWWWGWGBOOYGWORYOBWRGGYRBOBYOOYROGRBRWBGWRYYYBGYRBGR") NE MARCHE PAS AVEC CE CUBE
+	cube=cube("RWRWWWGWBBGWORYOBBWOYYGYRRBOBOGOOGGWORGRBWRROBGYYYYYBG")
 	drawCube(cube.cube_to_color54())
 	print(couronne1(cube))
-	drawCube(cube.cube_to_color54())"""
+	drawCube(cube.cube_to_color54())
 
