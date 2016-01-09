@@ -71,7 +71,7 @@ def croixBlanche(cube):
 			cube.turn(2)
 			print("mouvement x2 face 2")
 	"""
-	for i in range(0, 2):
+	for i in range(0, 4):
 		# Placement de la facette numéro 2 en fonction de la face sur laquelle elle est situé
 		# Cas de la face rouge
 		if listePosition[2][0] == 2:
@@ -399,7 +399,27 @@ def croixBlanche(cube):
 		# Cas de la face orange
 		if listePosition[7][0] == 4:
 			if listePosition[7][1] == 2:
-				
+				cube.turn(5)
+				cube.turnInv(1)
+				cube.turn(2)
+				cube.turn(1)
+			if listePosition[7][1] == 0:
+				cube.turn(4)
+				cube.turn(0)
+				cube.turn(1)
+				cube.turnInv(0)
+			if listePosition[7][1] == 1 and listePosition[7][2] == 2:
+				cube.turn(0)
+				cube.turn(1)
+				cube.turnInv(0)
+			if listePosition[7][1] == 1 and listePosition[7][2] == 0:
+				cube.turnInv(0)
+				cube.turnInv(3)
+				cube.turn(0)
+			listePosition = position(2, listePosition)
+			listePosition = position(4, listePosition)
+			listePosition = position(5, listePosition)
+			listePosition = position(7, listePosition)
 
 		#Cas de la face rouge
 		if listePosition[7][0] == 2:
@@ -428,9 +448,47 @@ def croixBlanche(cube):
 
 		# Cas de la face verte
 		if listePosition[7][0] == 1:
+			if listePosition[7][1] == 0:
+				cube.turn(1)
+				cube.turn(2)
+			if listePosition[7][1] == 2:
+				cube.turnInv(1)
+				cube.turn(2)
+				cube.turn(1)
+			if listePosition[7][1] == 1 and listePosition[7][2] == 2:
+				cube.turn(2)
+			if listePosition[7][1] == 1 and listePosition[7][2] == 0:
+				cube.turn(0)
+				cube.turn(1)
+				cube.turn(1)
+				cube.turnInv(0)
+				cube.turn(2)
+			listePosition = position(2, listePosition)
+			listePosition = position(4, listePosition)
+			listePosition = position(5, listePosition)
+			listePosition = position(7, listePosition)
 
 		# Cas de la face bleue
 		if listePosition[7][0] == 3:
+			if listePosition[7][1] == 0:
+				cube.turnInv(3)
+				cube.turnInv(2)
+			if listePosition[7][1] == 1 and listePosition[7][2] == 0:
+				cube.turnInv(2)
+			if listePosition[7][1] == 1 and listePosition[7][2] == 2:
+				cube.turnInv(3)
+				cube.turnInv(3)
+				cube.turnInv(2)
+				cube.turnInv(3)
+				cube.turnInv(3)
+			if listePosition[7][1] == 2:
+				cube.turn(3)
+				cube.turnInv(2)
+				cube.turnInv(3)
+			listePosition = position(2, listePosition)
+			listePosition = position(4, listePosition)
+			listePosition = position(5, listePosition)
+			listePosition = position(7, listePosition)
 
 def position(facette, listePosition):
 	for i in range(0,6):
