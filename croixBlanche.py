@@ -22,31 +22,53 @@ def croixBlanche(cube):
 						print("Facette numéro : "+str(facette)+" position "+str(i), str(j), str(k))
 						listePosition[facette] = [i,j,k]
 						print(listePosition[facette])
+						print(listePositionDefinitive[facette])
 
 	for facette in listeFacetteBlanche:
 		#Si la piece est déjà situé sur la face blanche, on fait seulement une rotation de cette face
 		if listePosition[facette][0] == 0 :
 			while(listePosition[facette] != listePositionDefinitive[facette]):
-				position(facette, listePosition)
 				cube.turn(0)
-				print("mouvement de la face  0")
+				listePosition = position(facette, listePosition)
+				print("mouvement de la face  0 pour positionner la facette :"+str(facette))
 
 		#Si la piece est situé sur la face jaune, on la position de facon à pouvoir la placer en deux mouvement
 		if listePosition[facette][0] == 5 :
 			if facette == 4 :
 				while(listePosition[4][2] != listePositionDefinitive[4][2]):
-					position(facette, listePosition)
 					cube.turn(5)
-					print("mouvement de la face 5")
+					listePosition = position(facette, listePosition)
+					print("mouvement de la face 5 (facette4)")
 				cube.turn(1)
 				cube.turn(1)
+				print("mouvement x2 face 1")
+
 			if facette == 5 :
 				while(listePosition[5][2] != listePositionDefinitive[5][2]):
-					position(facette, listePosition)
 					cube.turn(5)
-					print("mouvement de la face 5")
+					listePosition = position(facette, listePosition)
+					print("mouvement de la face 5 (facette5)")
 				cube.turn(3)
 				cube.turn(3)
+				print("mouvement x2 face 3")
+
+			if facette == 2 :
+				while(listePosition[2][1] != listePositionDefinitive[2][1]):
+					cube.turn(5)
+					listePosition = position(facette, listePosition)
+					print("mouvement de la face 5 (facette2)")
+				cube.turn(4)
+				cube.turn(4)
+				print("mouvement x2 face 4")
+
+			if facette == 7:
+				while(listePosition[7][1] != listePositionDefinitive[7][1]):
+					cube.turn(5)
+					listePosition = position(facette, listePosition)
+					print("mouvement de la face 5 (facette7)")
+				cube.turn(2)
+				cube.turn(2)
+				print("mouvement x2 face 2")
 
 			
 def position(facette, listePosition):
@@ -56,6 +78,7 @@ def position(facette, listePosition):
 					if cube.lCube[i][j][k] == facette:
 						print("Facette numéro : "+str(facette)+" position "+str(i), str(j), str(k))
 						listePosition[facette] = [i,j,k]
+	return listePosition
 
 
 
