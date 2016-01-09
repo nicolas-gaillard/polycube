@@ -205,10 +205,10 @@ def croixBlanche(cube):
 		#Cas de la face rouge
 		if listePosition[4][0] == 2:
 			if listePosition[4][1] == 0:
-				turn.cubeInv(2)
-				turn.cubeInv(1)
+				cube.turnInv(2)
+				cube.turnInv(1)
 			if listePosition[4][1] == 1 and listePosition[4][2] == 0:
-				turn.cubeInv(1)
+				cube.turnInv(1)
 			if listePosition[4][1] == 1 and listePosition[4][2] == 2:
 				cube.turn(2)
 				cube.turn(2)
@@ -250,7 +250,6 @@ def croixBlanche(cube):
 				cube.turn(2)
 				cube.turnInv(1)
 				cube.turnInv(2)
-
 			listePosition = position(2, listePosition)
 			listePosition = position(4, listePosition)
 			listePosition = position(5, listePosition)
