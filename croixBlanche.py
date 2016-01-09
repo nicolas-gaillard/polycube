@@ -70,6 +70,34 @@ def croixBlanche(cube):
 				cube.turn(2)
 				print("mouvement x2 face 2")
 
+		# Placement de la facette numéro 2 en fonction de la face sur laquelle elle est situé
+		if listePosition[2][0] == 2:
+			if listePosition[2][1] == 0:
+				turn.cube(2)
+				turn.cube(0)
+				turn.cube(3)
+				turn.cubeInv(0)
+			if listePosition[2][1] == 2:
+				turn.cube(2)
+				turn.cube(0)
+				turn.cube(3)
+				turn.cubeInv(0)
+				turn.cubeInv(2)
+			if listePosition[2][1] == 1 and listePosition[2][2] == 2:
+				turn.cube(0)
+				turn.cube(2)
+				turn.cubeInv(0)
+			if listePosition[2][1] == 1 and listePosition[2][2] == 0:
+				turn.cubeInv(0)
+				turn.cubeInv(1)
+				turn.cube(0)
+
+		if listePosition[2][0] == 3:
+
+
+			listePosition = position(facette, listePosition)
+
+
 			
 def position(facette, listePosition):
 	for i in range(0,6):
