@@ -29,24 +29,26 @@ def croixBlanche(cube):
 		# Cas de la face rouge
 		if listePosition[2][0] == 2:
 			if listePosition[2][1] == 0:
-				cube.turn(2)
-				cube.turn(0)
-				cube.turn(3)
-				cube.turnInv(0)
-			if listePosition[2][1] == 2:
-				cube.turn(2)
-				cube.turn(0)
-				cube.turn(3)
-				cube.turnInv(0)
 				cube.turnInv(2)
+				cube.turnInv(0)
+				cube.turnInv(1)
+				cube.turn(0)
+				cube.turn(1)
+			if listePosition[2][1] == 2:
+				cube.turnInv(5)
+				cube.turn(1)
+				cube.turnInv(4)
+				cube.turnInv(1)
 			if listePosition[2][1] == 1 and listePosition[2][2] == 2:
 				cube.turn(0)
 				cube.turn(3)
 				cube.turnInv(0)
+				cube.turnInv(3)
 			if listePosition[2][1] == 1 and listePosition[2][2] == 0:
 				cube.turnInv(0)
 				cube.turnInv(1)
 				cube.turn(0)
+				cube.turn(1)
 			listePosition = position(2, listePosition)
 			listePosition = position(4, listePosition)
 			listePosition = position(5, listePosition)
@@ -79,18 +81,18 @@ def croixBlanche(cube):
 			if listePosition[2][1] == 1 and listePosition[2][2] == 0:
 				cube.turnInv(4)
 			if listePosition[2][1] == 1 and listePosition[2][2] == 2:
-				cube.turn(3)
-				cube.turn(3)
+				cube.turn(1)
+				cube.turn(1)
 				cube.turnInv(4)
-				cube.turn(3)
-				cube.turn(3)
+				cube.turn(1)
+				cube.turn(1)
 			if listePosition[2][1] == 0:
-				cube.turnInv(3)
+				cube.turnInv(1)
 				cube.turnInv(4)	
 			if listePosition[2][1] == 2:
-				cube.turn(3)
+				cube.turn(1)
 				cube.turnInv(4)
-				cube.turnInv(3)
+				cube.turnInv(1)
 			listePosition = position(2, listePosition)
 			listePosition = position(4, listePosition)
 			listePosition = position(5, listePosition)
