@@ -109,6 +109,9 @@ def couronne1(cube):
 					if i==5 and cube.lCube[i][j][k] in coinW :
 						#cpt+=5
 						mouvement+=go_to_asc1(cube,j,k)
+						i = 2
+						j = 0
+						k = 0
 					
 
 						print("go_to_asc1")
@@ -295,28 +298,29 @@ def go_to_asc1(cube,j,k):
 		cube.turnInv(5)
 		cube.turnInv(5)
 		cube.turnInv(1)
-		return "LD'D'L'"#+asc1_complet(cube)
+		return "LD'D'L'"
 
 	if (j == 2 and k == 0) :
 		cube.turnInv(1)
-		cube.turnInv(5)
-		cube.turnInv(5)
+		cube.turn(5)
 		cube.turn(1)
-		return "L'D'D'L"#+asc2_complet(cube)
+		cube.turnInv(5)
+		return "L'DLD'"
+		# l'dld'
 
 	if (j == 2 and k == 2) :
 		cube.turn(3)
 		cube.turnInv(5)
-		cube.turnInv(5)
 		cube.turnInv(3)
-		return "RD'D'R'"#+asc1_complet(cube)
+		cube.turn(5)
+		return "RD'R'D"
 
 	if (j == 0 and k == 2) :
 		cube.turnInv(3)
 		cube.turnInv(5)
 		cube.turnInv(5)
 		cube.turn(3)
-		return "R'D'D'R"#+asc2_complet(cube)
+		return "R'D'D'R"
 	
 
 # --------------------------------------------------------------------------
@@ -369,12 +373,14 @@ if __name__ == "__main__" :
 	#print(cube)
 
 	# Test de couronne : 
-	#cube = cube("GWBWWWWWGOGGRRYRBYOOWYGGYRRBBYBORBOGYBRBROBOWOOYGYGRYW")
+	cube = cube("GWBWWWWWGOGGRRYRBYOOWYGGYRRBBYBORBOGYBRBROBOWOOYGYGRYW")
 	#cube = cube("GWBWWWWWGOGRBRYRBYOOWYGGORRBBYBORBOGWBRBYYOROROYYYGWGG")
 	#cube = cube("YWBWWWBWYBGOWRGOBWROOYGYRRGYBOGOOYRGORGROWRYBWGYBYBRBG")
 	#cube=cube("RWRWWWGWBBGWORYOBBWOYYGYRRBOBOGOOGGWORGRBWRROBGYYYYYBG")
 	#cube = cube("WWWWWWYWOOGOBRGWBGROBYGOGRYGBOYOBBGYGRBYBYOBWRYRRYRROG")
-	cube = cube("WWBWWWYWYOGOBRRGBRYOBYGOGRYOBRBOBWBOGGBRYGORGYRWOYGRYW")
+	#cube = cube("WWBWWWYWYOGOBRRGBRYOBYGOGRYOBRBOBWBOGGBRYGORGYRWOYGRYW")
+
+	#cube = cube("WWWWWWYWROGOBRYBBGROBGGOBRGRBGOOYGRGRORWYYORWYYBBYBOYG")
 	drawCube(cube.cube_to_color54())
 	print(couronne1(cube))
 	drawCube(cube.cube_to_color54())
