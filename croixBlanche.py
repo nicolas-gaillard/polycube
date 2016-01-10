@@ -458,6 +458,17 @@ def croixBlanche(cube):
 				cube.turn(2)
 			listePosition = positionAll(listePosition)
 
+		# Cas d'une face blanche ne correspond pas aux autres faces
+		if(croixBlancheDone(cube) == False and listePosition[2][0] == 0 and listePosition[4][0] == 0 and listePosition[5][0] == 0 and listePosition[7][0]):
+			if(listePosition[2][1] != 0):
+				cube.turn(4)
+			if(listePosition[4][1] != 1 and listePosition[4][2] != 0)
+				cube.turn(1)
+			if(listePosition[5][1] != 1 and listePosition[5][2] != 2):
+				cube.turn(3)
+			if(listePosition[7][1] != 2):
+				cube.turn(2)
+
 def position(facette, listePosition):
 	for i in range(0,6):
 			for j in range(0,3):
