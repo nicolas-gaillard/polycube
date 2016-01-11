@@ -118,8 +118,11 @@ def deuxieme_couronne(cube):
                     mouvements += "D"
                     cube.turn(5)
                 elif (faceF[2][1] in arete_rouge and faceD[0][1] in arete_jaune) or (faceR[2][1] in arete_bleu and faceD[1][2] in arete_jaune) or (faceB[2][1] in arete_orange and faceD[2][1] in arete_jaune):
-                    mouvements += "D"
-                    cube.turn(5)
+                    if (faceF[2][1] in arete_vert and faceD[1][0] in arete_vert) or (faceF[2][1] in arete_vert and faceD[1][0] in arete_bleu) or (faceR[2][1] in arete_bleu and faceD[1][2] in arete_orange) or (faceR[2][1] in arete_bleu and faceD[1][2] in arete_rouge) or (faceB[2][1] in arete_orange and faceD[2][1] in arete_vert) or (faceB[2][1] in arete_orange and faceD[2][1] in arete_bleu):
+                        pass
+                    else:
+                        mouvements += "D"
+                        cube.turn(5)
                 pass
         faceL = cube.getFace(1)
         faceF = cube.getFace(2)
@@ -152,8 +155,11 @@ def deuxieme_couronne(cube):
                     mouvements += "D"
                     cube.turn(5)
                 elif (faceL[2][1] in arete_vert and faceD[1][0] in arete_jaune) or (faceR[2][1] in arete_bleu and faceD[1][2] in arete_jaune) or (faceB[2][1] in arete_orange and faceD[2][1] in arete_jaune):
-                    mouvements += "D"
-                    cube.turn(5)
+                    if (faceL[2][1] in arete_vert and faceD[1][0] in arete_orange) or (faceL[2][1] in arete_vert and faceD[1][0] in arete_rouge) or (faceR[2][1] in arete_bleu and faceD[1][2] in arete_orange) or (faceR[2][1] in arete_bleu and faceD[1][2] in arete_rouge) or (faceB[2][1] in arete_orange and faceD[2][1] in arete_vert) or (faceB[2][1] in arete_orange and faceD[2][1] in arete_bleu):
+                        pass
+                    else:
+                        mouvements += "D"
+                        cube.turn(5)
                 pass
         faceL = cube.getFace(1)
         faceF = cube.getFace(2)
@@ -186,8 +192,11 @@ def deuxieme_couronne(cube):
                     mouvements += "D"
                     cube.turn(5)
                 elif (faceL[2][1] in arete_vert and faceD[1][0] in arete_jaune) or (faceF[2][1] in arete_rouge and faceD[0][1] in arete_jaune) or (faceB[2][1] in arete_orange and faceD[2][1] in arete_jaune):
-                    mouvements += "D"
-                    cube.turn(5)
+                    if (faceL[2][1] in arete_vert and faceD[1][0] in arete_orange) or (faceL[2][1] in arete_vert and faceD[1][0] in arete_rouge) or (faceF[2][1] in arete_vert and faceD[1][0] in arete_vert) or (faceF[2][1] in arete_vert and faceD[1][0] in arete_bleu) or (faceB[2][1] in arete_orange and faceD[2][1] in arete_vert) or (faceB[2][1] in arete_orange and faceD[2][1] in arete_bleu):
+                        pass
+                    else:
+                        mouvements += "D"
+                        cube.turn(5)
                 pass
         faceL = cube.getFace(1)
         faceF = cube.getFace(2)
@@ -220,8 +229,11 @@ def deuxieme_couronne(cube):
                     mouvements += "D"
                     cube.turn(5)
                 elif (faceL[2][1] in arete_vert and faceD[1][0] in arete_jaune) or (faceF[2][1] in arete_rouge and faceD[0][1] in arete_jaune) or (faceR[2][1] in arete_bleu and faceD[1][2] in arete_jaune):
-                    mouvements += "D"
-                    cube.turn(5)
+                    if (faceL[2][1] in arete_vert and faceD[1][0] in arete_orange) or (faceL[2][1] in arete_vert and faceD[1][0] in arete_rouge) or (faceF[2][1] in arete_vert and faceD[1][0] in arete_vert) or (faceF[2][1] in arete_vert and faceD[1][0] in arete_bleu) or (faceR[2][1] in arete_bleu and faceD[1][2] in arete_orange) or (faceR[2][1] in arete_bleu and faceD[1][2] in arete_rouge):
+                        pass
+                    else:
+                        mouvements += "D"
+                        cube.turn(5)
                 pass
         faceL = cube.getFace(1)
         faceF = cube.getFace(2)
@@ -236,7 +248,7 @@ def deuxieme_couronne(cube):
         faceR = cube.getFace(3)
         faceB = cube.getFace(4)
         faceD = cube.getFace(5)
-        if croixTerminee(cube) and fin == False:
+        if ((croixTerminee(cube)) or (faceD[0][1] in arete_jaune and faceD[1][0] in arete_jaune and faceD[2][1] in arete_jaune) or (faceD[0][1] in arete_jaune and faceD[1][2] in arete_jaune and faceD[2][1] in arete_jaune) or (faceD[1][2] in arete_jaune and faceD[1][0] in arete_jaune and faceD[2][1] in arete_jaune)) and fin == False:
             if faceL[2][1] in arete_vert and faceL[1][0] not in arete_vert:
                 mouvements += "DBD'B'D'L'DL"
                 cube.turn(5)
