@@ -248,7 +248,7 @@ def deuxieme_couronne(cube):
         faceR = cube.getFace(3)
         faceB = cube.getFace(4)
         faceD = cube.getFace(5)
-        if ((croixTerminee(cube)) or (faceD[0][1] in arete_jaune and faceD[1][0] in arete_jaune and faceD[2][1] in arete_jaune) or (faceD[0][1] in arete_jaune and faceD[1][2] in arete_jaune and faceD[2][1] in arete_jaune) or (faceD[1][2] in arete_jaune and faceD[1][0] in arete_jaune and faceD[2][1] in arete_jaune)) and fin == False:
+        if ((croixTerminee(cube)) or (faceD[0][1] in arete_jaune and faceD[1][0] in arete_jaune and faceD[2][1] in arete_jaune) or (faceD[0][1] in arete_jaune and faceD[1][2] in arete_jaune and faceD[2][1] in arete_jaune) or (faceD[1][2] in arete_jaune and faceD[1][0] in arete_jaune and faceD[2][1] in arete_jaune) or (faceD[0][1] in arete_jaune and faceD[1][0] in arete_jaune and faceD[1][2] in arete_jaune)) and fin == False:
             if faceL[2][1] in arete_vert and faceL[1][0] not in arete_vert:
                 mouvements += "DBD'B'D'L'DL"
                 cube.turn(5)
