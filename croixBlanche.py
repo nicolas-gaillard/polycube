@@ -566,7 +566,7 @@ def position(facette, listePosition, cube):
 						listePosition[facette] = [i,j,k]
 	return listePosition
 
-def positionAll(listePosition):
+def positionAll(listePosition, cube):
 	listePosition = position(2, listePosition, cube)
 	listePosition = position(4, listePosition, cube)
 	listePosition = position(5, listePosition, cube)
