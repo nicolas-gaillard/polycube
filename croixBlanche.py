@@ -46,7 +46,7 @@ def croixBlanche(cube):
 				cube.turn(0)
 				cube.turn(1)
 				mouvement += "U'L'UL"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face bleue
 		if listePosition[2][0] == 3:
@@ -69,7 +69,7 @@ def croixBlanche(cube):
 				cube.turn(3)
 				cube.turn(4)
 				mouvement += "RB"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face verte
 		if listePosition[2][0] == 1:
@@ -92,7 +92,7 @@ def croixBlanche(cube):
 				cube.turnInv(4)
 				cube.turnInv(1)
 				mouvement += "LB'L'"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		#Cas de la face orange
 		if listePosition[2][0] == 4:
@@ -124,7 +124,7 @@ def croixBlanche(cube):
 				cube.turnInv(4)
 				cube.turnInv(3)
 				mouvement += "BDRB'R'"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face jaune
 		if listePosition[2][0] == 5:
@@ -148,7 +148,7 @@ def croixBlanche(cube):
 				cube.turn(4)
 				cube.turn(4)
 				mouvement += "BB"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Placement de la facette numéro 4 en fonction de la face sur laquelle elle est situé
 		# Cas de la face orange
@@ -172,7 +172,7 @@ def croixBlanche(cube):
 				cube.turn(1)
 				cube.turn(4)
 				mouvement += "B'LB"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		#Cas de la face rouge
 		if listePosition[4][0] == 2:
@@ -195,7 +195,7 @@ def croixBlanche(cube):
 				cube.turnInv(1)
 				cube.turnInv(2)
 				mouvement += "FL'F'"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face verte
 		if listePosition[4][0] == 1:
@@ -227,7 +227,7 @@ def croixBlanche(cube):
 				cube.turnInv(1)
 				cube.turnInv(2)
 				mouvement += "LDFL'F'"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face bleue
 		if listePosition[4][0] == 3:
@@ -256,7 +256,7 @@ def croixBlanche(cube):
 				cube.turn(0)
 				cube.turn(1)
 				mouvement += "R'U'L'UL"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face jaune
 		if listePosition[4][0] == 5:
@@ -280,7 +280,7 @@ def croixBlanche(cube):
 				cube.turn(1)
 				cube.turn(1)
 				mouvement += "D'LL"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Placement de la facette numéro 5 en fonction de la face sur laquelle elle est situé
 		# Cas de la face orange
@@ -304,7 +304,7 @@ def croixBlanche(cube):
 				cube.turn(4)
 				cube.turn(4)
 				mouvement += "BBR'BB"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		#Cas de la face rouge
 		if listePosition[5][0] == 2:
@@ -327,7 +327,7 @@ def croixBlanche(cube):
 				cube.turn(2)
 				cube.turn(2)
 				mouvement += "FFRFF"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face verte
 		if listePosition[5][0] == 1:
@@ -361,7 +361,7 @@ def croixBlanche(cube):
 				cube.turn(3)
 				cube.turn(2)
 				mouvement += "L'DLF'RF"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face bleue
 		if listePosition[5][0] == 3:
@@ -390,7 +390,7 @@ def croixBlanche(cube):
 				cube.turnInv(0)
 				cube.turn(1)
 				mouvement += "UR'U'L"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face jaune
 		if listePosition[5][0] == 5:
@@ -414,7 +414,7 @@ def croixBlanche(cube):
 				cube.turn(3)
 				cube.turn(3)
 				mouvement += "DRR"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Placement de la facette numéro 7 en fonction de la face sur laquelle elle est situé
 		# Cas de la face orange
@@ -441,7 +441,7 @@ def croixBlanche(cube):
 				cube.turnInv(3)
 				cube.turn(0)
 				mouvement += "U'R'U"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		#Cas de la face rouge
 		if listePosition[7][0] == 2:
@@ -467,7 +467,7 @@ def croixBlanche(cube):
 				cube.turnInv(1)
 				cube.turnInv(0)
 				mouvement += "UL'U'"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face verte
 		if listePosition[7][0] == 1:
@@ -490,7 +490,7 @@ def croixBlanche(cube):
 				cube.turnInv(0)
 				cube.turn(2)
 				mouvement += "ULLU'F"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face bleue
 		if listePosition[7][0] == 3:
@@ -513,7 +513,7 @@ def croixBlanche(cube):
 				cube.turnInv(2)
 				cube.turnInv(3)
 				mouvement += "RF'R'"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face jaune
 		if listePosition[7][0] == 5:
@@ -537,7 +537,7 @@ def croixBlanche(cube):
 				cube.turn(2)
 				cube.turn(2)
 				mouvement += "FF"
-			listePosition = positionAll(listePosition)
+			listePosition = positionAll(listePosition, cube)
 
 		# Cas d'une face blanche ne correspond pas aux autres faces
 		if(croixBlancheDone(cube) == False and listePosition[2][0] == 0 and listePosition[4][0] == 0 and listePosition[5][0] == 0 and listePosition[7][0]):
@@ -553,10 +553,11 @@ def croixBlanche(cube):
 			if(listePosition[7][1] != 2):
 				cube.turn(2)
 				mouvement += "F"
-
+            listePosition = positionAll(listePosition, cube)
+        
 	return mouvement
 
-def position(facette, listePosition):
+def position(facette, listePosition, cube):
 	for i in range(0,6):
 			for j in range(0,3):
 				for k in range(0,3):
@@ -566,10 +567,10 @@ def position(facette, listePosition):
 	return listePosition
 
 def positionAll(listePosition):
-	listePosition = position(2, listePosition)
-	listePosition = position(4, listePosition)
-	listePosition = position(5, listePosition)
-	listePosition = position(7, listePosition)
+	listePosition = position(2, listePosition, cube)
+	listePosition = position(4, listePosition, cube)
+	listePosition = position(5, listePosition, cube)
+	listePosition = position(7, listePosition, cube)
 	return listePosition
 
 def croixBlancheDone(cube):
@@ -589,4 +590,3 @@ if __name__ == "__main__" :
 	drawCube(cube.cube_to_color54())
 	print(croixBlanche(cube))
 	drawCube(cube.cube_to_color54())
-	
