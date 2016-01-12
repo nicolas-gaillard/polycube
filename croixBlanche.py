@@ -14,7 +14,7 @@ def croixBlanche(cube):
 	listePosition = [0,0,0,0,0,0,0,0]
 	listePositionDefinitive = [0,0,[0, 0, 1],0,[0, 1, 0], [0, 1, 2],0,[0, 2, 1]]
 	listeFacetteBlanche = [2, 4, 5, 7]
-	positionAll(listePosition)
+	positionAll(listePosition, cube)
 
 
 	for i in range(0, 10):
