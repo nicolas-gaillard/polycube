@@ -12,23 +12,21 @@ Si face du haut (blanche) :
 Si face 1,2,3,4 :
 	- si la pièce est sur la partie haute de la face, on la redescend
 	- si c'est sur la partie basse :
-		. si c'est sur le coin inférieur gauche : on se place en asc2
-		. si c'est sur le coin inférieur droit : on se place en asc1
+		. si c'est sur le coin inférieur gauche : on se place en asc2 et on applique la suite de mouvements
+		. si c'est sur le coin inférieur droit : on se place en asc1 et on applique la suite de mouvements
 
 Si face 5 :
 	- La ramener sur une face 1,2,3,4 à l'aide de go_to_asc1 pour ascenceur
 """
 
 def couronne1(cube):
-# Utilisation d'un compteur qui compte les mouvements
-# Mouvement est une chaine de caractères contenant la liste des mouvements
-	#cpt=0
+
+# Mouvement est une chaine de caractères contenant la liste des mouvements amenant à la première face
 	mouvement=""
 	coinW=[1,3,6,8]
 	fini = couronne1Done(cube)
 
 	while not fini :
-		print("boucle")
 
 		# Parcours du cube
 		for i in range(0,len(cube.lCube)):
@@ -40,9 +38,6 @@ def couronne1(cube):
 						if bienPlace(cube,j,k) is False :
 							# Ce n'est pas bien placé, on descend
 							mouvement+=descente0(cube,j,k)
-							print("descente0")
-							#cpt+=3
-
 
 					if i in [1,2,3,4]:
 
@@ -50,15 +45,15 @@ def couronne1(cube):
 						if j == 0 and cube.lCube[i][j][k] in coinW :
 								# On la descend
 							mouvement+=descente1234(cube,i,k)
-							print("descente1234")
-							#cpt+=3
 
-# Pour optimiser ici, on peut chercher quand il vaut mieux faire un turn' ou turn
 
 		# Troisième cas, la case blanche est sur la partie basse d'une face :
+					# La pièce blanche est dans le coin inférieur droit :
+
 						if j == 2 and k ==2 and cube.lCube[i][j][k] in coinW :
 							# Configuration de l'ascenceur1 :
 							n=i
+# On regarde s'il n'est pas préferable de faire D' pour aller à la configuration de l'ascenceur 1
 							if (n == 1 and pos_asc1(cube,4)) or (n in [2,3,4] and pos_asc1(cube,n-1)):
 								cube.turnInv(5)
 								mouvement+="D'"
@@ -66,22 +61,23 @@ def couronne1(cube):
 									n = 4
 								else :
 									n=n-1
+
+			# Tant qu'on est pas en position de l'ascenceur 1, on fait des rotations de la face down
 							while not pos_asc1(cube,n):
 								cube.turn(5)
 								mouvement+="D"
-								#cpt+=1
 								if n == 4 :
 									n = 1 
 								else :
 									n+=1
 							mouvement+=ascenceur1(cube,n)
-							print("ascenceur1")
-							#cpt+=4
 
+					# La pièce blanche est dans le coin inférieur gauche :
 
 						if j == 2 and k == 0 and cube.lCube[i][j][k] in coinW :
 							# Configuration de l'ascenceur 2 : 
 							n=i
+# On regarde s'il n'est pas préferable de faire D' pour aller à la configuration de l'ascenceur 1
 							if (n == 1 and pos_asc2(cube,4)) or (n in [2,3,4] and pos_asc2(cube,n-1)):
 								cube.turnInv(5)
 								mouvement+="D'"
@@ -89,10 +85,10 @@ def couronne1(cube):
 									n = 4
 								else :
 									n=n-1
+
 							while not pos_asc2(cube,n):
 								cube.turn(5)
 								mouvement+="D"
-								#cpt+=1
 								if n == 4 :
 									n = 1
 								else :
@@ -102,31 +98,22 @@ def couronne1(cube):
 								mouvement+=ascenceur2(cube,4)
 							else :
 								mouvement+=ascenceur2(cube,n-1)
-							print("ascenceur2")
-							#cpt+=4
 
-
+		# Dernier cas, la pièce blanche est sur la face du bas :
 					if i==5 and cube.lCube[i][j][k] in coinW :
-						#cpt+=5
 						mouvement+=go_to_asc1(cube,j,k)
 						i = 2
 						j = 0
 						k = 2
-					
-
-						print("go_to_asc1")
-
-	# A voir s'il n'est pas possible de simplifier cette suite de mouvements (5)
 		
-		#print(fini)
 		fini = couronne1Done(cube)
-		#print(fini)
 
-	print("sortie de boucle")
-	# return cpt
 	return mouvement 
 
 # --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+
 # Fonction qui détermine si la première couronne est réalisée ou non
 # Args : objet cube
 # Return : Boolean 
@@ -224,6 +211,10 @@ def coin_couleur(cube,face,k):
 		return False
 
 # --------------------------------------------------------------------------
+# Fonction qui effectue la suite de mouvement de l'ascenceur 1
+# Args : objet cube, face
+# Return : String
+
 def ascenceur1(cube,face):	
 # face de 1 à 4		
 # R,F',R',F en étant devant la face où l'on doit effectuer le mouvement
@@ -256,6 +247,10 @@ def ascenceur1(cube,face):
 		return "LB'L'B"
 
 # --------------------------------------------------------------------------
+# Fonction qui effectue la suite de mouvement de l'ascenceur 2
+# Args : objet cube, face
+# Return : String
+
 def ascenceur2(cube,face):	
 # face de 1 à 4		
 # F',R,F,R' en étant devant la face où l'on doit effectuer le mouvement
@@ -329,7 +324,6 @@ def go_to_asc1(cube,j,k):
 # Return : String (liste de mouvements)
 def descente1234(cube,i,k):
 # Même mouvement que descente0 : R',D',R
-# A OPTIMISER
 	if (i == 1 and k == 0) or (i == 4 and k == 2) :
 		cube.turn(4)
 		cube.turnInv(5)
@@ -353,35 +347,3 @@ def descente1234(cube,i,k):
 		cube.turnInv(5)
 		cube.turnInv(3)
 		return "RD'R'"
-
-# --------------------------------------------------------------------------
-
-#--- TEST DE LA FONCTION --
-
-if __name__ == "__main__" :
-	# Test couronne1Done :
-	#cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGBYYOYBRYYORRBYYYYOG")
-	#cube = Cube("GWBWWWGWGOGOYRYRBYOOWYGOYRRBBYBORBOBWGGWBRBRWOYRGYORGY")
-
-	# Test de fonctions :
-	#print(cube.lCube[1][1][2])
-	#print(cube)
-	#print(bienPlace(cube,2,0))
-	#print(cube)
-	#print(descente1234(cube,2,0))
-	#descente0(cube,2,0)
-	#print(cube)
-
-	# Test de couronne : 
-	#cube = Cube("GWBWWWWWGOGGRRYRBYOOWYGGYRRBBYBORBOGYBRBROBOWOOYGYGRYW")
-	#cube = Cube("GWBWWWWWGOGRBRYRBYOOWYGGORRBBYBORBOGWBRBYYOROROYYYGWGG")
-	#cube = Cube("YWBWWWBWYBGOWRGOBWROOYGYRRGYBOGOOYRGORGROWRYBWGYBYBRBG")
-	#cube=Cube("RWRWWWGWBBGWORYOBBWOYYGYRRBOBOGOOGGWORGRBWRROBGYYYYYBG")
-	#cube = Cube("WWWWWWYWOOGOBRGWBGROBYGOGRYGBOYOBBGYGRBYBYOBWRYRRYRROG")
-	#cube = Cube("WWBWWWYWYOGOBRRGBRYOBYGOGRYOBRBOBWBOGGBRYGORGYRWOYGRYW")
-
-	cube = Cube("WWWWWWYWROGOBRYBBGROBGGOBRGRBGOOYGRGRORWYYORWYYBBYBOYG")
-	drawCube(cube.cube_to_color54())
-	print(couronne1(cube))
-	drawCube(cube.cube_to_color54())
-
