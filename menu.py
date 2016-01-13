@@ -1,5 +1,6 @@
 import os
 import webbrowser
+import time
 
 from poqb import *
 from utils import *
@@ -29,7 +30,7 @@ def affichageMenu():
     print("|     - 2 - Résolution d'un cube précis          |")
     print("|     - 3 - Afficher un cube précis              |")
     print("|     - 4 - Résolution via alg.cubing.net        |")
-    print("|     - 5 - README      				            |")
+    print("|     - 5 - README                               |")
     print("|     - 6 - PERFORMANCES                         |")
     print("|     - 7 - Résolution 100 cubes et performances |")
     print("|     - 0 - Quitter                              |")
@@ -96,14 +97,42 @@ def choixMenu(choix):
         performance = open("PERFORMANCE.md", "r")
         print(performance.read())
 
-        input("Appueyz sur entrée pour continuer ")
+        input("Appuyez sur entrée pour continuer ")
         performance.close()
 
         pageAccueil()
         affichageMenu()
 
     elif choix == "7" :
-        pass
+        # Génération des cubes
+        print("Génération de 100 cubes...")
+        cubes = []
+        for i in range(0, 100):
+            cubes.append(generator())
+
+        # Résolution des cubes en mesurant le temps d'exécution et le nombre de mouvements
+        print("Résolution des 100 cubes...")
+        nbMouv = []
+        temps = 0
+        for i in cubes:
+            tDebut = time.clock()
+            mouv = solve(i)
+            tFin = time.clock()
+            
+            temps += tFin - tDebut
+            nbMouv.append(len(mouv.replace("'", "")))
+
+        moy = sum(nbMouv) / len(nbMouv)
+        print("Temps d'exécution : " + str(temps) + " secondes")
+        print("Nombre de mouvements moyen : " + str(moy))
+        print("Nombre de mouvements maximum : " + str(max(nbMouv)))
+        print("Nombre de mouvements minimum : " + str(min(nbMouv)))
+        
+        input("Appuyez sur entrée pour continuer ")
+            
+        pageAccueil()
+        affichageMenu()
+        
 
     elif choix == "0" :
         clear()
