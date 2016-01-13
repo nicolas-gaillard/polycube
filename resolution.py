@@ -1,9 +1,11 @@
 from cube import *
 from CubeDisplay import *
 from couronne1 import *
+from croixBlanche import *
 
 def croix_blanche(cube):
-    pass
+    "Effectue la croix blanche d'un cube mélangé au préalable."
+    return croixBlanche(cube)
 
 def premiere_face_couronne(cube):
     return couronne1(cube)

@@ -140,8 +140,8 @@ def solve(cube_c54):
     
     c = cube(cube_c54)
 
-    motion = ""
-    #motion=premiere_face_couronne(c)
+    motion=croix_blanche(c)
+    motion+=premiere_face_couronne(c)
     motion+=deuxieme_couronne(c)
     motion+=croix(c)
     motion+=correspondance(c)
@@ -151,10 +151,6 @@ def solve(cube_c54):
     motion = optimisation_manoeuvres(motion)
     
     return motion
-
-a,b = scramble()
-print(a)
-print(b)
 
 """
 if __name__=="__main__":

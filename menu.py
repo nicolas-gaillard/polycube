@@ -53,7 +53,7 @@ def choixMenu(choix):
         print("Affichage du cube à résoudre")
         print(cube)
         print("Chaîne de mouvements : "+solve(generator()))
-        input("Appuyez sur une touche pour continuer ")
+        input("Appuyez sur entrée pour continuer ")
 
         pageAccueil()
         affichageMenu()
@@ -65,7 +65,7 @@ def choixMenu(choix):
         print(cube)
 
         print("Chaîne de mouvements : "+solve(color54))
-        input("Appuyez sur une touche pour continuer ")
+        input("Appuyez sur entrée pour continuer ")
         pageAccueil()
         affichageMenu()
 
@@ -86,7 +86,7 @@ def choixMenu(choix):
         readme = open("README.md", "r")
         print(readme.read())
 
-        input("Appuyez sur une touche pour continuer ")
+        input("Appuyez sur entrée pour continuer ")
         readme.close()
 
         pageAccueil()
@@ -96,7 +96,7 @@ def choixMenu(choix):
         performance = open("PERFORMANCE.md", "r")
         print(performance.read())
 
-        input("Appuez sur une touche pour continuer ")
+        input("Appueyz sur entrée pour continuer ")
         performance.close()
 
         pageAccueil()
