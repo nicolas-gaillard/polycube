@@ -4,23 +4,40 @@ from poqb import *
 
 def croixBlanche(cube):
 
+	# On initialise la variable qui va enregistrer tous les mouvements
 	mouvement=""
 
+	""" 
+	On créé un tableau de position, avec certaines cases qui ne seront pas utilisées
+	mais cela permettra de mieux comprendre de quel pièce il s'agit.
+	De même, on créé un tableau des positions définitives, qu'auront les pièces
+	une fois placées.
 	"""
-	while(croixBlancheDone(cube) == False):
-		print("croix blanche non terminée")
-	"""
-
 	listePosition = [0,0,0,0,0,0,0,0]
 	listePositionDefinitive = [0,0,[0, 0, 1],0,[0, 1, 0], [0, 1, 2],0,[0, 2, 1]]
-	listeFacetteBlanche = [2, 4, 5, 7]
+
+	"""
+	On appele la fonction qui met à jour le tableau des positions,
+	pour connaître la place initiale de chaque pièce
+	"""
 	positionAll(listePosition, cube)
 
+	"""
+	La stratégie ici pour résoudre la croix blanche en le moins de mouvement est
+	de faire du cas par cas.
+	On va placer les 4 pièces les une après les autres, sachant qu'à chaque fois
+	on va identifier avec certaines conditions et le tableau de position de quel cas il s'agit.
+	Ensuite il ne reste plus qu'à faire la suite de mouvement nécessaire pour placer
+	la pièce sans déplacer celle qui l'était avant.
+	Après chaque cas, on met à jour la variable de mouvement pour enregistrer ce qu'on à fait sur le cube
+	"""
 
-	for i in range(0, 10):
+	# On boucle tant que la croix blanche n'est pas terminée
+	while(croixBlancheDone(cube) == False):
 		# Placement de la facette numéro 2 en fonction de la face sur laquelle elle est situé
 		# Cas de la face rouge
 		if listePosition[2][0] == 2:
+			# Si la facette blanche de la pièce est située sur la première ligne :
 			if listePosition[2][1] == 0:
 				cube.turnInv(2)
 				cube.turnInv(0)
@@ -28,18 +45,21 @@ def croixBlanche(cube):
 				cube.turn(0)
 				cube.turn(1)
 				mouvement += "F'U'L'UL"
+			# Si la facette blanche de la pièce est située sur la troisième ligne :
 			if listePosition[2][1] == 2:
 				cube.turnInv(5)
 				cube.turn(1)
 				cube.turnInv(4)
 				cube.turnInv(1)
 				mouvement += "D'LB'L'"
+			# Si la facette blanche de la pièce est située sur la deuxième ligne, à droite :
 			if listePosition[2][1] == 1 and listePosition[2][2] == 2:
 				cube.turn(0)
 				cube.turn(3)
 				cube.turnInv(0)
 				cube.turnInv(3)
 				mouvement += "URU'R'"
+			# Si la facette blanche de la pièce est située sur la deuxième ligne, à gauche :
 			if listePosition[2][1] == 1 and listePosition[2][2] == 0:
 				cube.turnInv(0)
 				cube.turnInv(1)
@@ -555,17 +575,27 @@ def croixBlanche(cube):
 				cube.turn(2)
 				mouvement += "F"
 			listePosition = positionAll(listePosition, cube)
+	# A la fin de la fonction, on retourne la variable des mouvements
 	return mouvement
 
+"""
+Cette fonction permet de mettre à jour le tableau de position pour une des quatres
+pièce, que l'on passe en paramètre
+Elle boucle sur le nombre de face, puis le nombre de ligne dans chaque face et enfin
+la position possible sur cette ligne.
+Si les positions correspondent, elle met à jour la case de la pièce dans le tableau de position
+"""
 def position(facette, listePosition, cube):
 	for i in range(0,6):
 			for j in range(0,3):
 				for k in range(0,3):
 					if cube.lCube[i][j][k] == facette:
-						print("Facette numéro : "+str(facette)+" position "+str(i), str(j), str(k))
 						listePosition[facette] = [i,j,k]
 	return listePosition
-
+"""
+Cette fonction permet d'appeler la fonction position sur les quatres pièces à placer
+permettant d'actualiser les quatres positions que l'on doit toujours connaître.
+"""
 def positionAll(listePosition, cube):
 	listePosition = position(2, listePosition, cube)
 	listePosition = position(4, listePosition, cube)
@@ -573,18 +603,19 @@ def positionAll(listePosition, cube):
 	listePosition = position(7, listePosition, cube)
 	return listePosition
 
+"""
+Cette fonction nous permet de savoir si la croix blanche est terminé ou non
+Pour cela on regarde si au position de la croix blanche il y a bien les 4 facettes
+blanche et celle qui ne bouge pas au centre
+"""
 def croixBlancheDone(cube):
-	""" Cette fonction nous permet de savoir si la croix blanche est terminé ou non
-	Pour cela on regarde si au position de la croix blanche il y a bien les 4 facettes
-	blanche et celle qui ne bouge pas au centre"""
-
 	return (cube.lCube[0][0][1] == 2 and cube.lCube[0][1][0] == 4 and cube.lCube[0][1][2] == 5 and cube.lCube[0][2][1] == 7)
 
 
 if __name__ == "__main__" :
 
-	#stringCube = generator()
-	stringCube = "RROWWWWWBYBOGRYOGWBYGOGRGRYOBBROGRYRBOWROOGYBYWGGYBWBY"
+	stringCube = generator()
+	#stringCube = "RROWWWWWBYBOGRYOGWBYGOGRGRYOBBROGRYRBOWROOGYBYWGGYBWBY"
 	print(stringCube)
 	cube = cube(stringCube)
 	print(croixBlancheDone(cube))
