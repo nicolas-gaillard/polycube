@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from itertools import permutations
+from Cube_Exception import *
 
 
 def rotation_cube(colored54):
@@ -40,7 +41,7 @@ def colored54_to_perm48(colored54):
 
     # On commence par tester si l'entrée est bien au format attendu
     if len(colored54) != 54:
-        return []
+        raise Cube_Exception("Votre cube ne contient pas 54 faces")
     
     cptO, cptW, cptB, cptG, cptY, cptR = 0, 0, 0, 0, 0, 0
     for c in colored54:
@@ -57,15 +58,15 @@ def colored54_to_perm48(colored54):
         elif c == "R":
             cptR += 1
         else:
-            return []
+            raise Cube_Exception("Votre chaine de caractères contient des éléments autres que les couleurs requises")
         
     if not (cptO == cptW == cptB == cptG == cptY == cptR == 9):
-        return []
+        raise Cube_Exception("Votre cube ne contient pas 9 faces pour chaque couleur")
 
     fixes = []
     for i in [4, 22, 25, 28, 31, 49]:
         if colored54[i] in fixes:
-            return []
+            raise Cube_Exception("Vous avez deux cubes fixes de meme couleur")
         else:
             fixes.append(colored54[i])
 
@@ -152,7 +153,7 @@ def colored54_to_perm48(colored54):
                 perm48[i] = bords_pos[pos][1] + 1
                 perm48[j] = bords_pos[pos][0] + 1
             else:
-                return []
+                raise Cube_Exception("Un des cubes aretes est physiquement impossible")
 
     # On identifie les coins
     coins_couleur = [["W", "G", "O"], ["W", "B", "O"], ["W", "R", "G"], ["W", "R", "B"], ["Y", "G", "O"], ["Y", "B", "O"], ["Y", "R", "G"], ["Y", "R", "B"]]
@@ -179,7 +180,7 @@ def colored54_to_perm48(colored54):
                 break
             
         if not ajoute:
-            return []
+            raise Cube_Exception("Un des cubes coins est physiquement impossible")
             
             
     return perm48
