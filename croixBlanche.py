@@ -41,11 +41,11 @@ def croixBlanche(cube):
 				cube.turnInv(3)
 				mouvement += "URU'R'"
 			if listePosition[2][1] == 1 and listePosition[2][2] == 0:
-				cube.turn(0)
-				cube.turnInv(1)
 				cube.turnInv(0)
+				cube.turnInv(1)
+				cube.turn(0)
 				cube.turn(1)
-				mouvement += "U'L'UL"
+				mouvement += "UL'U'L"
 			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face bleue
@@ -435,7 +435,8 @@ def croixBlanche(cube):
 				cube.turn(0)
 				cube.turn(1)
 				cube.turnInv(0)
-				mouvement += "ULU'"
+				cube.turnInv(1)
+				mouvement += "ULU'L'"
 			if listePosition[7][1] == 1 and listePosition[7][2] == 0:
 				cube.turnInv(0)
 				cube.turnInv(3)
@@ -458,15 +459,15 @@ def croixBlanche(cube):
 				cube.turnInv(3)
 				mouvement += "DRF'R'"
 			if listePosition[7][1] == 1 and listePosition[7][2] == 2:
-				cube.turnInv(0)
+				cube.turn(0)
 				cube.turn(3)
-				cube.turn(0)
-				mouvement += "U'RU"
-			if listePosition[7][1] == 1 and listePosition[7][2] == 0:
-				cube.turn(0)
-				cube.turnInv(1)
 				cube.turnInv(0)
-				mouvement += "UL'U'"
+				mouvement += "URU'"
+			if listePosition[7][1] == 1 and listePosition[7][2] == 0:
+				cube.turnInv(0)
+				cube.turnInv(1)
+				cube.turn(0)
+				mouvement += "U'L'U"
 			listePosition = positionAll(listePosition, cube)
 
 		# Cas de la face verte
@@ -583,7 +584,7 @@ def croixBlancheDone(cube):
 if __name__ == "__main__" :
 
 	#stringCube = generator()
-	stringCube = "WWRGWWBBYGWWRORGOWGBOGGRBRGOBOYOROGBYYYBBWOWYRROYYYGRB"
+	stringCube = "OROYWBYYYBGOBBBRWYGGWWGBORGWBYRORYYRGGWGWRWBRWOOOYOGRB"
 	print(stringCube)
 	cube = cube(stringCube)
 	print(croixBlancheDone(cube))
