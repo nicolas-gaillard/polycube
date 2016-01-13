@@ -29,8 +29,6 @@ def affichageMenu():
     print("| - 4 - Résolution via alg.cubing.net   |")
     print("| - 5 - README      				       |")
     print("| - 6 - PERFORMANCES      			   |")
-    print("| - 7 - Téléchargement en continu       |")
-    print("| - 8 - Téléchargement depuis fichier   |")
     print("| - 0 - Quitter                         |")
     print("|                                       |")
     print("\\-------                        --------/")
@@ -48,6 +46,9 @@ def choixMenu(choix):
     elif choix == 2 :
     elif choix == 3 :
     elif choix == 4 :
+        a,b = scramble()
+        c=solve(b).replace("'","-")
+        webbrowser.open("https://alg.cubing.net/?setup="+a+"&alg="+c)
     elif choix == 0 :
         clear()
         print("Merci d'avoir utilisé Polycube")
