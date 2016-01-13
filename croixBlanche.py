@@ -33,7 +33,8 @@ def croixBlanche(cube):
 	"""
 
 	# On boucle tant que la croix blanche n'est pas terminée
-	while(croixBlancheDone(cube) == False):
+	#while(croixBlancheDone(cube) == False):
+	for i in range(0 , 10):
 		# Placement de la facette numéro 2 en fonction de la face sur laquelle elle est situé
 		# Cas de la face rouge
 		if listePosition[2][0] == 2:
@@ -148,23 +149,23 @@ def croixBlanche(cube):
 
 		# Cas de la face jaune
 		if listePosition[2][0] == 5:
-			if listePosition[4][1] == 1 and listePosition[4][2] == 2:
+			if listePosition[2][1] == 1 and listePosition[2][2] == 2:
 				cube.turn(5)
 				cube.turn(4)
 				cube.turn(4)
 				mouvement += "DBB"
-			if listePosition[4][1] == 1 and listePosition[4][2] == 0:
+			if listePosition[2][1] == 1 and listePosition[2][2] == 0:
 				cube.turnInv(5)
 				cube.turn(4)
 				cube.turn(4)
 				mouvement += "D'BB"
-			if listePosition[4][1] == 0:
+			if listePosition[2][1] == 0:
 				cube.turn(5)
 				cube.turn(5)
 				cube.turn(4)
 				cube.turn(4)
 				mouvement += "DDBB"
-			if listePosition[4][1] == 2:
+			if listePosition[2][1] == 2:
 				cube.turn(4)
 				cube.turn(4)
 				mouvement += "BB"
@@ -614,8 +615,8 @@ def croixBlancheDone(cube):
 
 if __name__ == "__main__" :
 
-	stringCube = generator()
-	#stringCube = "ROWWWGOWWBRYGGOGRGRYYOGBRRYBBRYOGBORYWYBGRWBOGBOWYYWOB"
+	#stringCube = generator()
+	stringCube = "ROWWWGOWWBRYGGOGRGRYYOGBRRYBBRYOGBORYWYBGRWBOGBOWYYWOB"
 	cube = cube(stringCube)
 	drawCube(cube.cube_to_color54())
 	print(croixBlanche(cube))
