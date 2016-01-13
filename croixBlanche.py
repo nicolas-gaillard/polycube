@@ -1,5 +1,5 @@
-from cube import *
-from CubeDisplay import *
+from Cube import *
+from cubeDisplay import *
 from poqb import *
 
 def croixBlanche(cube):
@@ -586,7 +586,7 @@ if __name__ == "__main__" :
 	#stringCube = generator()
 	stringCube = "WWRRWYWRGGBGRYYRBBWGOOGWORRWBYGOGROBOGWOWYOYYYRBBYBBOG"
 	print(stringCube)
-	cube = cube(stringCube)
+	cube = Cube(stringCube)
 	print(croixBlancheDone(cube))
 	drawCube(cube.cube_to_color54())
 	print(croixBlanche(cube))

@@ -1,6 +1,3 @@
-__author__ = "Alexandre DORMEVAL, Kévin BRIAND"
-__version__ = "1.0.0"
-
 from tkinter import *
 
 def decoupeCouleurs(chaine):

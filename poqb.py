@@ -1,7 +1,7 @@
 # poqb.py
 # -*- coding: utf-8 -*-
 
-from cube import *
+from Cube import *
 from resolution import *
 from random import *
 
@@ -87,7 +87,7 @@ def optimisation_manoeuvres(man):
 
 
 def generator():
-    test = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+    test = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
     for i in range(0,25):
         j = randint(0,5)
         test.turn(j)
@@ -95,7 +95,7 @@ def generator():
 
 def scramble():
     mv=""
-    test = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+    test = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
     for i in range(0,25):
         j = randint(0,5)
         if j == 0 :
@@ -138,10 +138,10 @@ def solve(cube_c54):
     """
 
     
-    c = cube(cube_c54)
+    c = Cube(cube_c54)
 
     motion=croix_blanche(c)
-    motion+=premiere_face_couronne(c)
+    motion+=premiere_couronne(c)
     motion+=deuxieme_couronne(c)
     motion+=croix(c)
     motion+=correspondance(c)

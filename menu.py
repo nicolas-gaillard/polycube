@@ -4,8 +4,8 @@ import time
 
 from poqb import *
 from utils import *
-from cube import *
-from CubeDisplay import *
+from Cube import *
+from cubeDisplay import *
 from resolution import *
 
 def clear():
@@ -49,7 +49,7 @@ def choixMenu(choix):
     if choix == "1" :
         clear()
         color54 = generator()
-        cube = cube(color54)
+        cube = Cube(color54)
 
         print("Affichage du cube à résoudre")
         print(cube)
@@ -62,7 +62,7 @@ def choixMenu(choix):
     elif choix == "2" :
         color54 = input("Entrez une chaine de 54 couleurs correcte : ")
         clear()
-        cube = cube(color54)
+        cube = Cube(color54)
         print(cube)
 
         print("Chaîne de mouvements : "+solve(color54))
@@ -72,7 +72,7 @@ def choixMenu(choix):
 
     elif choix == "3" :
         color54 = input("Entrez une chaîne de 54 couleurs valide : ")
-        cube = cube(color54)
+        cube = Cube(color54)
         print(cube)
 
         pageAccueil()
