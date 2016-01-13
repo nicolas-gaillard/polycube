@@ -83,6 +83,9 @@ def choixMenu(choix):
         c=solve(b).replace("'","-")
         webbrowser.open("https://alg.cubing.net/?setup="+a+"&alg="+c)
 
+        pageAccueil()
+        affichageMenu()
+
     elif choix == "5" :
         readme = open("README.md", "r")
         print(readme.read())
