@@ -540,7 +540,7 @@ def croixBlanche(cube):
 			listePosition = positionAll(listePosition, cube)
 
 		# Cas d'une face blanche ne correspond pas aux autres faces
-		if(croixBlancheDone(cube) == False and listePosition[2][0] == 0 and listePosition[4][0] == 0 and listePosition[5][0] == 0 and listePosition[7][0]):
+		if(croixBlancheDone(cube) == False and listePosition[2][0] == 0 and listePosition[4][0] == 0 and listePosition[5][0] == 0 and listePosition[7][0] == 0):
 			if(listePosition[2][1] != 0):
 				cube.turn(4)
 				mouvement += "B"
@@ -583,7 +583,7 @@ def croixBlancheDone(cube):
 if __name__ == "__main__" :
 
 	#stringCube = generator()
-	stringCube = "WGWRWWBBYGYRYRGOBGRYOOGGRRGWBOYOGBBGROOBBYBWWYWWOYYRRO"
+	stringCube = "WWRGWWBBYGWWRORGOWGBOGGRBRGOBOYOROGBYYYBBWOWYRROYYYGRB"
 	print(stringCube)
 	cube = cube(stringCube)
 	print(croixBlancheDone(cube))
