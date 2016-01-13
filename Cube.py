@@ -6,11 +6,8 @@ from cubeDisplay import *
 class Cube :
     def __init__(self,color54):
 
-        if len(color54)!=54: # Manque à vérifier que color 54 est bien formé, à l'aide d'une boucle
-            self.init(input("Chaine non valide, recommencez "))
-        else:
-            self.perm48=colored54_to_perm48(color54)
-            self.color54=color54
+        self.perm48=colored54_to_perm48(color54)
+        self.color54=color54
 
 # face[1][1] est une constante, elle ne bouge jamais
 # F=Front, D=Down, L=Left, R=Right, B=Back, U=Up
