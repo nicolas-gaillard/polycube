@@ -81,6 +81,7 @@ def drawCube(chaine):
 	# création de la fenêtre tkinter
 	fenetre = Tk()
 	canvas = Canvas(fenetre,width=1000,height=500,background='white')
+	fenetre.bind('<Return>', lambda e: fenetre.destroy())
 
 	# taille et position du patron du cube
 	topX = 100
