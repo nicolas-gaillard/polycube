@@ -93,6 +93,26 @@ def generator():
         test.turn(j)
     return test.cube_to_color54()
 
+def scramble():
+    mv=""
+    test = cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+    for i in range(0,25):
+        j = randint(0,5)
+        if j == 0 :
+            mv+="U"
+        if j == 1 :
+            mv+="L"
+        if j == 2 :
+            mv+="F"
+        if j == 3 :
+            mv+="R"
+        if j == 4 :
+            mv+="B"
+        if j == 5 :
+            mv+="D"
+        test.turn(j)
+    return mv, test.cube_to_color54()
+
 
 
 def solve(cube_c54):
@@ -132,6 +152,9 @@ def solve(cube_c54):
     
     return motion
 
+a,b = scramble()
+print(a)
+print(b)
 
 """
 if __name__=="__main__":
